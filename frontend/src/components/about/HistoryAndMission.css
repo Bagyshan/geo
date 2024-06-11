@@ -1,0 +1,49 @@
+.history-mission {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    margin-top: 80px;
+  }
+  
+  .history-mission h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+  }
+  
+  .section-image {
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
+  }
+  
+  .mission, .history, .overview {
+    margin-bottom: 30px;
+  }
+  
+  .mission h3, .history h3, .overview h3 {
+    font-size: 1.5em;
+    color: #333;
+  }
+  
+  .mission ul, .history ul, .overview ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .mission ul li, .history ul li, .overview ul li {
+    background: #f9f9f9;
+    margin: 5px 0;
+    padding: 10px;
+    border-left: 5px solid #007BFF;
+  }
+  
+  .mission ul li:nth-child(odd), .history ul li:nth-child(odd), .overview ul li:nth-child(odd) {
+    background: #eef;
+  }
+  
+  .mission p, .history p, .overview p {
+    line-height: 1.6;
+  }
+  

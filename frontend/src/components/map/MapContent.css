@@ -1,0 +1,21 @@
+/* ContentComponent.css */
+.content-container {
+    width: 50%;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f8f9fa; /* Light background color */
+    float: left;
+  }
+  
+  .content-container h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .content-container p {
+    font-size: 16px;
+    color: #666;
+  }
+  
