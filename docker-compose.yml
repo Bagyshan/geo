@@ -1,0 +1,78 @@
+version: '3.10'
+
+services:
+  backend:
+    build: ./backend
+    command: >
+      sh -c "gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 2"
+    volumes:
+      - ./backend:/usr/src/app/
+      - static_volume:/usr/src/app/static
+      - media_volume:/usr/src/app/media
+      - logs_volume:/usr/src/app/logs
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - migration
+
+  db:
+    image: postgis/postgis:16-3.4
+    restart: always
+    environment:
+      POSTGRES_DB: kyrgeo
+      POSTGRES_USER: bagyshan
+      POSTGRES_PASSWORD: 1
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+
+  # db:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.postgis
+  #   restart: always
+  #   environment:
+  #     POSTGRES_DB: kyrgeo
+  #     POSTGRES_USER: bagyshan
+  #     POSTGRES_PASSWORD: 1
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data/
+  #     - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+  #   ports:
+  #     - "5432:5432"
+    
+  migration:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: on-failure
+    command: >
+      sh -c "python manage.py makemigrations && python manage.py migrate"
+    volumes:
+      - ./backend:/usr/src/app/
+    depends_on:
+      - db
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - static_volume:/usr/src/app/static
+      - media_volume:/usr/src/app/media
+    depends_on:
+      - backend
+
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
+  logs_volume:
+
+

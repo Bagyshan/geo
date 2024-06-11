@@ -1,0 +1,19 @@
+                   List of relations
+ Schema |            Name            | Type  |  Owner   
+--------+----------------------------+-------+----------
+ public | auth_group                 | table | bagyshan
+ public | auth_group_permissions     | table | bagyshan
+ public | auth_permission            | table | bagyshan
+ public | auth_user                  | table | bagyshan
+ public | auth_user_groups           | table | bagyshan
+ public | auth_user_user_permissions | table | bagyshan
+ public | django_admin_log           | table | bagyshan
+ public | django_content_type        | table | bagyshan
+ public | django_migrations          | table | bagyshan
+ public | django_session             | table | bagyshan
+ public | home_home                  | table | bagyshan
+ public | maps_maps                  | table | bagyshan
+ public | news_news                  | table | bagyshan
+ public | spatial_ref_sys            | table | bagyshan
+(14 rows)
+
