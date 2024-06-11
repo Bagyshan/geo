@@ -1,0 +1,107 @@
+/* Общие стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Стили для контейнера новостей */
+.containerNews {
+  margin: 5px auto;
+  padding: 0 15px; /* Уменьшаем отступы по бокам */
+  max-width: 1100px;
+  margin-top: 80px;
+}
+
+/* Стили для каждой новости */
+.news-item {
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок новости */
+.news-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #0D3E61;
+}
+
+/* Текст новости */
+.news-text {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+/* Контейнер для PDF-файла */
+.pdf-container {
+  margin-bottom: 20px;
+}
+
+/* Форма комментария */
+.comment-form {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+/* Поля ввода имени и электронной почты */
+.name-email-container {
+  display: flex;
+  flex-wrap: wrap; /* Обертываем на мобильных устройствах */
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.name-input,
+.email-input {
+  width: 100%; /* Полное ширине на мобильных устройствах */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 10px; /* Увеличиваем отступ между полями */
+}
+
+.email-input {
+  margin-left: 0; /* Убираем отступ слева для второго поля */
+}
+
+/* Кнопка отправки комментария */
+.submit-button {
+  width: 100%; /* Полная ширина на мобильных устройствах */
+}
+
+/* Поля ввода комментария */
+.comment-input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box; /* Учитываем отступы и рамку в общей ширине */
+}
+
+/* Кнопка отправки комментария */
+.submit-button {
+  width: 100%;
+  padding: 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  box-sizing: border-box; /* Учитываем отступы и рамку в общей ширине */
+}
+
+/* При наведении */
+.submit-button:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,170 @@
+.achievements-projects {
+  padding: 20px;
+  margin-top: 80px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.content-box {
+  margin-bottom: 40px;
+}
+
+.intro p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.stat {
+  flex-basis: 48%;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.stat h3 {
+  margin: 0 0 10px;
+  font-size: 36px;
+  text-align: center;
+}
+
+.stat p {
+  margin: 0;
+  color: #666;
+  font-size: 16px;
+  text-align: center;
+}
+
+.achievements,
+.technology,
+.projects {
+  margin-bottom: 30px;
+}
+
+.achievements h3,
+.technology h3,
+.projects h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #0D3E61;
+}
+
+.achievements p,
+.technology ul,
+.projects p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.projects .project {
+  margin-bottom: 20px;
+}
+
+.projects .project h4 {
+  color: #0D3E61;
+  margin-top: 0;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .stats {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat {
+    flex-basis: 100%;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+
+  .stat h3 {
+    font-size: 28px;
+  }
+
+  .stat p {
+    font-size: 14px;
+  }
+
+  .achievements h3,
+  .technology h3,
+  .projects h3 {
+    font-size: 20px;
+  }
+
+  .projects .project h4 {
+    font-size: 18px;
+  }
+
+  .projects .project {
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 24px;
+  }
+
+  .stat h3 {
+    font-size: 24px;
+  }
+
+  .stat p {
+    font-size: 12px;
+  }
+
+  .achievements h3,
+  .technology h3,
+  .projects h3 {
+    font-size: 18px;
+  }
+
+  .projects .project h4 {
+    font-size: 16px;
+  }
+
+  .intro p,
+  .achievements p,
+  .technology ul,
+  .projects p {
+    font-size: 14px;
+  }
+
+  .projects .project {
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 100%;
+  }
+}
