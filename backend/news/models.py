@@ -9,6 +9,7 @@ class News(models.Model):
     body = models.TextField(null=True, blank=True)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+    file = models.FileField(upload_to='pdfs', null=True, blank=True)
 
     def save(self, *args, **kwargs):
         self.updated_at = timezone.now().date()

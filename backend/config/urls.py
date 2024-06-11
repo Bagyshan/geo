@@ -44,7 +44,6 @@ urlpatterns = [
     path('upload_image/', include('upload_image.urls')),
     path('admin/media/text_images/', include('upload_image.urls')),
     path('maps/', include('maps.urls')),
-    path('upload_file/', include('upload_file.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
