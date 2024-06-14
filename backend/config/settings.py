@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'news',
     'upload_image',
     'maps',
+    'services',
+    'comments',
 ]
 
 MIDDLEWARE = [
@@ -175,6 +177,22 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool)
+EMAIL_PORT_SSL = config("EMAIL_PORT_SSL", cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+
+
+REDIS_HOST = 'redis'
+REDIS_PORT = '6379'
+
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT
+
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -223,45 +241,86 @@ TINYMCE_DEFAULT_CONFIG = {
 
 
 
+# JAZZMIN_SETTINGS = {
+#     "site_title": "KyrgyzGeologia",
+#     "site_header": "KyrgyzGeologia",
+#     # "site_logo": "images/logo.png",  # Путь к вашему логотипу
+#     "site_logo_classes": "img-circle",
+#     "welcome_sign": "Добро пожаловать в KyrgyzGeologia",
+#     "show_sidebar": True,
+#     "theme": "cyborg",
+#     "navigation_expanded": True,
+#     "hide_apps": ["social_django", "auth"],
+#     "usermenu_links": [
+#         {
+#             "name": "Помощь",
+#             "url": "https://www.google.ru/",
+#             "new_window": True
+#         },
+#         {
+#             "model": "auth.user"
+#         }
+#     ],
+#     "topmenu_links": [
+#         # Ссылки, отображаемые в верхнем меню
+#         {"name": "Домой", "url": "admin:index",
+#          "permissions": ["auth.view_user"]},
+#         {"name": "Поддержка", "url": "https://www.google.ru/",
+#          "new_window": True},
+#     ],
+#     "show_ui_builder": True,
+#     "changeform_format": "horizontal_tabs",
+#     # Используйте горизонтальные вкладки на страницах редактирования
+#     "changeform_format_overrides": {"auth.user": "collapsible",
+#                                     "auth.group": "vertical_tabs"},
+#     "show_icons": True,  # Показывать иконки в меню
+#     "default_theme": "cerulean",  # Используйте тему Cerulean из Bootswatch
+#     "related_modal_active": True,
+#     # Включить модальные окна для связанных объектов
+# }
+
+
 JAZZMIN_SETTINGS = {
-    "site_title": "KyrgyzGeologia",
-    "site_header": "KyrgyzGeologia",
-    # "site_logo": "images/logo.png",  # Путь к вашему логотипу
-    "site_logo_classes": "img-circle",
-    "welcome_sign": "Добро пожаловать в KyrgyzGeologia",
-    "show_sidebar": True,
-    "navigation_expanded": True,
-    "hide_apps": ["social_django", "auth"],
-    "usermenu_links": [
-        {
-            "name": "Помощь",
-            "url": "https://www.google.ru/",
-            "new_window": True
-        },
-        {
-            "model": "auth.user"
-        }
-    ],
-    "topmenu_links": [
-        # Ссылки, отображаемые в верхнем меню
-        {"name": "Домой", "url": "admin:index",
-         "permissions": ["auth.view_user"]},
-        {"name": "Поддержка", "url": "https://www.google.ru/",
-         "new_window": True},
-    ],
-    "show_ui_builder": True,
-    "changeform_format": "horizontal_tabs",
-    # Используйте горизонтальные вкладки на страницах редактирования
-    "changeform_format_overrides": {"auth.user": "collapsible",
-                                    "auth.group": "vertical_tabs"},
-    "show_icons": True,  # Показывать иконки в меню
-    "default_theme": "cerulean",  # Используйте тему Cerulean из Bootswatch
-    "related_modal_active": True,
-    # Включить модальные окна для связанных объектов
+    "site_title": "Hackaton Projects",
+    "welcome_sign": "Добро пожаловать!",
+    "site_header": "Blow",
+    "site_brand": "KyrgyzGeology",
+    "copyright": "ChocoPy31",
+    "hide_apps": ["auth", "admin"]
 }
 
 
-
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-success",
+    "accent": "accent-teal",
+    "navbar": "navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-dark-info",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "cyborg",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success",
+    },
+}
 
 
 LOGGING = {

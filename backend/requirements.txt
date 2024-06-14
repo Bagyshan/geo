@@ -20,3 +20,4 @@ django-leaflet
 django-geojson
 django-map-widgets
 django-admin-geomap
+celery[redis]

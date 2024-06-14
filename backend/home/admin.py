@@ -10,5 +10,7 @@ class HomeAdmin(admin.ModelAdmin):
         models.TextField: {'widget': TinyMCE()},
     }
 
+    list_display = ('id', 'title')
+
 admin.site.register(Home, HomeAdmin)
 

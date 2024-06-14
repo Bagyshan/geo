@@ -26,7 +26,7 @@ class MapsAdmin(TranslationAdmin, LeafletGeoAdmin):
         models.TextField: {'widget': TinyMCE()},
     }
 
-    list_display = ('title', 'body')
+    list_display = ('id', 'title', 'object_type', 'created_at')
 
 admin.site.register(Maps, MapsAdmin)
 

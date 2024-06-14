@@ -21,7 +21,7 @@ from django.shortcuts import render
 from django_admin_geomap import geomap_context
 
 
-class MapsViewSet(viewsets.ModelViewSet):
+class MapsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Maps.objects.all()
     serializer_class = MapsSerializer
 

@@ -19,9 +19,15 @@ class Maps(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     location = gis_models.PointField()
-    color = models.CharField(max_length=10, choices=COLOR_CHOICES)
+    object_type = models.CharField(max_length=10, choices=COLOR_CHOICES)
+    file = models.FileField(upload_to='pdfs', null=True, blank=True)
 
 
     def __str__(self) -> str:
         return self.title
+    
+
+    class Meta:
+        verbose_name = 'Краты'
+        verbose_name_plural = 'Карты'
 

@@ -1,11 +1,10 @@
 from rest_framework.routers import DefaultRouter
 from django.urls import path, include
-from .views import NewsViewSet
+from .views import ServiceViewSet
 from . import views
 
 router = DefaultRouter()
-router.register('', NewsViewSet)
-
+router.register('', ServiceViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
