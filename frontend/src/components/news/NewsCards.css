@@ -4,14 +4,12 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 /* Стили для секции новостей */
 .news-section {
   padding: 40px;
   background-color: rgb(213, 221, 234);
   text-align: center;
 }
-
 body {
   background-color: #e0e8f5;
 }
@@ -38,7 +36,8 @@ body {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 20px;
-  padding: 20px;
+  padding: 20px 180px;
+
 }
 
 .news-card {
@@ -164,15 +163,15 @@ body {
   .news-cards-container {
     grid-template-columns: repeat(1, 1fr);
     padding: 10px;
-    justify-content: center; 
+    justify-content: center;
   }
 
   .news-card {
     grid-column: span 1;
-    margin-bottom: 20px; 
-    height: auto; 
-    justify-content: center; 
-    align-items: center; 
+    margin-bottom: 20px;
+    height: auto;
+    justify-content: center;
+    align-items: center;
   }
 
   .news-card.size-1,
@@ -181,25 +180,25 @@ body {
   .news-card.size-4,
   .news-card.size-5,
   .news-card.size-6 {
-    grid-column: span 1; 
+    grid-column: span 1;
   }
 
   .news-image {
-    height: 200px; 
+    height: 200px;
   }
 
   .news-content {
-    padding: 10px; 
-    text-align: center; 
+    padding: 10px;
+    text-align: center;
   }
 
   .news-card h3 {
-    font-size: 18px; 
-    margin-bottom: 10px; 
+    font-size: 18px;
+    margin-bottom: 10px;
   }
 
   .news-card p {
-    font-size: 14px; 
+    font-size: 14px;
   }
 }
 

@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './NewsCards.css';
 import { useNavigate } from 'react-router-dom';
+import {useDispatch, useSelector} from "react-redux";
+import {getNews} from "../../store/apiSlice";
+import newsData from "../../newsData";
 
 const determineCardSize = (index) => {
   switch (index % 6) {
@@ -21,7 +24,12 @@ const determineCardSize = (index) => {
   }
 };
 
-const NewsCards = ({ newsData }) => {
+const NewsCards = () => {
+  const dispatch = useDispatch();
+  const {news,loading} = useSelector((state)=> state.api)
+  useEffect(()=>{
+    dispatch(getNews())
+  },[])
   const navigate = useNavigate();
   const [visibleNews, setVisibleNews] = useState(7); // Определяем начальное количество видимых новостей
 
@@ -29,8 +37,11 @@ const NewsCards = ({ newsData }) => {
     navigate(path);
   };
 
-  if (!newsData) {
+  if (loading) {
     return <div>Loading...</div>;
+  }
+  if(!newsData){
+    return <div>Новостей нет</div>
   }
 
   const handleLoadMore = () => {
@@ -38,29 +49,29 @@ const NewsCards = ({ newsData }) => {
   };
 
   return (
-    <div className="news-cards-container">
-      {newsData.slice(0, visibleNews).map((news, index) => (
-        <div
-          onClick={() => handleNavigate('/newsitem')}
-          key={index}
-          className={`news-card ${determineCardSize(index)}`}
-        >
-          {news.image && (
+      <div className="news-cards-container">
+
+        {news.slice(0, visibleNews).map((news, index) => (
             <div
-              className="news-image"
-              style={{ backgroundImage: `url(${news.image})` }}
-            ></div>
-          )}
-          <div className="news-content">
-            <h3>{news.title}</h3>
-            <p>{news.text}</p>
-          </div>
-        </div>
-      ))}
-      {newsData.length > visibleNews && (
-        <button className='load-more-btn' onClick={handleLoadMore}>Загрузить еще</button>
-      )}
-    </div>
+                onClick={() => handleNavigate(`/newsitem/${news.id}`)}
+                key={index}
+                className={`news-card ${determineCardSize(index)}`}
+            >
+              {news.image && (
+                  <div
+                      className="news-image"
+                      style={{backgroundImage: `url(${news.image})`}}
+                  ></div>
+              )}
+              <div className="news-content">
+                <h3>{news.title}</h3>
+              </div>
+            </div>
+        ))}
+        {news.length > visibleNews && (
+            <button className='load-more-btn' onClick={handleLoadMore}>Загрузить еще</button>
+        )}
+      </div>
   );
 };
 
