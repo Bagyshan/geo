@@ -55,7 +55,7 @@
   transition: color 0.3s ease, background-color 0.3s ease;
   padding: 10px 15px;
   border-radius: 8px;
-  background: rgba(200, 200, 200, 0.5); /* Прозрачный серый фон */
+  background: rgba(213, 188, 95, 0.59); /* Прозрачный серый фон */
 }
 
 .navbar a.dark-bg {

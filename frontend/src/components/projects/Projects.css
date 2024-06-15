@@ -8,18 +8,7 @@
     margin: 0 auto;
   }
   
-  .section-title {
-    text-align: center;
-    font-size: 36px;
-    color: #0D3E61;
-    margin-bottom: 40px;
-  }
-  
-  .projects-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
+
   
   .project {
     width: calc(33.3333% - 20px);
