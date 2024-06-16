@@ -1,15 +1,13 @@
 /* ContentComponent.css */
 .content-container {
-    width: 50%;
-    height: 100vh;
     padding: 20px;
-    box-sizing: border-box;
-    background-color: #f8f9fa; /* Light background color */
-    float: left;
   }
+.content-container img{
+  width: 100%;
+}
   
   .content-container h1 {
-    font-size: 32px;
+    font-size: 22px;
     font-weight: bold;
     color: #333;
   }

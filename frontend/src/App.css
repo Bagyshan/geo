@@ -32,4 +32,10 @@
   main {
     flex: 1;
   }
+.section-title {
+  text-align: center;
+  font-size: 36px;
+  color: #0D3E61;
+  margin-bottom: 40px;
+}
   

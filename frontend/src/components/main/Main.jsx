@@ -26,24 +26,13 @@ const Main = () => {
   // const goToSlide = (index) => {
   //   setCurrentSlide(index);
   // };
-
-
- 
-
-
-  const [news, setNews] = useState(initialNewsData);
-
-  const addNews = (newNews) => {
-    setNews([...news, newNews]);
-  };
-
   return (
     <div className="main-page">
       <div className="videobg">
-      <video className="background-video" autoPlay loop muted>
-        <source src={video} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+          <video className="background-video" autoPlay loop muted>
+            <source src={video} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
       </div>
 
       
@@ -66,8 +55,10 @@ const Main = () => {
       </div> */}
 
 
-
-
+        <div className="newsBlock">
+            <h2 className="section-title">Новости</h2>
+            <NewsCards/>
+        </div>
     </div>
   );
 };
