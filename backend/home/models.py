@@ -1,9 +1,10 @@
+from modeltranslation.translator import register, TranslationOptions
 from django.db import models
 from ckeditor.fields import RichTextField
 
 
 class Home(models.Model):
-    title = models.CharField(max_length=250)
+    title = models.CharField(max_length=200)
     image = models.ImageField(upload_to='media')
 
 
@@ -13,3 +14,8 @@ class Home(models.Model):
     class Meta:
         verbose_name = 'Домашняя страница'
         verbose_name_plural = 'Домашние страницы'
+
+
+# @register(Home)
+# class HomeTranslationOptions(TranslationOptions):
+#     fields = ('title',)

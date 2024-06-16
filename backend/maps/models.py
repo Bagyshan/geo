@@ -28,6 +28,6 @@ class Maps(models.Model):
     
 
     class Meta:
-        verbose_name = 'Краты'
+        verbose_name = 'Карты'
         verbose_name_plural = 'Карты'
 
