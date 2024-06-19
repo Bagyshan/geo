@@ -7,7 +7,8 @@ services:
       sh -c "gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 2"
     volumes:
       - ./backend:/usr/src/app/
-      - static_volume:/usr/src/app/static
+      # - static_volume:/usr/src/app/static
+      - static_volume:/usr/src/app/api/static
       - media_volume:/usr/src/app/media
       - logs_volume:/usr/src/app/logs
     ports:
@@ -32,21 +33,6 @@ services:
       - "5432:5432"
     networks:
       - backend
-
-  # db:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.postgis
-  #   restart: always
-  #   environment:
-  #     POSTGRES_DB: kyrgeo
-  #     POSTGRES_USER: bagyshan
-  #     POSTGRES_PASSWORD: 1
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data/
-  #     - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-  #   ports:
-  #     - "5432:5432"
     
   migration:
     build:
@@ -80,15 +66,52 @@ services:
     networks:
       - backend
 
-  nginx:
+  # nginx:
+  #   build:
+  #     context: .
+  #     dockerfile: nginx/Dockerfile
+  #   ports:
+  #     - "80:80"
+  #   restart: always
+  #   volumes:
+  #     - static_volume:/usr/src/app/static
+  #     - media_volume:/usr/src/app/media
+  #   depends_on:
+  #     - backend
+  #     - frontend
+  #   networks:
+  #     - backend
+
+  # frontend:
+  #   build: ./frontend
+  #   # command: npm start
+  #   ports:
+  #     - "80:80"
+  #   tty: true
+  #   volumes:
+  #     - ./frontend/:/usr/src/app/
+  #     - node_modules:/usr/src/app/node_modules
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - backend
+
+
+
+  frontend:
     build:
-      context: .
-      dockerfile: nginx/Dockerfile
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: on-failure
     ports:
       - "80:80"
+    container_name: "frontend"
     volumes:
-      - static_volume:/usr/src/app/static
-      - media_volume:/usr/src/app/media
+      # - ./frontend:/usr/src/app/
+      - front_static_volume:/usr/src/app/static
+      - static_volume:/usr/src/app/api/static
+    environment:
+      - NODE_ENV=production
     depends_on:
       - backend
     networks:
@@ -98,8 +121,10 @@ services:
 volumes:
   postgres_data:
   static_volume:
+  front_static_volume:
   media_volume:
   logs_volume:
+  # node_modules:
 
 networks:
   backend:
