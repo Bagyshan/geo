@@ -34,6 +34,7 @@ class NewsSerializer(serializers.ModelSerializer):
                 representation.pop('body_ky')
                 representation.pop('file')
                 representation.pop('comments')
+                representation.pop('image')
         
         return representation
     

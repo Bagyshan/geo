@@ -6,6 +6,7 @@ from django.utils import timezone
 class News(models.Model):
     title = models.CharField(max_length=250)
     image = models.ImageField(upload_to='images')
+    preview = models.ImageField(upload_to='previews')
     body = models.TextField(null=True, blank=True)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)

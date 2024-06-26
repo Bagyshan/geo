@@ -65,21 +65,20 @@ services:
     networks:
       - backend
 
-  # nginx:
-  #   build:
-  #     context: .
-  #     dockerfile: nginx/Dockerfile
-  #   ports:
-  #     - "80:80"
-  #   restart: always
-  #   volumes:
-  #     - static_volume:/usr/src/app/static
-  #     - media_volume:/usr/src/app/media
-  #   depends_on:
-  #     - backend
-  #     - frontend
-  #   networks:
-  #     - backend
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - "80:80"
+    restart: always
+    volumes:
+      - static_volume:/usr/src/app/api/static
+      - media_volume:/usr/src/app/media
+    depends_on:
+      - backend
+    networks:
+      - backend
 
   # frontend:
   #   build: ./frontend
@@ -97,23 +96,23 @@ services:
 
 
 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    restart: on-failure
-    ports:
-      - "80:80"
-    container_name: "frontend"
-    volumes:
-      - front_static_volume:/usr/src/app/static
-      - static_volume:/usr/src/app/api/static
-    environment:
-      - NODE_ENV=production
-    depends_on:
-      - backend
-    networks:
-      - backend
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   restart: on-failure
+  #   ports:
+  #     - "80:80"
+  #   container_name: "frontend"
+  #   volumes:
+  #     - front_static_volume:/usr/src/app/static
+  #     - static_volume:/usr/src/app/api/static
+  #   environment:
+  #     - NODE_ENV=production
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - backend
 
 
 volumes:
@@ -125,4 +124,3 @@ volumes:
 
 networks:
   backend:
-

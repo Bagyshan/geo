@@ -46,6 +46,7 @@ urlpatterns = [
     path('maps/', include('maps.urls')),
     path('services/', include('services.urls')),
     path('comments/', include('comments.urls')),
+    path('gp/', include('gp.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
@@ -53,6 +54,7 @@ urlpatterns += i18n_patterns(
     path('news/', include('news.urls')),
     path('maps/', include('maps.urls')),
     path('services/', include('services.urls')),
+    path('gp/', include('gp.urls')),
 )
 
 

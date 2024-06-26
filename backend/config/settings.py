@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'maps',
     'services',
     'comments',
+    'gp',
 ]
 
 MIDDLEWARE = [
