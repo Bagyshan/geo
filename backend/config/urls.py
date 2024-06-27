@@ -46,7 +46,10 @@ urlpatterns = [
     path('maps/', include('maps.urls')),
     path('services/', include('services.urls')),
     path('comments/', include('comments.urls')),
-    path('gp/', include('gp.urls'))
+    path('gp/', include('gp.urls')),
+    path('aboutcompany/', include('aboutcompany.urls')),
+    path('employees/', include('employees.urls')),
+    path('achievements/', include('achievements.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
@@ -55,6 +58,9 @@ urlpatterns += i18n_patterns(
     path('maps/', include('maps.urls')),
     path('services/', include('services.urls')),
     path('gp/', include('gp.urls')),
+    path('aboutcompany/', include('aboutcompany.urls')),
+    path('employees/', include('employees.urls')),
+    path('achievements/', include('achievements.urls')),
 )
 
 
