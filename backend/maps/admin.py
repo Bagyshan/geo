@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Maps
+from .models import Maps, NewMaps
 from tinymce.widgets import TinyMCE
 from django import forms
 from django.db import models
@@ -29,6 +29,16 @@ class MapsAdmin(TranslationAdmin, LeafletGeoAdmin):
     list_display = ('id', 'title', 'object_type', 'created_at')
 
 admin.site.register(Maps, MapsAdmin)
+
+class NewMapsAdmin(TranslationAdmin, LeafletGeoAdmin):
+    # form = NewMapsAdminForm
+    formfield_overrides = {
+        models.TextField: {'widget': TinyMCE()},
+    }
+
+    list_display = ('id', 'title', 'object_type', 'created_at')
+
+admin.site.register(NewMaps, NewMapsAdmin)
 
 
 # models.py:

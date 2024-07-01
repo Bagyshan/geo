@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'leaflet',
     'djgeojson',
     'storages',
+    'django_echarts',
 
     # apps
     'home',
@@ -64,6 +65,7 @@ INSTALLED_APPS = [
     'aboutcompany',
     'employees',
     'achievements',
+    'charts',
 ]
 
 MIDDLEWARE = [
@@ -92,6 +94,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {  # Добавьте эту строку, если ее нет
+                'echarts': 'django_echarts.templatetags.echarts',
+            },
         },
     },
 ]
@@ -176,6 +181,8 @@ MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

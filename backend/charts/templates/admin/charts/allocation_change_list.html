@@ -1,0 +1,121 @@
+<!-- templates/admin/charts/allocation_change_list.html -->
+
+{% extends "admin/change_list.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Example</title>
+    <style>
+        body {
+            background-color: #2e2e2e;
+            color: white;
+        }
+        #main {
+            width: 600px;
+            height: 400px;
+            margin: 0 auto;
+        }
+        .allocation-table {
+            margin-top: 50px; /* Устанавливаем отступ сверху */
+            text-align: left;
+        }
+        .allocation-table th, .allocation-table td {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<div>
+    <h1>Диаграма всех объектов</h1>
+    <div id="main" style="width: 100%;height:400px;"></div>
+</div>
+<div>
+    <h1>|Все объекты</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Категория |</th>
+                <th>Количество |</th>
+                <th>Процент |</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for allocation in allocations %}
+            <tr>
+                <td>{{ allocation.category }}</td>
+                <td>{{ allocation.amount }}</td>
+                <td>{{ allocation.percentage }}%</td>
+                <td>
+                    <a href="{% url 'admin:charts_allocation_change' allocation.id %}">Изменить</a> |
+                    <a href="{% url 'admin:charts_allocation_delete' allocation.id %}">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+<script>
+    fetch("?as_json=1")
+        .then(response => response.json())
+        .then(data => {
+            const categories = data.map(item => item.category);
+            const amounts = data.map(item => item.amount);
+            const colors = data.map(item => item.color);
+            const percentages = data.map(item => item.percentage);
+            const total = amounts.reduce((a, b) => a + b, 0);
+
+            const seriesData = data.map(item => ({
+                value: item.amount,
+                name: `${item.category} ${item.amount} (${item.percentage}%)`,
+                itemStyle: { color: item.color }
+            }));
+
+            const myChart = echarts.init(document.getElementById('main'));
+
+            const option = {
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    top: '5%',
+                    left: 'center',
+                    textStyle: {
+                        color: 'white'  // Цвет текста легенды
+                    }
+                },
+                series: [
+                    {
+                        name: 'Диаграмма',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            show: false,
+                            position: 'center',
+                            color: 'white'
+                        },
+                        emphasis: {
+                            label: {
+                                show: true,
+                                fontSize: '20',
+                                fontWeight: 'bold',
+                                color: 'white'
+                            }
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        data: seriesData
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+        });
+</script>
+{% endblock %}

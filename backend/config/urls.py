@@ -50,6 +50,7 @@ urlpatterns = [
     path('aboutcompany/', include('aboutcompany.urls')),
     path('employees/', include('employees.urls')),
     path('achievements/', include('achievements.urls')),
+    path('charts/', include('charts.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
@@ -61,6 +62,7 @@ urlpatterns += i18n_patterns(
     path('aboutcompany/', include('aboutcompany.urls')),
     path('employees/', include('employees.urls')),
     path('achievements/', include('achievements.urls')),
+    path('charts/', include('charts.urls')),
 )
 
 
