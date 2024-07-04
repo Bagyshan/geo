@@ -8,9 +8,11 @@
 /* Стили для контейнера новостей */
 .containerNews {
   margin: 5px auto;
-  padding: 0 15px; /* Уменьшаем отступы по бокам */
-  max-width: 1100px;
+  padding: 35px 45px;/* Уменьшаем отступы по бокам */
+  max-width: 1150px;
+  background-color: #f8f9fa;
   margin-top: 80px;
+  border-radius: 15px;
 }
 .containerNews img{
   max-width: 1100px;
@@ -23,7 +25,7 @@
   margin: 20px auto;
   padding: 20px;
   border-radius: 8px;
-  background-color: #f8f9fa;
+
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 

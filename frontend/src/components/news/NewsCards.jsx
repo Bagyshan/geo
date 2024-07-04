@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './NewsCards.css';
 import { useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import {getNews} from "../../store/apiSlice";
-import newsData from "../../newsData";
+import {translate} from "../../assets/translate";
+import {LanguageContext} from "../../LanguageContext";
 
 const determineCardSize = (index) => {
   switch (index % 6) {
@@ -30,18 +31,23 @@ const NewsCards = () => {
   useEffect(()=>{
     dispatch(getNews())
   },[])
+  useEffect(() => {
+    console.log(news)
+  }, []);
   const navigate = useNavigate();
   const [visibleNews, setVisibleNews] = useState(7); // Определяем начальное количество видимых новостей
-
+  const { language } = useContext(LanguageContext);
   const handleNavigate = (path) => {
     navigate(path);
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div style={{display:"flex", alignItems:"center",justifyContent:"center", padding:'100px'}}><span className="loader"></span></div>;
   }
-  if(!newsData){
-    return <div>Новостей нет</div>
+  if (!news || news.length === 0) {
+    return <div style={{display: "flex", alignItems: "center", justifyContent: "center", padding: '100px'}}>
+      <h1>Новостей нет...</h1>
+    </div>
   }
 
   const handleLoadMore = () => {
@@ -49,30 +55,35 @@ const NewsCards = () => {
   };
 
   return (
-      <div className="news-cards-container">
-
-        {news.slice(0, visibleNews).map((news, index) => (
-            <div
-                onClick={() => handleNavigate(`/newsitem/${news.id}`)}
-                key={index}
-                className={`news-card ${determineCardSize(index)}`}
-            >
-              {news.image && (
-                  <div
-                      className="news-image"
-                      style={{backgroundImage: `url(${news.image})`}}
-                  ></div>
-              )}
-              <div className="news-content">
-                <h3>{news.title}</h3>
-              </div>
-            </div>
-        ))}
-        {news.length > visibleNews && (
-            <button className='load-more-btn' onClick={handleLoadMore}>Загрузить еще</button>
-        )}
-      </div>
-  );
+      <>
+      {loading == false ? (
+          <div className="news-cards-container">
+            {news.slice(0, visibleNews).map((news, index) => (
+                <div
+                    onClick={() => handleNavigate(`/newsitem/${news.id}`)}
+                    key={index}
+                    className={`news-card ${determineCardSize(index)}`}
+                >
+                  {news.preview && (
+                      <div
+                          className="news-image"
+                          style={{backgroundImage: `url(${news.preview})`}}
+                      ></div>
+                  )}
+                  <div className="news-content">
+                    <h3>{news[translate.translatedApi.title[language]]}</h3>
+                  </div>
+                </div>
+            ))}
+            {news.length > visibleNews && (
+                <button className='load-more-btn' onClick={handleLoadMore}>{translate.loadMore[language]}</button>
+            )}
+          </div>
+      ): (<div>
+      </div>)}
+        </>
+)
+  ;
 };
 
 export default NewsCards;

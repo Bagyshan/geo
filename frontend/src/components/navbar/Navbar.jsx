@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import logo from '../../assets/main_large1.png';
 import './Navbar.css';
+import {translate} from "../../assets/translate";
+import {LanguageContext} from "../../LanguageContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAboutHovered, setIsAboutHovered] = useState(false);
-  const [language, setLanguage] = useState('RU');
+  const { language, changeLanguage } = useContext(LanguageContext);
   const [isDarkBackground, setIsDarkBackground] = useState(true);
   const navigate = useNavigate();
 
@@ -37,11 +39,6 @@ const Navbar = () => {
     navigate(path);
   };
 
-  const handleLanguageChange = (lang) => {
-    setLanguage(lang);
-    // логика для смены языка 
-  };
-
   return (
     <header className="header">
       <div className="logo">
@@ -53,28 +50,28 @@ const Navbar = () => {
           onClick={() => handleNavigate('/news')}
           className={isDarkBackground ? 'dark-bg' : 'light-bg'}
         >
-          Новости
+          {translate.news[language]}
         </a>
         <a
           href="#vacancies"
           onClick={() => handleNavigate('/services')}
           className={isDarkBackground ? 'dark-bg' : 'light-bg'}
         >
-          Услуги
+          {translate.services[language]}
         </a>
         <a
           href="#vacancies"
           onClick={() => handleNavigate('/investorpage')}
           className={isDarkBackground ? 'dark-bg' : 'light-bg'}
         >
-          Инвесторы
+          {translate.investors[language]}
         </a>
         <a
           href="#investors"
           onClick={() => handleNavigate('/projects')}
           className={isDarkBackground ? 'dark-bg' : 'light-bg'}
         >
-          Проекты
+          {translate.projects[language]}
         </a>
         <div
           className="about-container"
@@ -86,7 +83,7 @@ const Navbar = () => {
             onClick={toggleMenu}
             className={isDarkBackground ? 'dark-bg' : 'light-bg'}
           >
-            О компании
+            {translate.aboutCompany[language]}
           </a>
           <div id='aboutAccordion'
             className={`accordion ${isAboutHovered ? 'active' : ''}`}>
@@ -100,14 +97,14 @@ const Navbar = () => {
           onClick={() => handleNavigate('/contacts')}
           className={isDarkBackground ? 'dark-bg' : 'light-bg'}
         >
-          Контакты
+          {translate.contacts[language]}
         </a>
       </nav>
       <div className="icons">
         <div className="language-switcher">
-          <span onClick={() => handleLanguageChange('RU')} className={language === 'RU' ? 'active' : ''}>RU</span> | 
-          <span onClick={() => handleLanguageChange('KY')} className={language === 'KY' ? 'active' : ''}>KY</span> | 
-          <span onClick={() => handleLanguageChange('EN')} className={language === 'EN' ? 'active' : ''}>EN</span>
+          <span onClick={() => changeLanguage('RU')} className={language === 'RU' ? 'active' : ''}>RU</span> |
+          <span onClick={() => changeLanguage('KG')} className={language === 'KG' ? 'active' : ''}>KG</span> |
+          <span onClick={() => changeLanguage('EN')} className={language === 'EN' ? 'active' : ''}>EN</span>
         </div>
         <div className="menu-icon" onClick={toggleMenu}>
           {isOpen ? <FaTimes /> : <FaBars />}

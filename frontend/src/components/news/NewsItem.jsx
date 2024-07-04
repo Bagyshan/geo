@@ -1,15 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './NewsItem.css';
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getNewsPost, postComment} from "../../store/apiSlice";
 import DOMPurify from 'dompurify';
+import {LanguageContext} from "../../LanguageContext";
+import {translate} from "../../assets/translate";
 
 const NewsItem = () => {
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({username: '', email: '' ,content: ''});
     const {newsPost} = useSelector((state)=> state.api)
     const {newsId} = useParams();
+    const { language } = useContext(LanguageContext);
     useEffect(()=>{
         dispatch(getNewsPost(newsId))
     },[])
@@ -31,9 +34,9 @@ const NewsItem = () => {
   return (
     <div className="news-item">
         <div className="containerNews">
-            <h2 className="news-title">{newsPost.title}</h2>
+            <h2 className="news-title">{newsPost[translate.translatedApi.title[language]]}</h2>
             <img src={newsPost.image} style={{borderRadius: "20px"}}/>
-            <div dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(newsPost.body_ru)}}/>
+            <div dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(newsPost[translate.translatedApi.body[language]])}}/>
             <div className="pdf-upload">
                 <embed
                     id="pdf-plugin"
@@ -67,7 +70,7 @@ const NewsItem = () => {
                     value={formData?.email}
                     onChange={handleChange}
                 />
-                <button className="submit-button" type="submit">Отправить</button>
+                <button className="submit-button" type="submit">{translate.send[language]}</button>
             </form>
         </div>
     </div>

@@ -1,23 +1,34 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './Projects.css';
-import photo1 from '../../assets/geologiya_gruntov2.jpg'
-import photo2 from '../../assets/geoproject.jpeg'
-import photo3 from '../../assets/geoproject3.jpg'
-import photo4 from '../../assets/geoproject4.jpg'
-import photo5 from '../../assets/geoproject5.jpg'
-import photo6 from '../../assets/gepproject2.jpg'
 import Map from "../map/Map";
+import {translate} from "../../assets/translate";
+import {LanguageContext} from "../../LanguageContext";
+import {useDispatch, useSelector} from "react-redux";
+import {getMaps, getNewMaps} from "../../store/apiSlice";
+
 
 const Projects = () => {
-
-  return (
+    const { language } = useContext(LanguageContext);
+    const {maps,newMaps,loading} = useSelector((state) => state.api)
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(getMaps())
+        dispatch(getNewMaps())
+    },[dispatch])
+        return (
     <section className="projects">
-      <div className="container">
-        <h2 className="section-title">Наши проекты</h2>
-        <Map/>
+      <div className="containerProjects">
+        <h2 className="section-title">{translate.projects[language]}</h2>
+        <div className='mapContainer'>
+            <div className="mapContent">
+                <Map maps={maps} loading={loading} type={0}/>
+                <h2 className="section-title" style={{marginTop: "40px"}}>{translate.geologicalExploration[language]}</h2>
+                <Map maps={newMaps} loading={loading}/>
+            </div>
+        </div>
       </div>
     </section>
-  );
+        );
 };
 
 export default Projects;

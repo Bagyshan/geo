@@ -5,6 +5,7 @@ import App from './App';
 import './index.css';
 import {Provider} from "react-redux";
 import store from "./store/store";
+import {LanguageProvider} from "./LanguageContext";
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -12,9 +13,11 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <LanguageProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </LanguageProvider>
     </Provider>
   </React.StrictMode>
 );

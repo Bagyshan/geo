@@ -1,15 +1,94 @@
 .projects {
-    padding: 50px 0;
+    padding: 70px 0;
     background-color: #f9f9f9;
   }
   
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
+  .containerProjects {
+    max-width: 1700px;
+    margin: 0 50px;
   }
-  
+  .mapContainer{
+    display: flex;
+  }
+  .mapContent{
+    width: 100%;
+  }
+.diagramMaps{
+  width: 300px;
+  margin-left: 10px;
+  padding: 20px;
+  border-radius: 35px;
+  background-color: rgba(223, 234, 234, 0.8);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-  
+}
+  .filteredList{
+    margin: 10px 0;
+    max-height: 320px; /* Adjust the height as needed */
+    overflow-y: auto;
+  }
+
+/* WebKit Browsers (Chrome, Safari) */
+.filteredList::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+  border-radius: 10px;
+}
+
+.filteredList::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background of the scrollbar track */
+  border-radius: 10px;
+}
+
+.filteredList::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+}
+
+.filteredList::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar thumb on hover */
+}
+
+/* Firefox */
+.filteredList {
+  scrollbar-width: thin; /* Make scrollbar thinner */
+  scrollbar-color: #888 #f1f1f1; /* Color of the scrollbar thumb and track */
+}
+
+
+
+.filteredList_Object{
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+.filteredList_Object:hover{
+  background-color: #e0e0e0;
+}
+.resetBtn{
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.resetBtn img{
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s ease-in-out;
+}
+.spinning {
+  animation: spin 0.5s linear ;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
   .project {
     width: calc(33.3333% - 20px);
     background-color: #fff;
@@ -42,4 +121,29 @@
     color: #555;
     line-height: 1.6;
   }
+  .loaderArea{
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+.loader {
+  width: 108px;
+  height: 108px;
+  border: 10px solid #000;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
   

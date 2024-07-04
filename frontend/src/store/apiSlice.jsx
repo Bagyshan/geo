@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const instance = axios.create({
-    baseURL: 'http://34.173.224.126/',
+    baseURL: 'http://34.71.94.143/',
 })
 
 export const getHome = createAsyncThunk(
@@ -9,6 +9,7 @@ export const getHome = createAsyncThunk(
     async function (_, { rejectWithValue }) {
         try {
             const response = await instance.get(`/home/`);
+            console.log(response)
             return response.data;
         } catch (error) {
             console.log(error);
@@ -21,7 +22,21 @@ export const getMaps = createAsyncThunk(
     "api/getMaps",
     async (_, { rejectWithValue, dispatch }) => {
         try {
-            const response = await instance.get(`/maps/`);
+            const response = await instance.get(`/maps/maps`);
+            console.log(response)
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getNewMaps = createAsyncThunk(
+    "api/getNewMaps",
+    async (_, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/maps/newmaps/`);
+            console.log(response)
             return response.data;
         } catch (error) {
             console.log(error);
@@ -34,6 +49,7 @@ export const getNews = createAsyncThunk(
     async (_, { rejectWithValue, dispatch }) => {
         try {
             const response = await instance.get(`/news/`);
+            console.log(response)
             return response.data;
         } catch (error) {
             console.log(error);
@@ -69,7 +85,19 @@ export const getMap = createAsyncThunk(
     "api/getMap",
     async (id , { rejectWithValue, dispatch }) => {
         try {
-            const response = await instance.get(`/maps/${id}/`);
+            const response = await instance.get(`/maps/maps/${id}/`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getNewMap = createAsyncThunk(
+    "api/getNewMap",
+    async (id , { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/maps/newmaps/${id}/`);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -82,6 +110,7 @@ export const getNewsPost = createAsyncThunk(
     async (id, { rejectWithValue, dispatch }) => {
         try {
             const response = await instance.get(`/news/${id}`);
+            console.log(response)
             return response.data;
         } catch (error) {
             console.log(error);
@@ -93,11 +122,13 @@ export const getNewsPost = createAsyncThunk(
 const apiSlice = createSlice({
     name: "api",
     initialState: {
-        home: [],
+        homes: [],
         loading: false,
         error: null,
         map: [],
+        newMap:[],
         maps: [],
+        newMaps:[],
         news:[],
         newsPost:[],
         services:[],
@@ -111,7 +142,7 @@ const apiSlice = createSlice({
             })
             .addCase(getHome.fulfilled, (state, { payload }) => {
                 state.loading = false;
-                state.home = payload;
+                state.homes = payload;
             })
             .addCase(getHome.rejected, (state, action) => {
                 state.loading = false;
@@ -127,6 +158,16 @@ const apiSlice = createSlice({
             .addCase(getMaps.rejected, (state) => {
                 state.loading = false;
             })
+            .addCase(getNewMaps.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getNewMaps.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.newMaps = payload;
+            })
+            .addCase(getNewMaps.rejected, (state) => {
+                state.loading = false;
+            })
             .addCase(getMap.pending, (state) => {
                 state.loading = true;
             })
@@ -135,6 +176,16 @@ const apiSlice = createSlice({
                 state.map = payload;
             })
             .addCase(getMap.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(getNewMap.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getNewMap.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.newMap = payload;
+            })
+            .addCase(getNewMap.rejected, (state) => {
                 state.loading = false;
             })
             .addCase(getNews.pending, (state) => {
