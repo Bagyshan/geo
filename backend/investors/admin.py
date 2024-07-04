@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 class InvestorsAdmin(TranslationAdmin):
     def save_model(self, request, obj, form, change):
         if not obj.pk and Investors.objects.count() >= 5:
-            raise ValidationError(_("Вы не можете создать более 5 ГП."))
+            raise ValidationError(_("Вы не можете создать более 5 страниц инвесторам."))
         super(InvestorsAdmin, self).save_model(request, obj, form, change)
 
     def has_add_permission(self, request):

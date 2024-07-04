@@ -4,13 +4,13 @@ from django.utils import timezone
 
 # Create your models here.
 class News(models.Model):
-    title = models.CharField(max_length=250)
-    body = models.TextField(null=True, blank=True)
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
-    preview = models.ImageField(upload_to='previews')
-    image = models.ImageField(upload_to='images')
-    file = models.FileField(upload_to='pdfs', null=True, blank=True)
+    title = models.CharField(max_length=250, verbose_name='Название')
+    body = models.TextField(null=True, blank=True, verbose_name='Описание')
+    created_at = models.DateField(auto_now_add=True, verbose_name='Дата создания')
+    updated_at = models.DateField(auto_now=True, verbose_name='Дата обновления')
+    preview = models.ImageField(upload_to='previews', verbose_name='Превью')
+    image = models.ImageField(upload_to='images', verbose_name='Фотография')
+    file = models.FileField(upload_to='pdfs', null=True, blank=True, verbose_name='Файл')
 
     def save(self, *args, **kwargs):
         self.updated_at = timezone.now().date()
