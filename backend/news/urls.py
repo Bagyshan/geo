@@ -8,5 +8,5 @@ router.register('', NewsViewSet)
 
 
 urlpatterns = [
-    path('news/', include(router.urls)),
+    path('', include(router.urls)),
 ]

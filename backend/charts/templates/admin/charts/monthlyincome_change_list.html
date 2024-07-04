@@ -1,0 +1,99 @@
+<!-- templates/admin/charts/income_change_list.html -->
+{% extends "admin/change_list.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>График прибыли</title>
+    <style>
+        body {
+            background-color: #2e2e2e;
+            color: white;
+        }
+        #main {
+            width: 600px;
+            height: 400px;
+            margin: 0 auto;
+        }
+        .income-table {
+            margin-top: 50px; /* Устанавливаем отступ сверху */
+            text-align: left;
+        }
+        .income-table th, .income-table td {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<div>
+    <h1>График прибыли |</h1>
+    <div id="main" style="width: 100%;height:400px;"></div>
+</div>
+<div>
+    <h1>Все месяцы</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Месяц</th>
+                <th>Доход</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for income in monthly_incomes %}
+            <tr>
+                <td>{{ income.month }}</td>
+                <td>{{ income.income }}</td>
+                <td>
+                    <a href="{% url 'admin:charts_monthlyincome_change' income.id %}">Изменить</a> |
+                    <a href="{% url 'admin:charts_monthlyincome_delete' income.id %}">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+<script>
+    fetch("?as_json=1")
+        .then(response => response.json())
+        .then(data => {
+            const months = data.map(item => item.month);
+            const incomes = data.map(item => item.income);
+
+            const myChart = echarts.init(document.getElementById('main'));
+
+            const option = {
+                title: {
+                    text: 'Прибыль в месяцах',
+                    textStyle: {
+                        color: 'white'  // Цвет текста легенды
+                    }
+                },
+                tooltip: {},
+                xAxis: {
+                    type: 'category',
+                    data: months
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: incomes,
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: {
+                        color: 'white'
+                    },
+                    itemStyle: {
+                        color: 'white'
+                    }
+                }]
+            };
+
+            myChart.setOption(option);
+        });
+</script>
+{% endblock %}

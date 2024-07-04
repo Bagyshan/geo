@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const instance = axios.create({
-    baseURL: 'http://34.71.94.143/',
+    baseURL: 'http://0.0.0.0:8000/',
 })
 
 export const getHome = createAsyncThunk(

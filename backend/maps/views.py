@@ -1,7 +1,7 @@
 from requests import Response
 from rest_framework import viewsets
-from .models import Maps
-from .serializers import MapsSerializer
+from .models import Maps, NewMaps
+from .serializers import MapsSerializer, NewMapsSerializer
 from django.http import FileResponse, Http404, HttpResponse, JsonResponse
 from rest_framework.decorators import action
 from django.views.decorators.csrf import csrf_exempt
@@ -21,9 +21,14 @@ from django.shortcuts import render
 from django_admin_geomap import geomap_context
 
 
-class MapsViewSet(viewsets.ModelViewSet):
+class MapsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Maps.objects.all()
     serializer_class = MapsSerializer
+
+
+class NewMapsViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = NewMaps.objects.all()
+    serializer_class = NewMapsSerializer
 
 
     # def create(self, request, *args, **kwargs):

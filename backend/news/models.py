@@ -5,10 +5,11 @@ from django.utils import timezone
 # Create your models here.
 class News(models.Model):
     title = models.CharField(max_length=250)
-    image = models.ImageField(upload_to='images')
     body = models.TextField(null=True, blank=True)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+    preview = models.ImageField(upload_to='previews')
+    image = models.ImageField(upload_to='images')
     file = models.FileField(upload_to='pdfs', null=True, blank=True)
 
     def save(self, *args, **kwargs):
@@ -19,5 +20,5 @@ class News(models.Model):
         return self.title
     
     class Meta:
-        verbose_name = 'News'
-        verbose_name_plural = 'News'
+        verbose_name = 'Новости'
+        verbose_name_plural = 'Новости'
