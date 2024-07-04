@@ -4,6 +4,6 @@ from .models import Home
 from .serializers import HomeSerializer
 
 
-class HomeViewSet(viewsets.ModelViewSet):
+class HomeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Home.objects.all()
     serializer_class = HomeSerializer

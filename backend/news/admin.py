@@ -11,6 +11,6 @@ class NewsAdmin(TranslationAdmin):
         models.TextField: {'widget': TinyMCE()},
     }
 
-    list_display = ('title', 'body')
+    list_display = ('id', 'title', 'created_at')
 
 admin.site.register(News, NewsAdmin)

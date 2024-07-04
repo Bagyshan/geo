@@ -44,12 +44,27 @@ urlpatterns = [
     path('upload_image/', include('upload_image.urls')),
     path('admin/media/text_images/', include('upload_image.urls')),
     path('maps/', include('maps.urls')),
+    path('services/', include('services.urls')),
+    path('comments/', include('comments.urls')),
+    path('gp/', include('gp.urls')),
+    path('aboutcompany/', include('aboutcompany.urls')),
+    path('employees/', include('employees.urls')),
+    path('achievements/', include('achievements.urls')),
+    path('charts/', include('charts.urls')),
+    path('investors/', include('investors.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
     path('home/', include('home.urls')),
     path('news/', include('news.urls')),
     path('maps/', include('maps.urls')),
+    path('services/', include('services.urls')),
+    path('gp/', include('gp.urls')),
+    path('aboutcompany/', include('aboutcompany.urls')),
+    path('employees/', include('employees.urls')),
+    path('achievements/', include('achievements.urls')),
+    path('charts/', include('charts.urls')),
+    path('investors/', include('investors.urls')),
 )
 
 
