@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import HistoryAndMission from "../components/about/HistoryAndMission";
 import Main from "../components/main/Main";
 import OrganizationalChart from "../components/about/OrganizationalChart";
-import NewsCards from "../components/news/NewsCards";
 import AchievementsProjects from "../components/about/AchievementsProjects";
 import NewsItem from "../components/news/NewsItem";
 import Services from "../components/services/Services";
@@ -12,6 +11,8 @@ import Contacts from "../components/contacts/Contacts";
 import InvestorPage from "../components/about/InvestorPage";
 import NewsForm from "../components/news/NewsForm";
 import NewsPage from "../components/news/NewsPage";
+import MapItem from "../components/map/mapItem";
+import NewMapItem from "../components/map/newMapItem";
 
 const PUBLIC_ROUTES = [
   
@@ -25,7 +26,9 @@ const PUBLIC_ROUTES = [
   { id: 9, link: "/projects", element: <Projects/> },
   { id: 10, link: "/contacts", element: <Contacts/> },
   { id: 11, link: "/investorpage", element: <InvestorPage/> },
-  { id: 12, link: '/newsform', element: <NewsForm/> }
+  { id: 12, link: '/newsform', element: <NewsForm/> },
+  {id:13,link: '/mapItem/:mapId', element:<MapItem/>},
+  {id:14,link: '/newMapItem/:mapId', element:<NewMapItem/>}
 ];
 
 const Myroutes = () => {

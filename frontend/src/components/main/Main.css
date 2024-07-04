@@ -20,7 +20,7 @@
   .slider {
     position: relative;
     width: 100%;
-    height: calc(100vh - 70px); 
+    height: 100vmin;
   }
   
   .slide img {
