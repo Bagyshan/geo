@@ -1,22 +1,23 @@
 from django.contrib import admin
-from .models import GP
+from .models import Investors
 from tinymce.widgets import TinyMCE
 from django.db import models
 from modeltranslation.admin import TranslationAdmin
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+# Register your models here.
 
 
-class GPAdmin(TranslationAdmin):
+class InvestorsAdmin(TranslationAdmin):
     def save_model(self, request, obj, form, change):
-        if not obj.pk and GP.objects.count() >= 6:
-            raise ValidationError(_("Вы не можете создать более 6 ГП."))
-        super(GPAdmin, self).save_model(request, obj, form, change)
+        if not obj.pk and Investors.objects.count() >= 5:
+            raise ValidationError(_("Вы не можете создать более 5 ГП."))
+        super(InvestorsAdmin, self).save_model(request, obj, form, change)
 
     def has_add_permission(self, request):
-        if GP.objects.count() >= 6:
+        if Investors.objects.count() >= 5:
             return False
-        return super(GPAdmin, self).has_add_permission(request)
+        return super(InvestorsAdmin, self).has_add_permission(request)
 
     def has_delete_permission(self, request, obj=None):
         return False
@@ -27,4 +28,4 @@ class GPAdmin(TranslationAdmin):
 
     list_display = ('id', 'title', 'created_at')
 
-admin.site.register(GP, GPAdmin)
+admin.site.register(Investors, InvestorsAdmin)

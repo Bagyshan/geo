@@ -1,10 +1,11 @@
 from rest_framework.routers import DefaultRouter
 from django.urls import path, include
-from .views import MapsViewSet, NewMapsViewSet
+from .views import InvestorsViewSet
+from . import views
 
 router = DefaultRouter()
-router.register(r'maps', MapsViewSet)
-router.register(r'newmaps', NewMapsViewSet)
+router.register('', InvestorsViewSet)
+
 
 urlpatterns = [
     path('', include(router.urls)),

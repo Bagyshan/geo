@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'employees',
     'achievements',
     'charts',
+    'investors',
 ]
 
 MIDDLEWARE = [
