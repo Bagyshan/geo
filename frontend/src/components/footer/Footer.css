@@ -1,60 +1,130 @@
 .footer {
-    position: relative; /* Относительное позиционирование */
-    margin-top: auto; /* Верхний отступ будет выталкивать футер вниз */
-    background-color: #0D3E61;
-    color: #ffffff;
-    padding: 40px 20px;
+  background-color: #1d3249;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.textSection {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  justify-content: space-between;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 20px;
+  border-right: 1px solid #ffffff;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 20px;
+}
+
+.column {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.headerh3 {
+  margin-bottom: 10px;
+}
+
+.text {
+  max-width: 100%; /* Ensure text width is responsive */
+  word-wrap: break-word;
+}
+
+.mapSectionFooter {
+  width: 40%;
+}
+
+.mapContainerFooter {
+  padding: 20px;
+  width: 100%;
+  background-color: rgba(44, 87, 105, 0.73);
+  border-radius: 10px;
+}
+
+.addressText {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.cartG {
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 5px solid white;
+}
+
+.contactIcons {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.iconLink {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.phoneNumber {
+  color: #fff;
+}
+.phoneNumber a{
+  color: #699eda;
+}
+
+.workingHours {
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.geologyText {
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.list {
+  padding-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
   }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
+  .textSection {
+    flex-direction: column;
+    width: 100%; /* Full width for text content in mobile view */
+  }
 
-.footer-info {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
-}
+  .leftColumn,
+  .rightColumn {
+    width: 100%;
+    padding: 20px;
+    border-right: none;
+  }
 
-.footer-item {
-  background-color: #0D3E61;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.footer-item h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #ffffff;
-}
-
-.footer-item p {
-  font-size: 16px;
-  color: #dcdcdc;
-}
-
-.footer-item a {
-  color: #007bff;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.footer-item a:hover {
-  color: #0056b3;
-}
-
-.footer-bottom {
-  text-align: center;
-  padding-top: 20px;
-  border-top: 1px solid #ffffff;
-}
-
-.footer-bottom p {
-  margin: 0;
-  font-size: 14px;
-  color: #c2bebe;
+  .mapSectionFooter {
+    width: 100%;
+    order: 2;
+    margin-top: 20px;
+  }
 }
