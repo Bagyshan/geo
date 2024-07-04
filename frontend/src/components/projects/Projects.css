@@ -1,11 +1,16 @@
 .projects {
     padding: 70px 0;
     background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   }
   
   .containerProjects {
     max-width: 1700px;
     margin: 0 50px;
+    width: 90%;
   }
   .mapContainer{
     display: flex;
@@ -146,4 +151,68 @@
     transform: rotate(360deg);
   }
 }
+@media (max-width: 768px) {
+  .mapContainer {
+    display: flex;
+    flex-direction: column; /* Вертикальное выравнивание */
+    align-items: center; /* Центрирование по горизонтали */
+    height: auto;
+  }
+
+  .leaflet-container {
+    height: 40vh; /* Высота карты для мобильных устройств */
+    width: 90vw; /* Ширина карты для мобильных устройств */
+    margin-bottom: 20px; /* Отступ снизу для карты */
+  }
+
+  .diagramMaps {
+    display: flex;
+    flex-direction: column; /* Вертикальное выравнивание диаграммы и кнопки */
+    align-items: center; /* Центрирование по горизонтали */
+    width: 90vw; /* Ширина контейнера диаграммы */
+    margin-top: 20px; /* Отступ сверху для диаграммы */
+  }
+
+  .filteredList {
+    display: flex;
+    flex-direction: column; /* Вертикальное выравнивание списка отфильтрованных объектов */
+    align-items: center; /* Центрирование по горизонтали */
+    width: 90vw; /* Ширина контейнера списка */
+    margin-top: 20px; /* Отступ сверху для списка */
+  }
+
+  .filteredList_Object {
+    margin: 10px 0; /* Отступы между элементами списка */
+    text-align: center; /* Выравнивание текста по центру */
+    width: 85%; /* Ширина элементов списка */
+  }
+
+  .loaderArea {
+    display: flex;
+    justify-content: center; /* Центрирование загрузчика по горизонтали */
+    align-items: center; /* Центрирование загрузчика по верьикали */
+    height: 100vh; /* Высота загрузчика на весь экран */
+  }
+
+  .resetBtn {
+    position: fixed; /* Фиксированное позиционирование кнопки сброса */
+    bottom: 20px; /* Отступ снизу */
+    right: 20px; /* Отступ справа */
+    z-index: 1000; /* Поверх остальных элементов */
+    width: 50px; /* Ширина кнопки сброса */
+    height: 50px; /* Высота кнопки сброса */
+    background: white; /* Фоншвый цвет кнопки сброса */
+    border: none; /* Удаление рамки */
+    border-radius: 50%; /* Округление кнопки сброса */
+    display: flex;
+    justify-content: center; /* Центрирование иконки по горизонтали */
+    align-items: center; /* Центрирование иконки по вертикали */
+  }
+
+  .resetBtn img {
+    width: 24px; /* Ширина иконки сброса */
+    height: 24px; /* Высота иконки сброса */
+  }
+}
+
   

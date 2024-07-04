@@ -30,6 +30,5 @@ export const translate =
         translatedApi:{
                 title:{"RU":"title_ru","KG":"title_ky","EN":"title_en"},
                 body:{"RU":"body_ru","KG":"body_ky","EN":"body_en"}
-        }
-
+        },
     }

@@ -36,7 +36,7 @@ const NewsItem = () => {
         <div className="containerNews">
             <h2 className="news-title">{newsPost[translate.translatedApi.title[language]]}</h2>
             <img src={newsPost.image} style={{borderRadius: "20px"}}/>
-            <div dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(newsPost[translate.translatedApi.body[language]])}}/>
+            <div className="bodyCont" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(newsPost[translate.translatedApi.body[language]])}}/>
             <div className="pdf-upload">
                 <embed
                     id="pdf-plugin"

@@ -54,6 +54,7 @@ const NewsCards = () => {
     setVisibleNews(prevVisibleNews => prevVisibleNews + 7); // Увеличиваем количество видимых новостей на 7 при нажатии на кнопку "Загрузить еще"
   };
 
+
   return (
       <>
       {loading == false ? (

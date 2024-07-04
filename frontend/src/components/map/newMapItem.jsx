@@ -21,7 +21,7 @@ const NewMapItem = () => {
             <div className="containerNews">
                 <h2 className="news-title">{newMap[translate.translatedApi.title[language]]}</h2>
                 <img src={newMap.image} style={{borderRadius: "20px"}}/>
-                <div dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(newMap[translate.translatedApi.body[language]])}}/>
+                <div className="bodyCont" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(newMap[translate.translatedApi.body[language]])}}/>
                 <div className="pdf-upload">
                     <embed
                         id="pdf-plugin"

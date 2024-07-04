@@ -16,6 +16,11 @@
   width: 100%;
   top: 0;
   z-index: 1000;
+  transition: top 0.3s ease;
+}
+
+.header.hidden {
+  top: -70px; /* скрыть хедер за пределами экрана */
 }
 
 /* Стили для логотипа */
@@ -55,7 +60,7 @@
   transition: color 0.3s ease, background-color 0.3s ease;
   padding: 10px 15px;
   border-radius: 8px;
-  background: rgba(213, 188, 95, 0.59); /* Прозрачный серый фон */
+  background: rgba(95, 138, 196, 0.54); /* Прозрачный серый фон */
 }
 
 .navbar a.dark-bg {
@@ -67,7 +72,8 @@
 }
 
 .navbar a:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(29, 50, 73, 0.75);
+  color: white;
 }
 
 .icons {
@@ -104,6 +110,9 @@
 .language-switcher span:hover {
   color: #FFD700;
 }
+.menu-icon.black {
+  color: #000000; /* черный цвет */
+}
 
 /* Стили для мобильных устройств */
 @media (max-width: 768px) {
@@ -111,7 +120,7 @@
     display: none;
     flex-direction: column;
     width: 100%;
-    background-color: #0D3E61;
+    background-color: #3a6482;
     position: absolute;
     top: 60px;
     left: 0;
@@ -127,7 +136,7 @@
     padding: 15px 0;
     text-align: center;
     width: 100%;
-    background-color: #0D3E61; 
+    background-color: #0D3E61;
     color: #ffffff;
     border-bottom: 1px solid #122C5B;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -158,8 +167,8 @@
   top: 100%;
   left: 0;
   width: 250px;
-  background-color: rgba(255, 255, 255, 0.9); 
-  border: 1px solid #dcdcdc; 
+  background-color: #3a6482;
+  border: 1px solid none;
   border-radius: 8px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1001;
@@ -167,7 +176,7 @@
   max-height: 0;
   transition: max-height 0.5s ease, opacity 0.5s ease;
   opacity: 0;
-  padding: 10px 0; 
+  padding: 10px 0;
 }
 
 .accordion a {
@@ -177,11 +186,11 @@
   text-align: left;
   transition: background-color 0.3s ease, color 0.3s ease;
   border-radius: 8px;
-  margin: 5px 10px; 
+  margin: 5px 10px;
 }
 
 .accordion a:hover {
-  background-color: rgba(13, 62, 97, 0.1); 
+  background-color: rgba(13, 62, 97, 0.1);
   color: #0D3E61;
 }
 
@@ -210,30 +219,3 @@
     max-height: none;
   }
 }
-
-/* Стили для кнопки администратора */
-.adminBtn {
-  padding: 12px 24px; 
-  color: #ffffff; 
-  background-color: #0004ff; 
-  border: none; 
-  border-radius: 8px;
-  margin: 5px 10px;
-  font-size: 16px; 
-  font-family: 'Arial', sans-serif; 
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; 
-}
-
-.adminBtn:hover {
-  background-color: #0056b3; 
-  color: #ffffff; 
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
-}
-
-.adminBtn:active {
-  background-color: #004085; 
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); 
-}
-
-
