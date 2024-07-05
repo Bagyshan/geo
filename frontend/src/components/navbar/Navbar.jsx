@@ -10,17 +10,35 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAboutHovered, setIsAboutHovered] = useState(false);
   const { language, changeLanguage } = useContext(LanguageContext);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(window.scrollY);
   const [isDarkBackground, setIsDarkBackground] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScroll = window.scrollY;
-      if (currentScroll > 50) {
-        setIsDarkBackground(false);
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY) {
+        setIsVisible(false); // Скрыть Navbar при прокрутке вниз
       } else {
-        setIsDarkBackground(true);
+        setIsVisible(true); // Показать Navbar при прокрутке вверх
       }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsDarkBackground(currentScrollY <= 50);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -40,7 +58,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="header">
+    <header className={`header ${isVisible ? '' : 'hidden'}`}>
       <div className="logo">
         <img onClick={() => handleNavigate('/')} src={logo} alt="Кыргызгеология" />
       </div>

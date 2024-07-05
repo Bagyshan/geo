@@ -28,7 +28,17 @@
 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
+.bodyCont ul{
+  margin-left: 20px;
+  padding: 35px;
+  border-radius: 15px;
+  background-color: rgba(129, 177, 229, 0.13);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.bodyCont img{
+  border-radius: 10px;
+  margin: 20px 0;
+}
 /* Заголовок новости */
 .news-title {
   font-size: 30px;
