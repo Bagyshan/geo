@@ -3,9 +3,16 @@ from django.db import models
 
 class Allocation(models.Model):
     COLOR_CHOICES = [
-        ('#FFFF00', 'Gold'),
-        ('#000000', 'Coal'),
-        ('#808080', 'General'),
+        ('#FFD700', 'Золото'),
+        ('#FFFF00', 'Рассыпное золото'),
+        ('#808080', 'Каменный уголь'),
+        ('#000000', 'Уголь'),
+        ('#E6E6FA', 'Мраморизованный известняк'),
+        ('#BA55D3', 'Сурьма, флюорит'),
+        ('#FFFFFF', 'Гипс'),
+        ('#2F4F4F', 'Глинистые сланцы'),
+        ('#00FA9A', 'Гранит'),
+        ('#DAA520', 'Ракушечник'),
     ]
 
     category = models.CharField(max_length=100, verbose_name='Название категории месторождений')
