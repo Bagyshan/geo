@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Employees(models.Model):
     name = models.CharField(max_length=100, verbose_name='Имя')
-    post = models.CharField(max_length=30, verbose_name='Должность')
+    post = models.CharField(max_length=30, default='-', verbose_name='Должность')
     body = models.TextField(verbose_name='Описание')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обносления')
