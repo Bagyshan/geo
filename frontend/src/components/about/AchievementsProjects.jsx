@@ -1,103 +1,45 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import './AchievementsProjects.css';
+import {useDispatch, useSelector} from "react-redux";
+import {getAchievements} from "../../store/apiSlice";
+import {translate} from "../../assets/translate";
+import {LanguageContext} from "../../LanguageContext";
 
 const AchievementsProjects = () => {
+  const dispatch = useDispatch();
+  const {achievements} = useSelector((state)=> state.api);
+  const { language } = useContext(LanguageContext);
+  useEffect(() => {
+    dispatch(getAchievements())
+  }, []);
+  const handleMouseEnter = (event) => {
+    event.target.classList.add("enlarge");
+  };
+
+  const handleMouseLeave = (event) => {
+    event.target.classList.remove("enlarge");
+  };
   return (
-    <section className="achievements-projects">
-      <div className="container">
-        <h2 className="section-title">Основные достижения и проекты</h2>
+      <section className="achievements-projects">
+        <div className="container">
+          <h2 className="section-title">{translate.achievements[language]}</h2>
 
-        <div className="content-box">
-          <div className="intro">
-            <p>
-              Успех ГП «Кыргызгеология» основан на сильной команде и технологиях собственной разработки…
-              Открытая геологическая культура, способствующая инновационному мышлению и стремлению к новым открытиям и исследованиям.
-            </p>
-          </div>
-
-          <div className="stats">
-            <div className="stat">
-              <h3>317+</h3>
-              <p>сотрудников</p>
-            </div>
-            <div className="stat">
-              <h3>~46 лет</h3>
-              <p>Средний возраст персонала</p>
-            </div>
-            <div className="stat">
-              <h3>~0,77%</h3>
-              <p>Текучесть кадров</p>
-            </div>
-            <div className="stat">
-              <h3>39%</h3>
-              <p>Женщин среди сотрудников</p>
-            </div>
-            <div className="stat">
-              <h3>~15%</h3>
-              <p>Женщин среди менеджеров</p>
+          <div className="services">
+            <div className="services-list">
+              {achievements.map((achievement, index) => (
+                  <div
+                      className="service"
+                      key={index}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                  >
+                    <h3 className="service-title">{achievement[translate.translatedApi.title[language]]}</h3>
+                  </div>))}
             </div>
           </div>
         </div>
+      </section>
 
-        <div className="content-box">
-          <div className="achievements">
-            <h3>Сильная команда и культура инноваций</h3>
-            <p>
-              Активно занимается геологической разведкой и добычей различных видов полезных ископаемых, таких как золото, серебро, уран, редкоземельные металлы, уголь и другие.
-            </p>
-            <p>
-              Удалось добиться существенных успехов в разработке месторождений золота, серебра и угля. Так, были открыты новые месторождения и проведены работы по увеличению добычи редкоземельных металлов.
-            </p>
-          </div>
-
-          <div className="technology">
-            <h3>Все задачи и продукты основаны на технологиях собственной разработки</h3>
-            <ul>
-              <li>Консультационные услуги</li>
-              <li>Производство ГГР техники и оборудования</li>
-              <li>Гибкость и адаптивность</li>
-              <li>Оцифровка архивных данных</li>
-              <li>Гидрогеологические исследования</li>
-              <li>Геологические исследования и разведка</li>
-              <li>Подготовка проектной и сметной документации</li>
-              <li>Геофизические исследования</li>
-              <li>Инженерно-геологические исследования</li>
-              <li>Обучение и образовательные программы</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="content-box">
-          <div className="projects">
-            <h3>Наши проекты</h3>
-            <div className="project">
-              <h4>Поиск</h4>
-              <p>Геологические исследования и разведка месторождений полезных ископаемых, включая нефть, газ, уголь, рудых металлов и другие.</p>
-            </div>
-            <div className="project">
-              <h4>Контрактная основа</h4>
-              <p>Проведение геологоразведочных работ на контрактной основе для частных компаний и иностранных инвесторов.</p>
-            </div>
-            <div className="project">
-              <h4>Обучение</h4>
-              <p>Обучение и повышение квалификации сотрудников, включая оплату обучения в высших учебных заведениях.</p>
-            </div>
-            <div className="project">
-              <h4>Зарубежные проекты</h4>
-              <p>Участие в международных проектах и сотрудничество с зарубежными компаниями в области геологии и разведки месторождений.</p>
-            </div>
-            <div className="project">
-              <h4>Финансирование</h4>
-              <p>Развитие инфраструктуры и технологий, необходимых для проведения геологических исследований.</p>
-            </div>
-            <div className="project">
-              <h4>Новые технологии</h4>
-              <p>Вложение средств в разработку новых технологий и методов разведки месторождений, а также в научные исследования в области геологии.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   );
 };
 

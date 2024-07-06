@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const instance = axios.create({
-    baseURL: 'http://0.0.0.0:8000/',
+    baseURL: 'http://34.71.94.143/',
 })
 
 export const getHome = createAsyncThunk(
@@ -9,7 +9,6 @@ export const getHome = createAsyncThunk(
     async function (_, { rejectWithValue }) {
         try {
             const response = await instance.get(`/home/`);
-            console.log(response)
             return response.data;
         } catch (error) {
             console.log(error);
@@ -23,7 +22,6 @@ export const getMaps = createAsyncThunk(
     async (_, { rejectWithValue, dispatch }) => {
         try {
             const response = await instance.get(`/maps/maps`);
-            console.log(response)
             return response.data;
         } catch (error) {
             console.log(error);
@@ -36,7 +34,6 @@ export const getNewMaps = createAsyncThunk(
     async (_, { rejectWithValue, dispatch }) => {
         try {
             const response = await instance.get(`/maps/newmaps/`);
-            console.log(response)
             return response.data;
         } catch (error) {
             console.log(error);
@@ -49,7 +46,6 @@ export const getNews = createAsyncThunk(
     async (_, { rejectWithValue, dispatch }) => {
         try {
             const response = await instance.get(`/news/`);
-            console.log(response)
             return response.data;
         } catch (error) {
             console.log(error);
@@ -110,7 +106,6 @@ export const getNewsPost = createAsyncThunk(
     async (id, { rejectWithValue, dispatch }) => {
         try {
             const response = await instance.get(`/news/${id}`);
-            console.log(response)
             return response.data;
         } catch (error) {
             console.log(error);
@@ -118,6 +113,90 @@ export const getNewsPost = createAsyncThunk(
         }
     }
 );
+export const getDiagramInvestor = createAsyncThunk(
+    "api/getDiagramInvestor",
+    async (_, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/charts/category-chart/allocation/`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getLineChartInvestor = createAsyncThunk(
+    "api/getLineChartInvestor",
+    async (_, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/charts/category-chart/monthlyincome/`);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getInvestorsInfo = createAsyncThunk(
+    "api/getInvestorsInfo",
+    async (_, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/investors/`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getInvestorItem = createAsyncThunk(
+    "api/getInvestorItem",
+    async (id, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/investors/${id}`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getGP = createAsyncThunk(
+    "api/getGP",
+    async (_, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/gp/`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getAboutCompany = createAsyncThunk(
+    "api/getAboutCompany",
+    async (_, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/aboutcompany/1/`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getAchievements = createAsyncThunk(
+    "api/getAchievements",
+    async (_, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/achievements/`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
 
 const apiSlice = createSlice({
     name: "api",
@@ -132,8 +211,30 @@ const apiSlice = createSlice({
         news:[],
         newsPost:[],
         services:[],
+        diagramInvestor:[],
+        lineChartInvestor:[],
+        investorsInfo:[],
+        investorItem:[],
+        gp:[],
+        aboutCompany:[],
+        achievements:[],
+
     },
-    reducers: {},
+    reducers: {
+        clearMap: (state) => {
+            state.map = [];
+        },
+        clearNewMap: (state) =>{
+            state.newMap = [];
+        },
+        clearInvestorItem:  (state) =>{
+            state.investorItem = []
+        },
+        clearNewsPost:  (state) =>{
+            state.newsPost = []
+        }
+
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getHome.pending, (state) => {
@@ -217,6 +318,76 @@ const apiSlice = createSlice({
             })
             .addCase(getServices.rejected, (state) => {
                 state.loading = false;
+            })
+            .addCase(getDiagramInvestor.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getDiagramInvestor.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.diagramInvestor = payload;
+            })
+            .addCase(getDiagramInvestor.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(getLineChartInvestor.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getLineChartInvestor.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.lineChartInvestor = payload;
+            })
+            .addCase(getLineChartInvestor.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(getInvestorsInfo.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getInvestorsInfo.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.investorsInfo = payload;
+            })
+            .addCase(getInvestorsInfo.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(getInvestorItem.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getInvestorItem.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.investorItem = payload;
+            })
+            .addCase(getInvestorItem.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(getGP.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getGP.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.gp = payload;
+            })
+            .addCase(getGP.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(getAboutCompany.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getAboutCompany.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.aboutCompany = payload;
+            })
+            .addCase(getAboutCompany.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(getAchievements.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getAchievements.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.achievements = payload;
+            })
+            .addCase(getAchievements.rejected, (state) => {
+                state.loading = false;
             });
 
 
@@ -224,4 +395,4 @@ const apiSlice = createSlice({
 });
 
 export default apiSlice.reducer;
-export const employerActions = apiSlice.actions;
+export const { clearMap, clearNewMap ,clearInvestorItem,clearNewsPost} = apiSlice.actions;

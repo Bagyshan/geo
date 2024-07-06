@@ -1,49 +1,157 @@
 .history-mission {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-    margin-top: 80px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  margin-top: 80px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.history-mission h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.5em;
+  color: #333;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}
+
+.section-image {
+  width: 100%;
+  height: auto;
+  margin: 10px 0;
+}
+
+.mission, .history, .overview {
+  margin-bottom: 30px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.mission h3, .history h3, .overview h3 {
+  font-size: 1.8em;
+  color: #007BFF;
+  margin-bottom: 15px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.mission ul, .history ul, .overview ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.mission ul li, .history ul li, .overview ul li {
+  background: #f1f1f1;
+  margin: 10px 0;
+  padding: 15px;
+  border-left: 5px solid #007BFF;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.mission ul li:nth-child(odd), .history ul li:nth-child(odd), .overview ul li:nth-child(odd) {
+  background: #e0e8f5;
+}
+
+.mission p, .history p, .overview p {
+  line-height: 1.6;
+  font-size: 1.1em;
+  color: #555;
+}
+
+.stateEnterprise-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e0e8f5;
+  padding: 50px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+.stateEnterprise-content {
+  text-align: center;
+  padding: 40px;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.stateEnterprise-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.stateEnterprise-description {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 30px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.stateEnterprise-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.stateEnterprise-item {
+  background-color: #fff;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.stateEnterprise-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stateEnterprise-item span {
+  display: block;
+  font-size: 2rem;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.stateEnterprise-item p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 0;
+}
+
+/* Адаптивная верстка */
+@media (max-width: 992px) {
+  .stateEnterprise-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .history-mission h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 2em;
+}
+
+@media (max-width: 768px) {
+  .stateEnterprise-title {
+    font-size: 2rem;
   }
-  
-  .section-image {
-    width: 100%;
-    height: auto;
-    margin: 10px 0;
+
+  .stateEnterprise-description {
+    font-size: 1rem;
   }
-  
-  .mission, .history, .overview {
-    margin-bottom: 30px;
+
+  .stateEnterprise-item span {
+    font-size: 1.5rem;
   }
-  
-  .mission h3, .history h3, .overview h3 {
-    font-size: 1.5em;
-    color: #333;
+
+  .stateEnterprise-item p {
+    font-size: 1rem;
   }
-  
-  .mission ul, .history ul, .overview ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
-  
-  .mission ul li, .history ul li, .overview ul li {
-    background: #f9f9f9;
-    margin: 5px 0;
-    padding: 10px;
-    border-left: 5px solid #007BFF;
-  }
-  
-  .mission ul li:nth-child(odd), .history ul li:nth-child(odd), .overview ul li:nth-child(odd) {
-    background: #eef;
-  }
-  
-  .mission p, .history p, .overview p {
-    line-height: 1.6;
-  }
-  
+}

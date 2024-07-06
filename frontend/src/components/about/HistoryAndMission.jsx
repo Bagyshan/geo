@@ -1,58 +1,60 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import './HistoryAndMission.css';
-import missionImage from '../../assets/MapKGRus-1200x843.jpg';
-import historyImage from '../../assets/econom.jpg';
-import overviewImage from '../../assets/redkozem-700x566.webp';
+import {useDispatch, useSelector} from "react-redux";
+import {getAboutCompany, getGP} from "../../store/apiSlice";
+import {translate} from "../../assets/translate";
+import {LanguageContext} from "../../LanguageContext";
+import DOMPurify from "dompurify";
 
 const HistoryAndMission = () => {
+  const dispatch = useDispatch()
+  const {gp,aboutCompany} = useSelector((state) => state.api);
+  const { language } = useContext(LanguageContext);
+  useEffect(() => {
+    dispatch(getGP())
+    dispatch(getAboutCompany())
+  }, []);
   return (
-    <section className="history-mission">
-      <h2>История и Миссия предприятия</h2>
-      
-      <div className="mission">
-        <h3>Основные задачи</h3>
-        <img src={missionImage} alt="Mission" className="section-image" />
-        <ul>
-          <li>Удовлетворение нужд государства, юридических и физических лиц в производстве товаров, работ и услуг в сфере геологии и недропользования.</li>
-          <li>Выполнение предприятием прямого государственного заказа по производству товаров, работ или услуг в сфере геологии и недропользования.</li>
-          <li>Реализация государственных программ и социально ориентированных проектов общереспубликанского значения.</li>
-          <li>Комплексно-прогрессивное геологическое изучение и разработка месторождений полезных ископаемых с использованием потенциала ресурсодобывающих отраслей, науки, инноваций, новых технологий для ускоренного роста перерабатывающих отраслей (ресурсно-экспортная инновация, ресурсная инновация).</li>
-          <li>Расширение минерально-сырьевой базы Кыргызской Республики на основе анализа комплекса геологических, геофизических, гидрогеологических, геохимических, физико-географических и экономических особенностей с учетом рекомендаций предыдущих исследований.</li>
-        </ul>
-      </div>
+      <section className="history-mission">
+        <h2>{translate.history[language]}</h2>
 
-      <div className="history">
-        <h3>История</h3>
-        <img src={historyImage} alt="History" className="section-image" />
-        <p>ГП «Кыргызгеология» образовано Постановлением Правительства КР № 170 от 23 апреля 2021 года на базе Северо-Кыргызской геологической экспедиции путем объединения 6 государственных предприятий:</p>
-        <ul>
-          <li>«Северо-Кыргызская геологическая экспедиция»</li>
-          <li>«Кыргызская комплексная гидрогеологическая экспедиция»</li>
-          <li>«Кыргызская методическая экспедиция геолого-экономических исследований»</li>
-          <li>«Южно-Кыргызская ордена Трудового Красного Знамени геологическая экспедиция»</li>
-          <li>«Кыргызская геофизическая экспедиция»</li>
-          <li>«Бишкекский опытно-экспериментальный завод горно-разведочной техники»</li>
-        </ul>
-      </div>
+        <div className="stateEnterprise-container">
+          <div className="stateEnterprise-content">
+            <h1 className="stateEnterprise-title">ГП «Кыргызгеология»</h1>
+            <p className="stateEnterprise-description">
+              Образовано Постановлением Правительства КР № 170 от 23 апреля 2021 года на базе Северо-Кыргызской геологической экспедиции путем объединения 6 госпредприятий:
+            </p>
+            <div className="stateEnterprise-grid">
+              {gp.map((g,index)=> (
+                  <div className="stateEnterprise-item" key={index}>
+                    <span>{g.id}</span>
+                    <p>{g[translate.translatedApi.title[language]]}</p>
+                  </div>
+              ))}
+            </div>
+          </div>
+        </div>
 
-      <div className="overview">
-        <h3>Обзор Госкомпании</h3>
-        <img src={overviewImage} alt="Overview" className="section-image" />
-        <p>Все задачи и продукты основаны на технологиях собственной разработки:</p>
-        <ul>
-          <li>Консультационные услуги</li>
-          <li>Производство ГГР техники и оборудования</li>
-          <li>Гибкость и адаптивность</li>
-          <li>Оцифровка архивных данных</li>
-          <li>Гидрогеологические исследования</li>
-          <li>Геологические исследования и разведка</li>
-          <li>Подготовка проектной и сметной документации</li>
-          <li>Геофизические исследования</li>
-          <li>Инженерно-геологические исследования</li>
-          <li>Обучение и образовательные программы</li>
-        </ul>
-      </div>
-    </section>
+        <div className="mission">
+          <h3>{translate.aboutCompany[language]}</h3>
+          <div className="bodyCont"
+               dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(aboutCompany[translate.translatedApi.body[language]])}}
+          />
+          {aboutCompany.file == null ? (
+              <div></div>
+          ): (
+              <div className="pdf-upload">
+                <embed
+                    id="pdf-plugin"
+                    type="application/pdf"
+                    src={aboutCompany?.file}
+                    width="100%"
+                    height="500px"
+                />
+              </div>
+          )}
+        </div>
+      </section>
   );
 };
 

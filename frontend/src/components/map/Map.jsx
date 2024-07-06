@@ -17,6 +17,7 @@ const MapExample = ({maps,loading,type}) => {
     const [geoJsonData, setGeoJsonData] = useState(null);
     const [filteredMaps, setFilteredMaps] = useState([]);
     const [isSpinning, setIsSpinning] = useState(false);
+
     const { language } = useContext(LanguageContext);
     const navigate = useNavigate()
 
@@ -75,13 +76,20 @@ const MapExample = ({maps,loading,type}) => {
             return acc;
         }, {});
         const ddd = {
-            "#FFFF00":translate.resources.gold[language],
-            "#000000":translate.resources.coal[language]
+            "#FFD700": translate.resources?.gold?.[language] || "Gold",
+            "#000000": translate.resources?.coal?.[language] || "Coal",
+            "#FFFF00": translate.resources?.looseGold?.[language] || "Loose Gold",
+            "#808080": translate.resources?.hardCoal?.[language] || "Hard Coal",
+            "#E6E6FA": translate.resources?.marbledLimestone?.[language] || "Marbled Limestone",
+            '#BA55D3': translate.resources?.antimonyFluorite?.[language] || "Antimony Fluorite",
+            '#C0C0C0': translate.resources?.gypsum?.[language] || "Gypsum",
+            '#2F4F4F': translate.resources?.clayShales?.[language] || "Clay Shales",
+            '#00FA9A': translate.resources?.granite?.[language] || "Granite",
+            '#DAA520': translate.resources?.shellRock?.[language] || "Shell Rock",
         }
         const labelsD = Object.keys(typeCounts);
         const data = Object.values(typeCounts);
         const labels = labelsD.map((d) => ddd[d])
-        console.log(labels)
         const backgroundColor = labelsD.map(label => label); // Assuming the label is a valid color string
 
         return {
@@ -127,11 +135,58 @@ const MapExample = ({maps,loading,type}) => {
             animateScale: true,
             animateRotate: true,
         },
+        plugins: {
+            legend: {
+                onClick: (e, legendItem) => {
+                    const index = legendItem.index;
+                    const newData = { ...data };
+
+                    if (newData.datasets[0].data[index] !== 0) {
+                        newData.datasets[0].data[index] = 0;
+                    } else {
+                        const typeCounts = maps.reduce((acc, map) => {
+                            acc[map.object_type] = (acc[map.object_type] || 0) + 1;
+                            return acc;
+                        }, {});
+                        newData.datasets[0].data[index] = typeCounts[getObjectTypeFromLabel(legendItem.text)];
+                    }
+
+                    setData(newData);
+                    const ddd = {
+                        "#FFD700": "gold",
+                        "#000000": "coal",
+                        "#FFFF00": "looseGold",
+                        "#808080": "hardCoal",
+                        "#E6E6FA": "marbledLimestone",
+                        '#BA55D3': "antimonyFluorite",
+                        '#С0С0С0': "gypsum",
+                        '#2F4F4F': "clayShales",
+                        '#00FA9A': "granite",
+                        '#DAA520': "shellRock",
+                    };
+                    const newFilteredMaps = maps.filter((map) => {
+                        const x = ddd[map.object_type];
+                        return newData.datasets[0].data[newData.labels.indexOf(translate.resources[x][language])] > 0;
+                    });
+                    setFilteredMaps(newFilteredMaps);
+                }
+            },
+
+
+        }
     };
     const getObjectTypeFromLabel = (label) => {
         const colorMap = {
-            [translate.resources.gold[language]]: "#FFFF00",
-            [translate.resources.coal[language]]: "#000000"
+            [translate.resources?.gold?.[language] || "Gold"]: "#FFD700",
+            [translate.resources?.coal?.[language] || "Coal"]: "#000000",
+            [translate.resources?.looseGold?.[language] || "Loose Gold"]: "#FFFF00",
+            [translate.resources?.hardCoal?.[language] || "Hard Coal"]: "#808080",
+            [translate.resources?.marbledLimestone?.[language] || "Marbled Limestone"]: "#E6E6FA",
+            [translate.resources?.antimonyFluorite?.[language] || "Antimony Fluorite"]: '#BA55D3',
+            [translate.resources?.gypsum?.[language] || "Gypsum"]: '#C0C0C0',
+            [translate.resources?.clayShales?.[language] || "Clay Shales"]: '#2F4F4F',
+            [translate.resources?.granite?.[language] || "Granite"]: '#00FA9A',
+            [translate.resources?.shellRock?.[language] || "Shell Rock"]: '#DAA520',
         };
         return colorMap[label];
     };
@@ -210,7 +265,7 @@ const MapExample = ({maps,loading,type}) => {
                     return (
 
                         <Marker key={index} position={coordinates} icon={createCustomIcon(mapPos.object_type)}>
-                            <Popup>
+                            <Popup className="popUp">
                                 <MapContent mapInfo={mapPos} type={type}/>
                             </Popup>
                         </Marker>
@@ -219,24 +274,35 @@ const MapExample = ({maps,loading,type}) => {
                 })}
                 <MapComponent/>
             </MapContainer>
-            {loading == false ?
-                (<div className="diagramMaps">
-                    <Doughnut data={data} options={options}/>
-                    {selectedElement !== null ?(
-                        <button onClick={resetChart} className={`resetBtn ${isSpinning ? 'spinning' : ''}`}><img src={ResetIcon}/></button>)
-                        : <div></div>}
-                    <div className="filteredList">
-                        {filteredMaps.map((mapObject) => {
-                            return (
-                                <div className="filteredList_Object" onClick={()=> handleNavigate(mapObject)}>
+            {loading === false ? (
+                maps.length >= 1 ? (
+                    <div className="diagramMaps">
+                        <Doughnut data={data} options={options} />
+                        {(selectedElement !== null || filteredMaps.length !== maps.length) ? (
+                            <button onClick={resetChart} className={`resetBtn ${isSpinning ? 'spinning' : ''}`}>
+                                <img src={ResetIcon} alt="Reset Icon" />
+                            </button>
+                        ) : (
+                            <div></div>
+                        )}
+                        <div className="filteredList">
+                            {filteredMaps.map((mapObject,index) => (
+                                <div key={index} className="filteredList_Object" onClick={() => handleNavigate(mapObject)}>
                                     <h2>{mapObject[translate.translatedApi.title[language]]}</h2>
                                 </div>
-                            )
-                        })}
+                            ))}
+                        </div>
                     </div>
-                </div>)
-                :
-                <div className="loaderArea"><span className="loader"></span></div>}
+                ) : (
+                    <div className="diagramMaps" style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
+                        <h2>{translate.noData[language]}...</h2>
+                    </div>
+                )
+            ) : (
+                <div className="loaderArea">
+                    <span className="loader"></span>
+                </div>
+            )}
         </div>
     );
 };
