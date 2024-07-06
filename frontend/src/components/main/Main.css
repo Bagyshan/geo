@@ -3,56 +3,96 @@
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-}
-.background-video {
-  /*position: absolute;*/
-  /*top: 50%;*/
-  /*left: 50%;*/
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /*transform: translate(-50%, -50%);*/
-  z-index: -1;
+  overflow: hidden; /* Ограничение контента в пределах экрана */
 }
 
-  
-  .slider {
-    position: relative;
-    width: 100%;
-    height: 100vmin;
-  }
-  
-  .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100vmin; /* Высота слайдера, регулируемая в зависимости от содержимого */
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Растягивание изображения слайда */
+}
+.titleSlide{
+  position: absolute;
+  top: 35%;
+  background-color: rgba(12, 31, 42, 0.66);
+  width: 700px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  padding-left: 50px;
+  border-radius: 0 25px 25px 0;
+  color: white;
+}
+.dots {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0; /* Внутренние отступы для точек */
+   /* Максимальная ширина для точки */
+  flex-shrink: 0; /* Запрет уменьшения точки */
+  min-width: 400px;
+
+}
+
+.dot {
+  background-color: rgba(255, 255, 255, 0.48);
+  border: 2px solid none;
+  border-radius: 5px;
+  min-width: 100px;
+  margin-right: 10px; /* Расстояние между точками */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.dot img {
+  width: 60px;
+  height: 40px;
+  margin-right: 5px;
+}
+
+.dot.active {
+  border-color: #007BFF;
+  background-color: rgba(255, 255, 255, 0.48);
+}
+
+.dot:last-child {
+  margin-right: 0; /* Убрать правый отступ для последней точки */
+}
+.newsBlock{
+  margin-top: 20px;
+}
+@media (max-width: 730px) {
   .dots {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    display: flex;
-    flex-direction: row;
+    overflow-x: auto; /* Включить горизонтальный скролл для точек */
+    white-space: nowrap; /* Предотвращение переноса точек на новую строку */
+    scrollbar-width: none; /* Скрыть полосу прокрутки для Firefox */
+    -ms-overflow-style: none; /* Скрыть полосу прокрутки для IE/Edge */
+    left: 1px;
+    bottom: 0;
+    width: 100%;
   }
-  
+
+  .dots::-webkit-scrollbar {
+    display: none; /* Скрыть полосу прокрутки для WebKit (Chrome, Safari, etc.) */
+  }
+  .titleSlide{
+    width: 100%;
+    top: 30%;
+  }
   .dot {
-    width: 60px;
-    height: 40px;
-    background-size: cover;
-    background-position: center;
-    border: 2px solid none;
-    border-radius: 5px;
-    margin-right: 10px; 
-    cursor: pointer;
+    margin-right: 10px; /* Возвращение расстояния между точками */
+    flex-shrink: 0; /* Запрет уменьшения точки */
   }
-  
-  .dot.active {
-    border-color: #007BFF;
-  }
-  
-  .dot:last-child {
-    margin-right: 0;
-  }
-  
+
+
+}

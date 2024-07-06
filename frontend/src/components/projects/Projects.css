@@ -17,7 +17,22 @@
   }
   .mapContent{
     width: 100%;
+
   }
+  .toProject{
+    cursor: pointer;
+    padding: 5px;
+    text-align: center;
+  }
+  .toProject:hover{
+    color: #1C5D99;
+    border-radius: 5px;
+  }
+  .popUp{
+    width: 200px;
+    padding: 0;
+  }
+
 .diagramMaps{
   width: 300px;
   margin-left: 10px;

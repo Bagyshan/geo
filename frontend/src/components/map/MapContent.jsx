@@ -16,9 +16,9 @@ const MapContent = ({mapInfo,type}) => {
        }
     };
   return (
-      <div className="content-container" onClick={handleNavigate} >
+      <div className="content-container">
           <img src={mapInfo.image}/>
-          <h1>{mapInfo[translate.translatedApi.title[language]] }</h1>
+          <h1 className="toProject" onClick={handleNavigate}>{mapInfo[translate.translatedApi.title[language]] }</h1>
       </div>
   );
 };

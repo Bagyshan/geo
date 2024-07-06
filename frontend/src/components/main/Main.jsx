@@ -21,9 +21,6 @@ const Main = () => {
     useEffect(()=>{
         dispatch(getHome())
     },[])
-    useEffect(()=>{
-        console.log(homes)
-    },[homes])
   useEffect(() => {
       const interval = setInterval(() => {
        setCurrentSlide(prevSlide => (prevSlide + 1) % homes.length);
@@ -44,17 +41,28 @@ const Main = () => {
 
 
       <div className="slider">
-        <div className="slide">
-          <img src={homes[currentSlide]?.image} alt={`Slide ${currentSlide}`} style={{ width: '100%', height: '100vmin' }} />
-        </div>
+          {homes.length > 0 && (
+              <div className="slide">
+                  <div className="titleSlide">
+                      <h2>{homes[currentSlide][translate.translatedApi.title[language]]}</h2>
+                  </div>
+                  <img
+                      src={homes[currentSlide]?.image}
+                      alt={`Slide ${currentSlide}`}
+                      style={{ width: '100%', height: '100vmin' }}
+                  />
+              </div>
+          )}
         <div className="dots">
           {homes.map((home, index) => (
             <div
               key={index}
               className={`dot ${index === currentSlide ? 'active' : ''}`}
-              style={{ backgroundImage: `url(${home?.image})` }}
               onClick={() => goToSlide(index)}
-            />
+            >
+                <img style={{width:"100%",borderRadius:"5px"}} src={home?.icon}/>
+                <h4>{home?.mini_title}</h4>
+            </div>
           ))}
         </div>
       </div>
