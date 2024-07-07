@@ -66,10 +66,12 @@ services:
       - backend
 
   nginx:
-    image: nginx:latest
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
     container_name: "nginx"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
     ports:
       - "7000:7000"
     depends_on:
@@ -119,7 +121,7 @@ services:
       - static_volume:/usr/src/app/api/static
     environment:
       - NODE_ENV=production
-      - REACT_APP_API_URL=http://0.0.0.0:8000/
+      - REACT_APP_API_URL=http://0.0.0.0:7000/
     depends_on:
       - backend
     networks:
