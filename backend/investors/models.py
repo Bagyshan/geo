@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Investors(models.Model):
-    title = models.CharField(max_length=250, verbose_name='Название')
+    title = models.CharField(max_length=50, verbose_name='Название')
     body = models.TextField(null=True, blank=True, verbose_name='Описание')
     created_at = models.DateField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateField(auto_now=True, verbose_name='Дата обновления')
