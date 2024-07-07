@@ -93,38 +93,38 @@
 # # CMD ["nginx", "-g", "daemon off;"]
 
 
-###########
-# BUILDER #
-###########
-FROM node:lts-slim as builder
+# ###########
+# # BUILDER #
+# ###########
+# FROM node:lts-slim as builder
 
-COPY package.json package-lock.json ./
-RUN npm install && mkdir /frontend && mv ./node_modules ./frontend
+# COPY package.json package-lock.json ./
+# RUN npm install && mkdir /frontend && mv ./node_modules ./frontend
 
-WORKDIR /frontend
-COPY . .
-
-RUN npm run build
-
-#########
-# FINAL #
-#########
-FROM nginx:1.19.2-alpine
-COPY --from=builder /frontend/build /usr/src/app
-RUN rm /etc/nginx/conf.d/default.conf
-COPY default.conf /etc/nginx/conf.d
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-
-
-# FROM node:14.14.0-alpine as builder
-# WORKDIR /app
-# COPY ./package.json ./
-# RUN npm install
+# WORKDIR /frontend
 # COPY . .
+
 # RUN npm run build
 
-# FROM nginx
-# EXPOSE 3000
-# COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
-# COPY --from=builder /app/build /usr/share/nginx/html
+# #########
+# # FINAL #
+# #########
+# FROM nginx:1.19.2-alpine
+# COPY --from=builder /frontend/build /usr/src/app
+# RUN rm /etc/nginx/conf.d/default.conf
+# COPY default.conf /etc/nginx/conf.d
+# EXPOSE 80
+# CMD ["nginx", "-g", "daemon off;"]
+
+
+FROM node:14.14.0-alpine as builder
+WORKDIR /app
+COPY ./package.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+FROM nginx
+EXPOSE 3000
+COPY ./default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/build /usr/share/nginx/html
