@@ -26,7 +26,7 @@ const Services = () => {
     return <div className="services">
       <h2 className="section-title">{translate.services[language]}</h2>
       <div style={{display: "flex", alignItems: "center", justifyContent: "center", padding: '100px'}}>
-        <h1>Услуг нет...</h1>
+        <h1>{translate.noServices[language]}...</h1>
       </div>
     </div>
   }

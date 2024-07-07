@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import './NewsItem.css';
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {getNewsPost, postComment} from "../../store/apiSlice";
+import {clearInvestorItem, clearNewsPost, getNewsPost, postComment} from "../../store/apiSlice";
 import DOMPurify from 'dompurify';
 import {LanguageContext} from "../../LanguageContext";
 import {translate} from "../../assets/translate";
@@ -15,10 +15,10 @@ const NewsItem = () => {
     const { language } = useContext(LanguageContext);
     useEffect(()=>{
         dispatch(getNewsPost(newsId))
+        return () => {
+            dispatch(clearNewsPost());
+        };
     },[])
-    useEffect(()=>{
-        console.log(newsId)
-    },[newsPost])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,8 +28,10 @@ const NewsItem = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await dispatch(postComment({ id: newsId, comment: formData }));
+        dispatch(getNewsPost(newsId))
         setFormData({username: '', email: '' ,content: ''})
     };
+    const comments = newsPost?.comments || []
 
   return (
     <div className="news-item">
@@ -37,14 +39,33 @@ const NewsItem = () => {
             <h2 className="news-title">{newsPost[translate.translatedApi.title[language]]}</h2>
             <img src={newsPost.image} style={{borderRadius: "20px"}}/>
             <div className="bodyCont" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(newsPost[translate.translatedApi.body[language]])}}/>
-            <div className="pdf-upload">
-                <embed
-                    id="pdf-plugin"
-                    type="application/pdf"
-                    src={newsPost?.file}
-                    width="100%"
-                    height="500px"
-                />
+            {newsPost.file == null ? (
+                <div></div>
+            ): (
+                <div className="pdf-upload">
+                    <embed
+                        id="pdf-plugin"
+                        type="application/pdf"
+                        src={newsPost?.file}
+                        width="100%"
+                        height="500px"
+                    />
+                </div>
+            )}
+            <div className="comments">
+                <h2 style={{marginBottom: "20px"}}>{translate.comments[language]}:</h2>
+                {comments.length >= 1 ? (
+                    comments.map((comment,index) => (
+                            <div className="comment" key={index}>
+                                <h2>{comment.username}</h2>
+                                <p>{comment.content}</p>
+                            </div>
+                        ))
+                ):(
+                    <div style={{display:"flex", alignItems:"center",justifyContent:"center"}}>
+                        <h2 style={{color:"#545454"}}>{translate.noComments[language]}...</h2>
+                    </div>
+                )}
             </div>
             <form className="comment-form" onSubmit={handleSubmit}>
                 <textarea

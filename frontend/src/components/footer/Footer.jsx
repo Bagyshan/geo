@@ -29,7 +29,7 @@ const Footer = () => {
               </p>
             </div>
             <div className="column">
-              <h3 className="headerh3">Кыргыз геология</h3>
+              <h3 className="headerh3">{translate.kyrgyzgeology[language]}</h3>
               <p className="geologyText">
                 Постановлением Правительства КР № 170 от 23 апреля 2021 года было образовано Государственное предприятие «Кыргызгеология», путем реорганизации государственных предприятий в сфере геологии и недропользования, на базе Государственного предприятия «Северо-Кыргызской геологической экспедиции».
               </p>
@@ -84,7 +84,7 @@ const Footer = () => {
         </div>
         <div className="mapSectionFooter">
           <div className="mapContainerFooter">
-            <p className="addressText">Наш адрес:</p>
+            <p className="addressText">{translate.ourAddress[language]}:</p>
             <div id="cartG" className="cartG">
               <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2924.5897544121544!2d74.4976477759584!3d42.86039487115072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389ec8cca5504a3b%3A0x7d36531e8639db03!2zMiDRg9C70LjRhtCwINCt0YDQutC40L3QtNC40LosINCR0LjRiNC60LXQuiwg0JrRi9GA0LPRi9C30YHRgtCw0L0!5e0!3m2!1sru!2sjp!4v1719353646930!5m2!1sru!2sjp"

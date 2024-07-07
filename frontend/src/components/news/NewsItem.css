@@ -73,7 +73,22 @@
   justify-content: space-between;
   margin-bottom: 20px;
 }
-
+.comments{
+  margin-top: 30px;
+  padding: 0 100px;
+}
+.comment{
+  border-radius: 5px;
+  background-color: rgba(152, 182, 210, 0.58);
+  padding: 10px;
+  padding-left: 20px;
+  margin-bottom: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.comment p{
+  color: #3b3b3b;
+  word-wrap: break-word;
+}
 .name-input,
 .email-input {
   width: 100%; /* Полное ширине на мобильных устройствах */
@@ -121,4 +136,9 @@
 /* При наведении */
 .submit-button:hover {
   background-color: #0056b3;
+}
+@media (max-width: 900px) {
+  .comments{
+    padding: 0;
+  }
 }

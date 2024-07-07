@@ -64,28 +64,28 @@ const Navbar = () => {
       </div>
       <nav className={`navbar ${isOpen ? 'active' : ''}`}>
         <a
-          href="#news"
+            href="#"
           onClick={() => handleNavigate('/news')}
           className={isDarkBackground ? 'dark-bg' : 'light-bg'}
         >
           {translate.news[language]}
         </a>
         <a
-          href="#vacancies"
+            href="#"
           onClick={() => handleNavigate('/services')}
           className={isDarkBackground ? 'dark-bg' : 'light-bg'}
         >
           {translate.services[language]}
         </a>
         <a
-          href="#vacancies"
+            href="#"
           onClick={() => handleNavigate('/investorpage')}
           className={isDarkBackground ? 'dark-bg' : 'light-bg'}
         >
           {translate.investors[language]}
         </a>
         <a
-          href="#investors"
+            href="#"
           onClick={() => handleNavigate('/projects')}
           className={isDarkBackground ? 'dark-bg' : 'light-bg'}
         >
@@ -97,7 +97,7 @@ const Navbar = () => {
           onMouseLeave={() => setIsAboutHovered(false)}
         >
           <a id='aboutacc'
-            href="#about"
+             href="#"
             onClick={toggleMenu}
             className={isDarkBackground ? 'dark-bg' : 'light-bg'}
           >
@@ -111,7 +111,7 @@ const Navbar = () => {
           </div>
         </div>
         <a
-          href="#contact"
+            href="#"
           onClick={() => handleNavigate('/contacts')}
           className={isDarkBackground ? 'dark-bg' : 'light-bg'}
         >

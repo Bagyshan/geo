@@ -27,8 +27,8 @@ const PUBLIC_ROUTES = [
   { id: 10, link: "/contacts", element: <Contacts/> },
   { id: 11, link: "/investorpage", element: <InvestorPage/> },
   { id: 12, link: '/newsform', element: <NewsForm/> },
-  {id:13,link: '/mapItem/:mapId', element:<MapItem/>},
-  {id:14,link: '/newMapItem/:mapId', element:<NewMapItem/>}
+  { id:13,link: '/mapItem/:mapId', element:<MapItem/>},
+  { id:14,link: '/newMapItem/:mapId', element:<NewMapItem/>}
 ];
 
 const Myroutes = () => {

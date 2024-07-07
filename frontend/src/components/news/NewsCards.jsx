@@ -28,11 +28,17 @@ const determineCardSize = (index) => {
 const NewsCards = () => {
   const dispatch = useDispatch();
   const {news,loading} = useSelector((state)=> state.api)
+  const [sortedNews,setSortedNews] = useState([])
+
   useEffect(()=>{
     dispatch(getNews())
   },[])
   useEffect(() => {
-    console.log(news)
+    if (news && news.length > 0) {
+      // Сортировка новостей по дате
+      const sorted = [...news].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      setSortedNews(sorted);
+    }
   }, []);
   const navigate = useNavigate();
   const [visibleNews, setVisibleNews] = useState(7); // Определяем начальное количество видимых новостей
@@ -46,7 +52,7 @@ const NewsCards = () => {
   }
   if (!news || news.length === 0) {
     return <div style={{display: "flex", alignItems: "center", justifyContent: "center", padding: '100px'}}>
-      <h1>Новостей нет...</h1>
+      <h1>{translate.noNews[language]}...</h1>
     </div>
   }
 
