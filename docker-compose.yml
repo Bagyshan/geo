@@ -73,6 +73,7 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
       - nginx_frontend_static_volume:/usr/share/nginx/html
+      - static_volume:/usr/src/app/api/static
     ports:
       - "80:80"
     depends_on:
