@@ -70,12 +70,17 @@ const MapExample = ({maps=[],loading,type}) => {
     };
     ChartJS.register(ArcElement, Tooltip, Legend);
 
-    const processChartData = (maps) => {
-        const typeCounts = maps?.reduce((acc, map) => {
+    const processChartData = (maps=[]) => {
+        if (!Array.isArray(maps)) {
+            console.error('Expected an array for maps but got', typeof maps);
+            return {};
+          }
+          
+          const typeCounts = maps.reduce((acc, map) => {
             acc[map.object_type] = (acc[map.object_type] || 0) + 1;
             return acc;
-        }, {});
-        const ddd = {
+          }, {});
+        const ddd = {   
             "#FFD700": translate.resources?.gold?.[language] || "Gold",
             "#000000": translate.resources?.coal?.[language] || "Coal",
             "#FFFF00": translate.resources?.looseGold?.[language] || "Loose Gold",
