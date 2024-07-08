@@ -71,7 +71,7 @@ const MapExample = ({maps,loading,type}) => {
     ChartJS.register(ArcElement, Tooltip, Legend);
 
     const processChartData = (maps) => {
-        const typeCounts = maps.reduce((acc, map) => {
+        const typeCounts = maps?.reduce((acc, map) => {
             acc[map.object_type] = (acc[map.object_type] || 0) + 1;
             return acc;
         }, {});
@@ -144,7 +144,7 @@ const MapExample = ({maps,loading,type}) => {
                     if (newData.datasets[0].data[index] !== 0) {
                         newData.datasets[0].data[index] = 0;
                     } else {
-                        const typeCounts = maps.reduce((acc, map) => {
+                        const typeCounts = maps?.reduce((acc, map) => {
                             acc[map.object_type] = (acc[map.object_type] || 0) + 1;
                             return acc;
                         }, {});
