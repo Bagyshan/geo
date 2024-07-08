@@ -20,8 +20,10 @@ const InvestorPage = () => {
     setSelectedTitle(id)
   }
   useEffect(() => {
-
-  }, [selectedTitle]);
+    console.log(diagramInvestor)
+    console.log(lineChartInvestor)
+    console.log(investorsInfo)
+  }, []);
 
   return (
       <div className="investor-page">
