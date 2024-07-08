@@ -12,7 +12,7 @@ import {translate} from "../../assets/translate";
 import {LanguageContext} from "../../LanguageContext";
 import {useNavigate} from "react-router-dom";
 
-const MapExample = ({maps,loading,type}) => {
+const MapExample = ({maps=[],loading,type}) => {
     const position = [41.20438, 74.7661];
     const [geoJsonData, setGeoJsonData] = useState(null);
     const [filteredMaps, setFilteredMaps] = useState([]);
