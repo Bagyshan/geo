@@ -72,7 +72,7 @@ const MapExample = ({maps=[],loading,type}) => {
 
     const processChartData = (maps=[]) => {
         if (!Array.isArray(maps)) {
-            console.error('Expected an array for maps but got', typeof maps);
+            console.error('Expected an array for maps but got', maps);
             return {};
           }
           
