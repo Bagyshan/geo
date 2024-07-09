@@ -13,7 +13,6 @@
   display: flex;
   justify-content: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
 }
 
 .navigation ul {
@@ -58,6 +57,9 @@
 
 .navigation a:hover {
   transform: translateY(-2px);
+  color: #f1c40f;
+}
+.navigation li.selected a{
   color: #f1c40f;
 }
 

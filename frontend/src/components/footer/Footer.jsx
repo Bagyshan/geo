@@ -87,13 +87,13 @@ const Footer = () => {
             <p className="addressText">{translate.ourAddress[language]}:</p>
             <div id="cartG" className="cartG">
               <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2924.5897544121544!2d74.4976477759584!3d42.86039487115072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389ec8cca5504a3b%3A0x7d36531e8639db03!2zMiDRg9C70LjRhtCwINCt0YDQutC40L3QtNC40LosINCR0LjRiNC60LXQuiwg0JrRi9GA0LPRi9C30YHRgtCw0L0!5e0!3m2!1sru!2sjp!4v1719353646930!5m2!1sru!2sjp"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2924.380216215135!2d74.6050463!3d42.8648184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb7cdf8b060f3%3A0xed93f52327e2af18!2zMiDQv9GA0L7RgdC_LiDQrdGA0LrQuNC90LTQuNC6LCDQkdC40YjQutC10LosINCa0YvRgNCz0YvQt9GB0YLQsNC9!5e0!3m2!1sru!2sjp!4v1720122067387!5m2!1sru!2sjp"
                   width="100%"
                   height="350px"
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  style={{ border: 'none' }}
+                  style={{border: 'none'}}
               ></iframe>
             </div>
           </div>

@@ -15,7 +15,7 @@
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 1000;
+  z-index: 10000;
   transition: top 0.3s ease;
 }
 
@@ -115,16 +115,17 @@
 }
 
 /* Стили для мобильных устройств */
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .navbar {
     display: none;
     flex-direction: column;
     width: 100%;
-    background-color: #3a6482;
+    background-color: #0D3E61;
     position: absolute;
     top: 60px;
     left: 0;
     border-top: 1px solid #122C5B;
+    border-radius: 20px;
   }
 
   .navbar.active {
@@ -137,8 +138,9 @@
     text-align: center;
     width: 100%;
     background-color: #0D3E61;
-    color: #ffffff;
+    color: #ffffff !important;
     border-bottom: 1px solid #122C5B;
+
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
@@ -158,6 +160,9 @@
 
 .about-container {
   position: relative;
+  padding: 20px 0;
+  width: 100%;
+  text-align: center;
 }
 
 .accordion {
@@ -167,7 +172,7 @@
   top: 100%;
   left: 0;
   width: 250px;
-  background-color: #3a6482;
+  background-color: #0D3E61;
   border: 1px solid none;
   border-radius: 8px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import './NewsCards.css';
 import { useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
@@ -29,7 +29,7 @@ const NewsCards = () => {
   const dispatch = useDispatch();
   const {news,loading} = useSelector((state)=> state.api)
   const [sortedNews,setSortedNews] = useState([])
-
+  const newsCardsRef = useRef([]);
   useEffect(()=>{
     dispatch(getNews())
   },[])
@@ -39,7 +39,8 @@ const NewsCards = () => {
       const sorted = [...news].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
       setSortedNews(sorted);
     }
-  }, []);
+    console.log(sortedNews)
+  }, [news]);
   const navigate = useNavigate();
   const [visibleNews, setVisibleNews] = useState(7); // Определяем начальное количество видимых новостей
   const { language } = useContext(LanguageContext);
@@ -47,48 +48,80 @@ const NewsCards = () => {
     navigate(path);
   };
 
-  if (loading) {
-    return <div style={{display:"flex", alignItems:"center",justifyContent:"center", padding:'100px'}}><span className="loader"></span></div>;
-  }
-  if (!news || news.length === 0) {
-    return <div style={{display: "flex", alignItems: "center", justifyContent: "center", padding: '100px'}}>
-      <h1>{translate.noNews[language]}...</h1>
-    </div>
-  }
-
   const handleLoadMore = () => {
     setVisibleNews(prevVisibleNews => prevVisibleNews + 7); // Увеличиваем количество видимых новостей на 7 при нажатии на кнопку "Загрузить еще"
   };
 
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2, // Порог видимости элемента
+    };
+
+    const handleIntersection = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+
+    if (newsCardsRef.current.length > 0) {
+      newsCardsRef.current.forEach(card => {
+        observer.observe(card);
+      });
+    }
+
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+  }, [sortedNews, visibleNews]); // Зависимости useEffect
+
+  if (loading) {
+    return <div style={{display:"flex", alignItems:"center",justifyContent:"center", padding:'100px'}}><span className="loader"></span></div>;
+  }
+  if (!news || news.length === 0) {
+    return <div style={{display: "flex", alignItems: "center", justifyContent: "center", padding: '100px'}} className="noData">
+      <h1>{translate.noNews[language]}...</h1>
+    </div>
+  }
 
   return (
-      <>
-      {loading == false ? (
+      <div className='news-section'>
+      {loading === false ? (
           <div className="news-cards-container">
-            {news.slice(0, visibleNews).map((news, index) => (
+            {sortedNews.slice(0, visibleNews).map((news, index) => (
                 <div
                     onClick={() => handleNavigate(`/newsitem/${news.id}`)}
                     key={index}
+                    ref={(el) => (newsCardsRef.current[index] = el)}
                     className={`news-card ${determineCardSize(index)}`}
                 >
+                  <div className="news-header">
+                    <span className="news-date">{news.created_at}</span>
+                  </div>
                   {news.preview && (
-                      <div
-                          className="news-image"
-                          style={{backgroundImage: `url(${news.preview})`}}
-                      ></div>
+                      <img src={news.preview} alt={news.title} className="news-image"/>
                   )}
                   <div className="news-content">
                     <h3>{news[translate.translatedApi.title[language]]}</h3>
                   </div>
                 </div>
             ))}
-            {news.length > visibleNews && (
+            {sortedNews.length > visibleNews && (
                 <button className='load-more-btn' onClick={handleLoadMore}>{translate.loadMore[language]}</button>
             )}
           </div>
       ): (<div>
       </div>)}
-        </>
+        </div>
 )
   ;
 };

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const instance = axios.create({
-    baseURL: 'http://34.71.94.143/',
+    baseURL: 'http://34.38.234.161/api/',
 })
 
 export const getHome = createAsyncThunk(
@@ -196,6 +196,42 @@ export const getAchievements = createAsyncThunk(
         }
     }
 );
+export const getAchievementItem = createAsyncThunk(
+    "api/getAchievementItem",
+    async (id, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/achievements/${id}`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getEmployees = createAsyncThunk(
+    "api/getEmployees",
+    async (_, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/employees/`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getEmployee = createAsyncThunk(
+    "api/getEmployee",
+    async (id, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/employees/${id}`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
 
 
 const apiSlice = createSlice({
@@ -218,6 +254,9 @@ const apiSlice = createSlice({
         gp:[],
         aboutCompany:[],
         achievements:[],
+        achievementItem:[],
+        employes:[],
+        employee:[],
 
     },
     reducers: {
@@ -232,6 +271,12 @@ const apiSlice = createSlice({
         },
         clearNewsPost:  (state) =>{
             state.newsPost = []
+        },
+        clearAchievementItem: (state) =>{
+            state.achievementItem = []
+        },
+        clearEmployee: (state) =>{
+            state.employee = []
         }
 
     },
@@ -388,6 +433,36 @@ const apiSlice = createSlice({
             })
             .addCase(getAchievements.rejected, (state) => {
                 state.loading = false;
+            })
+            .addCase(getAchievementItem.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getAchievementItem.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.achievementItem = payload;
+            })
+            .addCase(getAchievementItem.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(getEmployees.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getEmployees.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.employees = payload;
+            })
+            .addCase(getEmployees.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(getEmployee.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getEmployee.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.employee = payload;
+            })
+            .addCase(getEmployee.rejected, (state) => {
+                state.loading = false;
             });
 
 
@@ -395,4 +470,10 @@ const apiSlice = createSlice({
 });
 
 export default apiSlice.reducer;
-export const { clearMap, clearNewMap ,clearInvestorItem,clearNewsPost} = apiSlice.actions;
+export const {  clearMap,
+                clearNewMap ,
+                clearInvestorItem,
+                clearNewsPost,
+                clearAchievementItem,
+                clearEmployee
+            } = apiSlice.actions;

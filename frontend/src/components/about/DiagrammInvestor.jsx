@@ -1,15 +1,17 @@
-import React, {useRef, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import {translate} from "../../assets/translate";
+import {LanguageContext} from "../../LanguageContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const DoughnutChart = ({ allocations }) => {
+const DoughnutChart = ({ allocations,loading }) => {
     const chartRef = useRef(null);
     const [hoverIndex, setHoverIndex] = useState(null);
+    const { language } = useContext(LanguageContext);
     const data = {
-        labels: allocations.map(allocation => allocation.category_ru),
+        labels: allocations.map(allocation => allocation[translate.translatedApi.category[language]]),
         datasets: [
             {
                 label: 'Процент от общего количества',
@@ -72,27 +74,39 @@ const DoughnutChart = ({ allocations }) => {
 
     return (
         <div>
-            <h2>Диаграма всех объектов</h2>
-            <div className="diagrams" style={{display:"flex"}}>
-                <div style={{width:"100%",height:"80%"}}>
-                    <Doughnut data={data}  options={options} ref={chartRef}/>
-                </div>
-                <div className="diagramList" style={{width:"100%"}}>
-                    {allocations.map((item,index)=>(
-                        <div
-                            className="filteredList_Object diagramListObject"
-                            key={index}
-                            style={{display:"flex", alignItems:"center",justifyContent:"space-between"}}
-                            onMouseEnter={() => handleMouseEnter(index)}
-                            onMouseLeave={() => handleMouseLeave(index)}
-                        >
-                            <h2>{item.category_ru}</h2>
-                            <p>Количество: {item.amount}</p>
-                            <span>{item.percentage}%</span>
+            <h2>{translate.diagramOfAll[language]}</h2>
+            {loading === false ?
+                allocations.length >= 1 ? (
+                    <div className="diagrams" style={{display:"flex"}}>
+                        <div style={{width:"100%",height:"80%"}}>
+                            <Doughnut data={data}  options={options} ref={chartRef}/>
                         </div>
-                    ))}
-                </div>
-            </div>
+                        <div className="diagramList" style={{width:"100%"}}>
+                            {allocations.map((item,index)=>(
+                                <div
+                                    className="filteredList_Object diagramListObject"
+                                    key={index}
+                                    style={{display:"flex", alignItems:"center",justifyContent:"space-between"}}
+                                    onMouseEnter={() => handleMouseEnter(index)}
+                                    onMouseLeave={() => handleMouseLeave(index)}
+                                >
+                                    <h2>{item[translate.translatedApi.category[language]]}</h2>
+                                    <p>Количество: {item.amount}</p>
+                                    <span>{item.percentage}%</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ):(
+                    <div style={{display:"flex", alignItems:"center",justifyContent:"center", padding:'200px'}} className="noData">
+                        <h2>{translate.noData[language]}...</h2>
+                    </div>
+                )
+                : (
+                    <div style={{display: "flex", alignItems: "center", justifyContent: "center", padding: '100px'}}>
+                        <span className="loader"></span>
+                    </div>
+                )}
         </div>
     );
 };

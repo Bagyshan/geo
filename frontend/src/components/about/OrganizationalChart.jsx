@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './OrganizationalChart.css';
 import worker1 from '../../assets/eraaly.jpg';
 import worker2 from '../../assets/bagyshan.png';
 import worker3 from '../../assets/atai.jpg';
 import worker4 from '../../assets/meerim.jpg';
+import {useDispatch, useSelector} from "react-redux";
+import {getEmployees} from "../../store/apiSlice";
+import {useNavigate} from "react-router-dom";
 
 const workers = [
     {
@@ -45,10 +48,19 @@ const workers = [
 ];
 
 const OrganizationalChart = () => {
+    const dispatch = useDispatch();
+    const {employees} = useSelector((state)=> state.api);
+    const navigate = useNavigate()
+    useEffect(() => {
+        dispatch(getEmployees())
+    }, [dispatch]);
+    const handleNavigate = (item)=>{
+        navigate(`/employee/${item.id}`)
+    }
     return (
         <div className="chart-container">
             {workers.map((worker) => (
-                <div className="worker-card" key={worker.id}>
+                <div className="worker-card" key={worker.id} onClick={() => handleNavigate(worker)}>
                     <img src={worker?.photo} alt={worker.name} className="worker-photo" />
                     <div className="worker-info">
                         <h3>{worker.name}</h3>

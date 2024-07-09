@@ -12,7 +12,7 @@ import {translate} from "../../assets/translate";
 import {LanguageContext} from "../../LanguageContext";
 import {useNavigate} from "react-router-dom";
 
-const MapExample = ({maps,loading,type}) => {
+const MapExample = ({maps=[],loading,type}) => {
     const position = [41.20438, 74.7661];
     const [geoJsonData, setGeoJsonData] = useState(null);
     const [filteredMaps, setFilteredMaps] = useState([]);
@@ -71,7 +71,7 @@ const MapExample = ({maps,loading,type}) => {
     ChartJS.register(ArcElement, Tooltip, Legend);
 
     const processChartData = (maps) => {
-        const typeCounts = maps.reduce((acc, map) => {
+        const typeCounts = maps?.reduce((acc, map) => {
             acc[map.object_type] = (acc[map.object_type] || 0) + 1;
             return acc;
         }, {});
@@ -144,7 +144,7 @@ const MapExample = ({maps,loading,type}) => {
                     if (newData.datasets[0].data[index] !== 0) {
                         newData.datasets[0].data[index] = 0;
                     } else {
-                        const typeCounts = maps.reduce((acc, map) => {
+                        const typeCounts = maps?.reduce((acc, map) => {
                             acc[map.object_type] = (acc[map.object_type] || 0) + 1;
                             return acc;
                         }, {});
@@ -295,7 +295,7 @@ const MapExample = ({maps,loading,type}) => {
                     </div>
                 ) : (
                     <div className="diagramMaps" style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
-                        <h2>{translate.noData[language]}...</h2>
+                        <h2 className="noData">{translate.noData[language]}...</h2>
                     </div>
                 )
             ) : (
