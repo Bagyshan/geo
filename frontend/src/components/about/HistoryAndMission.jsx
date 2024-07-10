@@ -20,7 +20,7 @@ const HistoryAndMission = () => {
 
         <div className="stateEnterprise-container">
           <div className="stateEnterprise-content">
-            <h1 className="stateEnterprise-title">ГП «Кыргызгеология»</h1>
+            <h1 className="stateEnterprise-title">ГП «Кыргыз-геология»</h1>
             <p className="stateEnterprise-description">
               Образовано Постановлением Правительства КР № 170 от 23 апреля 2021 года на базе Северо-Кыргызской геологической экспедиции путем объединения 6 госпредприятий:
             </p>

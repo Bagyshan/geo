@@ -14,6 +14,13 @@
     margin: 10px;
     width: 500px; /* Ширина карточки */
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Добавлено свойство transition для плавного перехода */
+    flex-direction: row; /* По умолчанию размещаем фото слева, информация справа */
+}
+
+.worker-card:hover {
+    transform: translateY(-10px); /* Двигает карточку вверх при наведении */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Увеличивает тень при наведении */
 }
 
 .worker-photo {
@@ -31,6 +38,7 @@
     justify-content: center;
 }
 
+/* Заголовок и текст информации */
 .worker-info h3 {
     margin-bottom: 10px;
     font-size: 20px;
@@ -41,4 +49,23 @@
     margin: 5px 0;
     font-size: 16px;
     color: #666;
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 320px) {
+    .worker-card {
+        flex-direction: column; /* Меняем направление флекс-контейнера на колонку для мобильных устройств */
+        width: 100%; /* Делаем карточки более гибкими на мобильных устройствах */
+        max-width: 400px; /* Ограничиваем максимальную ширину карточки */
+    }
+
+    .worker-photo {
+        width: 100%; /* Фотография занимает полную ширину карточки */
+        height: auto; /* Высота определяется пропорциями изображения */
+        border-radius: 8px 8px 0 0; /* Скругляем только верхние углы для соответствия макету */
+    }
+
+    .worker-info {
+        padding: 15px; /* Уменьшаем отступы для мобильных устройств */
+    }
 }

@@ -104,15 +104,14 @@ const NewsCards = () => {
                     ref={(el) => (newsCardsRef.current[index] = el)}
                     className={`news-card ${determineCardSize(index)}`}
                 >
-                  <div className="news-header">
-                    <span className="news-date">{news.created_at}</span>
-                  </div>
+
                   {news.preview && (
                       <img src={news.preview} alt={news.title} className="news-image"/>
                   )}
                   <div className="news-content">
                     <h3>{news[translate.translatedApi.title[language]]}</h3>
                   </div>
+                  <span className="news-date">{news.created_at}</span>
                 </div>
             ))}
             {sortedNews.length > visibleNews && (

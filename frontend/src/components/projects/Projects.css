@@ -166,6 +166,9 @@
     transform: rotate(360deg);
   }
 }
+.leaflet-container {
+  height: 80vh; /* Высота карты для мобильных устройств */
+}
 @media (max-width: 768px) {
   .mapContainer {
     display: flex;

@@ -60,7 +60,7 @@ const Main = () => {
               className={`dot ${index === currentSlide ? 'active' : ''}`}
               onClick={() => goToSlide(index)}
             >
-                <img style={{width:"100%",borderRadius:"5px"}} src={home?.icon}/>
+                <img style={{borderRadius:"5px"}} src={home?.icon}/>
                 <h4>{home?.mini_title}</h4>
             </div>
           ))}

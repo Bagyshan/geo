@@ -111,7 +111,7 @@
   color: #FFD700;
 }
 .menu-icon.black {
-  color: #000000; /* черный цвет */
+  color: #333; /* черный цвет */
 }
 
 /* Стили для мобильных устройств */
@@ -122,10 +122,10 @@
     width: 100%;
     background-color: #0D3E61;
     position: absolute;
-    top: 60px;
+    top: 75px;
     left: 0;
     border-top: 1px solid #122C5B;
-    border-radius: 20px;
+    border-radius: 0 0 20px 20px;
   }
 
   .navbar.active {
@@ -155,6 +155,7 @@
 
   .menu-icon {
     display: block;
+    color: #333;
   }
 }
 
@@ -195,8 +196,8 @@
 }
 
 .accordion a:hover {
-  background-color: rgba(13, 62, 97, 0.1);
-  color: #0D3E61;
+  background-color: #0b314d84;
+  color: #c8c8c8;
 }
 
 .accordion.active {
@@ -222,5 +223,49 @@
 
   .about-container:hover .accordion {
     max-height: none;
+  }
+}
+@media (max-width: 768px) {
+  .header.hidden {
+    top: 0; /* Для мобильных устройств: хедер не скрывается */
+  }
+}
+
+
+/* Стили для иконок меню и переключателя языка на мобильных устройствах */
+@media (max-width: 768px) {
+  .icons {
+    display: flex;
+    align-items: center;
+    margin: 0 10px; /* Отступы по бокам */
+    margin-left: auto; /* Сдвинуть вправо */
+  }
+
+  .menu-icon {
+    display: block;
+    font-size: 28px;
+    cursor: pointer;
+    color: #000000;
+    background: #f0f0f079; /* Серый фон с небольшой прозрачностью */
+    border-radius: 8px; /* Закругленные углы */
+    padding: 5px 5px 0 5px; /* Отступы внутри квадратика (сверху и снизу 10px, по бокам 5px) */
+    margin-right: 10px; /* Отступ между иконками */
+  }
+
+  .language-switcher {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-right: 15px;
+    cursor: pointer;
+    padding: 5px 10px;
+    background: #f0f0f0a8; /* Серый фон */
+    border-radius: 8px; /* Закругленные углы */
+    margin: 0 5px; /* Отступ между языками */
+    transition: background-color 0.3s ease;
+  }
+
+  .language-switcher span.active {
+    color: #FFD700; /* Темный цвет текста для активного языка */
   }
 }
