@@ -105,9 +105,9 @@ const Navbar = () => {
           </a>
           <div id='aboutAccordion'
             className={`accordion ${isAboutHovered ? 'active' : ''}`}>
-            <a onClick={() => handleNavigate('/historyandmission')}>История и миссия предприятия</a>
+            <a onClick={() => handleNavigate('/historyandmission')}>{translate.history[language]}</a>
             <a onClick={() => handleNavigate('/organization')}>Информация о руководстве и ключевых сотрудниках</a>
-            <a onClick={() => handleNavigate('/achievementsProjects')}>Основные достижения и проекты</a>
+            <a onClick={() => handleNavigate('/achievementsProjects')}>{translate.achievements[language]}</a>
           </div>
         </div>
         <a

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './InvestorPage.css';
 import photo from '../../assets/geoproject5.jpg';
 import DoughnutChart from "./DiagrammInvestor";
@@ -6,11 +6,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {getDiagramInvestor, getInvestorsInfo, getLineChartInvestor} from "../../store/apiSlice";
 import LineChart from "./LineChartInvestor";
 import InvestorItem from "./investorItem";
+import {translate} from "../../assets/translate";
+import {LanguageContext} from "../../LanguageContext";
 
 const InvestorPage = () => {
-  const {diagramInvestor, lineChartInvestor,investorsInfo} = useSelector((state)=> state.api)
+  const {diagramInvestor, lineChartInvestor,investorsInfo,loading} = useSelector((state)=> state.api)
   const dispatch = useDispatch();
   const [selectedTitle,setSelectedTitle] = useState(0)
+    const { language } = useContext(LanguageContext);
   useEffect(() => {
     dispatch(getDiagramInvestor())
     dispatch(getLineChartInvestor())
@@ -19,21 +22,15 @@ const InvestorPage = () => {
   const handleSetId = (id)=>{
     setSelectedTitle(id)
   }
-  useEffect(() => {
-    console.log(diagramInvestor)
-    console.log(lineChartInvestor)
-    console.log(investorsInfo)
-  }, []);
-
   return (
       <div className="investor-page">
         <nav className="navigation">
           <ul>
-            <li key={0}>
-              <a onClick={() => handleSetId(0)}>Главная</a>
+            <li key={0} className={selectedTitle === 0 ? 'selected':''}>
+              <a onClick={() => handleSetId(0)}>{translate.main[language]}</a>
             </li>
             {investorsInfo.map((investorsInfoItem) => (
-                <li key={investorsInfoItem.id}>
+                <li key={investorsInfoItem.id} className={selectedTitle === investorsInfoItem.id ? 'selected':''}>
                   <a onClick={() => handleSetId(investorsInfoItem.id)}>{investorsInfoItem.title}</a>
                 </li>
             ))}
@@ -43,13 +40,12 @@ const InvestorPage = () => {
           {selectedTitle == 0 ? (
               <section className="financial-press-section">
                 <div className="press-releases">
-                  <DoughnutChart allocations={diagramInvestor}/>
+                  <DoughnutChart allocations={diagramInvestor} loading={loading}/>
                 </div>
                 <div className="financial-results">
-                  <h3>Финансовые результаты</h3>
                   <div className="results-container">
                     <div className="quarter-info">
-                      <LineChart monthlyIncome={lineChartInvestor}/>
+                      <LineChart monthlyIncome={lineChartInvestor} loading={loading}/>
                     </div>
                   </div>
                 </div>

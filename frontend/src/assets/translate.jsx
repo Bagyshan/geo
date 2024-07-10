@@ -37,15 +37,23 @@ export const translate =
         },
         translatedApi:{
                 title:{"RU":"title_ru","KG":"title_ky","EN":"title_en"},
-                body:{"RU":"body_ru","KG":"body_ky","EN":"body_en"}
+                body:{"RU":"body_ru","KG":"body_ky","EN":"body_en"},
+                name:{"RU":"name_ru","KG":"name_ky","EN":"name_en"},
+                post:{"RU":"post_ru","KG":"post_ky","EN":"post_en"},
+                category:{"RU":"category_ru","KG":"category_ky","EN":"category_en"},
+                month:{"RU":"month_ru","KG":"month_ky","EN":"month_en"}
         },
         comments:{"RU":"Комментарии","KG":"Комментарийлер","EN":"Comments"},
         noComments:{"RU":"Комментариев нет","KG":"Комментарийлер жок","EN":"There are no comments"},
         noNews:{"RU":"Новостей нет","KG":"Жаңылык жок","EN":"There are no news"},
         noServices:{"RU":"Услуг нет","KG":"Кызматтар жок","EN":"There are no services"},
         noData:{"RU":"Данных нет","KG":"Маалымат жок","EN":"There are no data"},
-        history:{"RU":"История и Миссия предприятия","KG":"Ишкананын тарыхы жана миссиясы","EN":"The history and Mission of the company"},
+        history:{"RU":"История и миссия предприятия","KG":"Ишкананын тарыхы жана миссиясы","EN":"The history and mission of the company"},
         achievements:{"RU":"Достижения","KG":"Жетишкендиктер","EN":"Achievements"},
         kyrgyzgeology:{"RU":"Кыргызгеология","KG":"Кыргызгеология","EN":"Kyrgyzgeology"},
-        ourAddress:{"RU":"Наш адрес","KG":"Биздин дарек","EN":"Our address"}
+        ourAddress:{"RU":"Наш адрес","KG":"Биздин дарек","EN":"Our address"},
+        main:{"RU":"Главная","KG":"Жалпы","EN":"Main"},
+        income:{"RU":"Доход","KG":"Киреше","EN":"Income"},
+        diagramOfAll:{"RU":"Диаграма всех объектов","KG":"Бардык объекттердин диаграммасы","EN":"Diagram of all objects"},
+        graphOfMonth:{"RU":"График месячного дохода","KG":"Айлык киреше диаграммасы","EN":"Monthly income graph"},
     }

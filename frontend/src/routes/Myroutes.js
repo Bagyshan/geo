@@ -13,6 +13,8 @@ import NewsForm from "../components/news/NewsForm";
 import NewsPage from "../components/news/NewsPage";
 import MapItem from "../components/map/mapItem";
 import NewMapItem from "../components/map/newMapItem";
+import EmployeeItem from "../components/about/EmployeeItem";
+import AchievementItem from "../components/about/AchievementItem";
 
 const PUBLIC_ROUTES = [
   
@@ -27,8 +29,10 @@ const PUBLIC_ROUTES = [
   { id: 10, link: "/contacts", element: <Contacts/> },
   { id: 11, link: "/investorpage", element: <InvestorPage/> },
   { id: 12, link: '/newsform', element: <NewsForm/> },
-  { id:13,link: '/mapItem/:mapId', element:<MapItem/>},
-  { id:14,link: '/newMapItem/:mapId', element:<NewMapItem/>}
+  { id: 13, link: '/mapItem/:mapId', element:<MapItem/>},
+  { id: 14, link: '/newMapItem/:mapId', element:<NewMapItem/>},
+  { id: 15, link: '/employee/:employeeId', element:<EmployeeItem/>},
+  { id: 16, link: '/achievement/:achievementId', element:<AchievementItem/>}
 ];
 
 const Myroutes = () => {

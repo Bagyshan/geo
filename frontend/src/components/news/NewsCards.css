@@ -4,12 +4,14 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 /* Стили для секции новостей */
 .news-section {
   padding: 40px;
-  background-color: rgb(213, 221, 234);
+  background-color: #e0e8f5;
   text-align: center;
 }
+
 body {
   background-color: #e0e8f5;
 }
@@ -35,22 +37,23 @@ body {
 .news-cards-container {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 20px;
-  padding: 20px 180px;
-
+  gap: 10px; /* Уменьшено значение gap между карточками */
+  padding: 20px;
 }
 
 .news-card {
   background: linear-gradient(135deg, #e9edff, #ffffff);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease; /* Добавлено свойство transition для opacity */
   overflow: hidden;
   position: relative;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-top: 40px; /* Уменьшено значение верхнего отступа */
+  opacity: 0; /* Начальное значение opacity для плавного появления */
 }
 
 .news-card:hover {
@@ -58,15 +61,35 @@ body {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.news-card.visible {
+  opacity: 1;
+}
+
 .news-image {
-  background-size: cover;
-  background-position: center;
   width: 100%;
-  height: 150px;
+  height: auto;
+  flex-grow: 1;
+  object-fit: cover;
+  position: relative;
 }
 
 .news-content {
   padding: 20px;
+  position: relative;
+  background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9));
+  z-index: 1;
+}
+
+.news-content::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit; /* Наследовать фон от родителя */
+  filter: blur(8px);
+  z-index: -1;
 }
 
 .news-card h3 {
@@ -87,31 +110,7 @@ body {
   color: #333;
 }
 
-.news-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(135deg, rgba(13, 62, 97, 0.1), rgba(13, 62, 97, 0));
-  transform: rotate(45deg);
-  transition: opacity 0.3s ease;
-  opacity: 0;
-  z-index: 0;
-}
-
-.news-card:hover::before {
-  opacity: 1;
-}
-
-.news-card h3,
-.news-card p {
-  z-index: 1;
-  position: relative;
-}
-
-/* Sizes for different cards */
+/* Размеры для разных карточек */
 .news-card.size-1 {
   grid-column: span 2;
   grid-row: span 1;
@@ -142,11 +141,11 @@ body {
   grid-row: span 1;
 }
 
-
-/*! адаптивная верстка */
+/* Адаптивная верстка */
 @media (max-width: 1200px) {
   .news-cards-container {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px; /* Уменьшено значение gap между карточками в адаптивной верстке */
   }
 
   .news-card h3 {
@@ -158,20 +157,22 @@ body {
   }
 }
 
-
 @media (max-width: 768px) {
   .news-cards-container {
     grid-template-columns: repeat(1, 1fr);
-    padding: 10px;
+    padding: 5px; /* Уменьшено значение padding */
+    gap: 5px; /* Уменьшено значение gap между карточками в мобильной верстке */
     justify-content: center;
   }
 
   .news-card {
     grid-column: span 1;
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Уменьшено значение нижнего отступа */
     height: auto;
     justify-content: center;
     align-items: center;
+    width: calc(100% - 20px); /* Сделать карточки шире, уменьшая общий отступ */
+    animation: fadeIn 0.5s ease forwards; /* Добавлена анимация для появления */
   }
 
   .news-card.size-1,
@@ -184,7 +185,7 @@ body {
   }
 
   .news-image {
-    height: 200px;
+    height: auto;
   }
 
   .news-content {
@@ -218,7 +219,14 @@ body {
   background-color: #1C5D99;
 }
 
-
-
-
-
+/* Анимация появления */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

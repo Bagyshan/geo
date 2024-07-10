@@ -25,7 +25,7 @@ const Services = () => {
   if (!services || services.length === 0) {
     return <div className="services">
       <h2 className="section-title">{translate.services[language]}</h2>
-      <div style={{display: "flex", alignItems: "center", justifyContent: "center", padding: '100px'}}>
+      <div style={{display: "flex", alignItems: "center", justifyContent: "center", padding: '100px'}} className="noData">
         <h1>{translate.noServices[language]}...</h1>
       </div>
     </div>

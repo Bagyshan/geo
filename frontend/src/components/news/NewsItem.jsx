@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import './NewsItem.css';
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {clearInvestorItem, clearNewsPost, getNewsPost, postComment} from "../../store/apiSlice";
+import {clearNewsPost, getNewsPost, postComment} from "../../store/apiSlice";
 import DOMPurify from 'dompurify';
 import {LanguageContext} from "../../LanguageContext";
 import {translate} from "../../assets/translate";
@@ -18,7 +18,7 @@ const NewsItem = () => {
         return () => {
             dispatch(clearNewsPost());
         };
-    },[])
+    },[dispatch,newsId])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -37,11 +37,12 @@ const NewsItem = () => {
     <div className="news-item">
         <div className="containerNews">
             <h2 className="news-title">{newsPost[translate.translatedApi.title[language]]}</h2>
-            <img src={newsPost.image} style={{borderRadius: "20px"}}/>
-            <div className="bodyCont" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(newsPost[translate.translatedApi.body[language]])}}/>
+            <img src={newsPost.image} style={{borderRadius: "20px"}} alt="NewsImage"/>
+            <div className="bodyCont"
+                 dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(newsPost[translate.translatedApi.body[language]])}}/>
             {newsPost.file == null ? (
                 <div></div>
-            ): (
+            ) : (
                 <div className="pdf-upload">
                     <embed
                         id="pdf-plugin"
@@ -52,21 +53,6 @@ const NewsItem = () => {
                     />
                 </div>
             )}
-            <div className="comments">
-                <h2 style={{marginBottom: "20px"}}>{translate.comments[language]}:</h2>
-                {comments.length >= 1 ? (
-                    comments.map((comment,index) => (
-                            <div className="comment" key={index}>
-                                <h2>{comment.username}</h2>
-                                <p>{comment.content}</p>
-                            </div>
-                        ))
-                ):(
-                    <div style={{display:"flex", alignItems:"center",justifyContent:"center"}}>
-                        <h2 style={{color:"#545454"}}>{translate.noComments[language]}...</h2>
-                    </div>
-                )}
-            </div>
             <form className="comment-form" onSubmit={handleSubmit}>
                 <textarea
                     className="comment-input"
@@ -93,6 +79,21 @@ const NewsItem = () => {
                 />
                 <button className="submit-button" type="submit">{translate.send[language]}</button>
             </form>
+            <div className="comments">
+                <h2 style={{marginBottom: "20px"}}>{translate.comments[language]}:</h2>
+                {comments.length >= 1 ? (
+                    comments.map((comment, index) => (
+                        <div className="comment" key={index}>
+                            <h2>{comment.username}</h2>
+                            <p>{comment.content}</p>
+                        </div>
+                    ))
+                ) : (
+                    <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                        <h2 style={{color: "#545454"}}>{translate.noComments[language]}...</h2>
+                    </div>
+                )}
+            </div>
         </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState,} from 'react';
-import {MapContainer, TileLayer, GeoJSON, useMap, Marker, Popup} from 'react-leaflet';
+import {MapContainer, TileLayer, GeoJSON, useMap, Marker, Popup, useMapEvent} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import wellknown from 'wellknown'
 import L from 'leaflet';
@@ -13,10 +13,13 @@ import {LanguageContext} from "../../LanguageContext";
 import {useNavigate} from "react-router-dom";
 
 const MapExample = ({maps=[],loading,type}) => {
-    const position = [41.20438, 74.7661];
+    const initialPosition = [41.20438, 74.7661];
+    const initialZoom = 7;
     const [geoJsonData, setGeoJsonData] = useState(null);
     const [filteredMaps, setFilteredMaps] = useState([]);
     const [isSpinning, setIsSpinning] = useState(false);
+    const [mapCenter, setMapCenter] = useState(initialPosition);
+    const [mapZoom, setMapZoom] = useState(initialZoom);
 
     const { language } = useContext(LanguageContext);
     const navigate = useNavigate()
@@ -52,6 +55,29 @@ const MapExample = ({maps=[],loading,type}) => {
     useEffect(() => {
         setFilteredMaps(maps);
     }, [maps]);
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+
+            // Обновление уровня масштабирования в зависимости от ширины окна
+            if (width < 600) {
+                setMapZoom(initialZoom - 2); // отдаление карты при узком экране
+            } else if (width < 1000) {
+                setMapZoom(initialZoom - 1); // отдаление карты при среднем экране
+            } else if (width < 1460) {
+                setMapZoom(initialZoom - 1); // отдаление карты при среднем экране
+            }  else {
+                setMapZoom(initialZoom); // стандартное масштабирование при широком экране
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Вызываем при монтировании, чтобы установить начальное значение
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
     const style = {
         fillColor: 'rgba(8,92,194,0.62)',
         weight: 2,
@@ -69,14 +95,8 @@ const MapExample = ({maps=[],loading,type}) => {
         fillOpacity: 0.7
     };
     ChartJS.register(ArcElement, Tooltip, Legend);
-
-    const processChartData = (maps=[]) => {
-        if (!Array.isArray(maps)) {
-            console.error('Expected an array for maps but got', maps);
-            return {};
-          }
-          
-          const typeCounts = maps.reduce((acc, map) => {
+    const processChartData = (maps) => {
+        const typeCounts = maps?.reduce((acc, map) => {
             acc[map.object_type] = (acc[map.object_type] || 0) + 1;
             return acc;
           }, {});
@@ -164,13 +184,13 @@ const MapExample = ({maps=[],loading,type}) => {
                         "#808080": "hardCoal",
                         "#E6E6FA": "marbledLimestone",
                         '#BA55D3': "antimonyFluorite",
-                        '#С0С0С0': "gypsum",
+                        '#C0C0C0': "gypsum",
                         '#2F4F4F': "clayShales",
                         '#00FA9A': "granite",
                         '#DAA520': "shellRock",
                     };
-                    const newFilteredMaps = maps.filter((map) => {
-                        const x = ddd[map.object_type];
+                    const newFilteredMaps = maps?.filter((map) => {
+                        const x = ddd[map?.object_type];
                         return newData.datasets[0].data[newData.labels.indexOf(translate.resources[x][language])] > 0;
                     });
                     setFilteredMaps(newFilteredMaps);
@@ -219,15 +239,19 @@ const MapExample = ({maps=[],loading,type}) => {
             });
 
             layer.on('popupclose', () => {
-                map.setView(position, 7);
+                map.setView(mapCenter, mapZoom);
                 layer.setStyle(style)
 
             });
         };
         const handleReset = () => {
-            map.setView(position, 7);
-            handleClick()
+            map.setView(mapCenter, mapZoom);
+            handleClick();
         };
+
+        useMapEvent('resize', () => {
+            map.setView(mapCenter, mapZoom);
+        });
         return geoJsonData ?<>
             <GeoJSON data={geoJsonData} style={style} onEachFeature={onEachFeature} />
             <button className={`resetBtn ${isSpinning ? 'spinning' : ''}`} onClick={handleReset} style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000,}}><img src={ResetIcon}/></button>
@@ -249,7 +273,7 @@ const MapExample = ({maps=[],loading,type}) => {
     return (
 
         <div className='mapContainer'>
-            <MapContainer center={position} zoom={7} style={{height: "80vh", width: "100%", borderRadius: '30px'}}>
+            <MapContainer center={mapCenter} zoom={mapZoom} style={{height: "80vh", width: "100%", borderRadius: '30px'}}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -300,7 +324,7 @@ const MapExample = ({maps=[],loading,type}) => {
                     </div>
                 ) : (
                     <div className="diagramMaps" style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
-                        <h2>{translate.noData[language]}...</h2>
+                        <h2 className="noData">{translate.noData[language]}...</h2>
                     </div>
                 )
             ) : (

@@ -41,19 +41,19 @@ const MapItem = () => {
                     <img src={map.image} style={{ borderRadius: "20px" }} alt="Map" />
                 )}
                 <div className="bodyCont" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(map[translate.translatedApi.body[language]])}}/>
-                {map.file == null ? (
-                    <div></div>
-                ): (
-                    <div className="pdf-upload">
-                        <embed
-                            id="pdf-plugin"
-                            type="application/pdf"
-                            src={map?.file}
-                            width="100%"
-                            height="500px"
-                        />
-                    </div>
-                )}
+                    {map.file == null ? (
+                        <div></div>
+                    ): (
+                        <div className="pdf-upload">
+                            <embed
+                                id="pdf-plugin"
+                                type="application/pdf"
+                                src={map?.file}
+                                width="100%"
+                                height="500px"
+                            />
+                        </div>
+                    )}
             </div>
         </div>
     );

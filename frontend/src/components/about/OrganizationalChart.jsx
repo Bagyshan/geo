@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import './OrganizationalChart.css';
 import worker1 from '../../assets/eraaly.jpg';
 import worker2 from '../../assets/bagyshan.png';
 import worker3 from '../../assets/atai.jpg';
 import worker4 from '../../assets/meerim.jpg';
+import {useDispatch, useSelector} from "react-redux";
+import {getEmployees} from "../../store/apiSlice";
+import {useNavigate} from "react-router-dom";
+import {translate} from "../../assets/translate";
+import {LanguageContext} from "../../LanguageContext";
 
 const workers = [
     {
@@ -45,15 +50,24 @@ const workers = [
 ];
 
 const OrganizationalChart = () => {
+    const dispatch = useDispatch();
+    const {employees} = useSelector((state)=> state.api);
+    const { language } = useContext(LanguageContext);
+    const navigate = useNavigate()
+    useEffect(() => {
+        dispatch(getEmployees())
+    }, [dispatch]);
+    const handleNavigate = (item)=>{
+        navigate(`/employee/${item.id}`)
+    }
     return (
         <div className="chart-container">
-            {workers.map((worker) => (
-                <div className="worker-card" key={worker.id}>
-                    <img src={worker?.photo} alt={worker.name} className="worker-photo" />
+            {employees?.map((employee) => (
+                <div className="worker-card" key={employee.id} onClick={() => handleNavigate(employee)}>
+                    <img src={employee?.image} alt={employee[translate.translatedApi.name[language]]} className="worker-photo" />
                     <div className="worker-info">
-                        <h3>{worker.name}</h3>
-                        <p>Должность: {worker.position}</p>
-                        <p>Возраст: {worker.age}</p>
+                        <h3>{employee[translate.translatedApi.name[language]]}</h3>
+                        <p>Должность: {employee[translate.translatedApi.post[language]]}</p>
                     </div>
                 </div>
             ))}
