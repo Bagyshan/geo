@@ -59,7 +59,8 @@
   transform: translateY(-2px);
   color: #f1c40f;
 }
-.navigation li.selected a{
+
+.navigation li.selected a {
   color: #f1c40f;
 }
 
@@ -108,7 +109,7 @@
   position: relative;
 }
 
-.diagramList{
+.diagramList {
   margin-left: 45px;
 }
 
@@ -242,14 +243,81 @@
   margin: 10px 0;
 }
 
-@media (max-width: 768px){
-  .diagrams{
-    flex-direction: column;
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .overlay-text {
+    left: 50%;
+    width: 70%;
   }
-  .diagramListObject{
-    flex-direction: column;
+
+  .stock-info-box {
+    right: 10%;
   }
-  .diagramList{
+}
+
+@media (max-width: 768px) {
+  .navigation ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .links-section ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .overlay-text {
+    width: 90%;
+    left: 50%;
+  }
+
+  .stock-info-box {
+    top: 70%;
+    right: 50%;
+    transform: translate(50%, -50%);
+  }
+
+  .financial-press-section {
+    padding: 20px;
+  }
+
+  .financial-results,
+  .press-releases {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .main-image {
+    height: 400px;
+  }
+
+  .diagramList {
     margin-left: 0;
+  }
+
+  .diagrams,
+  .diagramListObject {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .navigation a {
+    padding: 8px 16px;
+  }
+
+  .contact-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .more-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .overlay-text p {
+    font-size: 16px;
   }
 }

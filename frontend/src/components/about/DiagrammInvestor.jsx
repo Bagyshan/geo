@@ -98,7 +98,7 @@ const DoughnutChart = ({ allocations,loading }) => {
                         </div>
                     </div>
                 ):(
-                    <div style={{display:"flex", alignItems:"center",justifyContent:"center", padding:'200px'}} className="noData">
+                    <div style={{display:"flex", alignItems:"center",justifyContent:"center", padding:'auto'}} className="noData">
                         <h2>{translate.noData[language]}...</h2>
                     </div>
                 )

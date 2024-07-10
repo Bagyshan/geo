@@ -37,48 +37,21 @@ const Footer = () => {
           </div>
           <div className="rightColumn">
             <div className="column">
-              <h3 className="headerh3">Полный комплекс работ</h3>
+              <h3 className="headerh3">ГП «Кыргызгеология»</h3>
               <ul className="list">
-                <li>в области геологии</li>
-                <li>в области геофизики</li>
-                <li>в области геолого-экономических исследований</li>
-                <li>в области гидрогеологии</li>
-                <li>в области производства горно-разведочной техники</li>
+                <li>01 Северо-Кыргызская геологическая экспедиция</li>
+                <li>02 Кыргызская методическая экспедиция геолого-экономических исследований</li>
+                <li>03 Южно-Кыргызская ордена Трудового Красного Знамени геологическая экспедиция</li>
+                <li>04 Кыргызская комплексная гидрогеологическая экспедиция</li>
+                <li>05 Кыргызская геофизическая экспедиция</li>
+                <li>06 Бишкекский опытно-экспериментальный завод горно-разведочной техники</li>
               </ul>
             </div>
             <div className="column">
-              <h3 className="headerh3">ВИДЕО МАТЕРИАЛЫ</h3>
-              <p className="text">
-                <iframe
-                    width="70%"
-                    height="100"
-                    src="https://www.youtube.com/embed/dsEQzcmHSU0"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                    style={{ marginBottom: '10px' }}
-                ></iframe>
-                <iframe
-                    width="100%"
-                    height="70"
-                    src="https://www.youtube.com/embed/MLtgfOO33Kw"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                    style={{ marginBottom: '10px' }}
-                ></iframe>
-                <iframe
-                    width="100%"
-                    height="70"
-                    src="https://www.youtube.com/embed/ZbHbIi2yRrQ"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                ></iframe>
-              </p>
+              <h3 className="headerh3">БИШКЕКСКИЙ ОПЫТНО-ЭКСПЕРЕМЕНТАЛЬНЫЙ ЗАВОД ГОРНО-РАЗВЕДОЧНОЙ ТЕХНИКИ</h3>
+              <div className="logoContainer">
+                <img src='https://bzgrt.com/assets/img/logo.svg' alt="Logo" className="logo" />
+              </div>
             </div>
           </div>
         </div>

@@ -1,7 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 export const instance = axios.create({
-    baseURL: 'http://34.38.234.161/api/',
+    baseURL: 'http://34.38.234.161/api'
 })
 
 export const getHome = createAsyncThunk(
@@ -176,7 +177,7 @@ export const getAboutCompany = createAsyncThunk(
     "api/getAboutCompany",
     async (_, { rejectWithValue, dispatch }) => {
         try {
-            const response = await axios.get(`http://34.38.234.161/api/aboutcompany/`);
+            const response = await instance.get(`/aboutcompany/`);
             return response.data;
         } catch (error) {
             console.log(error);

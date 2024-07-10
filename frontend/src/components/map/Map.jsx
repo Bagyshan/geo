@@ -61,7 +61,7 @@ const MapExample = ({maps=[],loading,type}) => {
 
             // Обновление уровня масштабирования в зависимости от ширины окна
             if (width < 600) {
-                setMapZoom(initialZoom - 2); // отдаление карты при узком экране
+                setMapZoom(initialZoom - 1); // отдаление карты при узком экране
             } else if (width < 1000) {
                 setMapZoom(initialZoom - 1); // отдаление карты при среднем экране
             } else if (width < 1460) {
@@ -100,8 +100,8 @@ const MapExample = ({maps=[],loading,type}) => {
         const typeCounts = maps?.reduce((acc, map) => {
             acc[map.object_type] = (acc[map.object_type] || 0) + 1;
             return acc;
-        }, {});
-        const ddd = {
+          }, {});
+        const ddd = {   
             "#FFD700": translate.resources?.gold?.[language] || "Gold",
             "#000000": translate.resources?.coal?.[language] || "Coal",
             "#FFFF00": translate.resources?.looseGold?.[language] || "Loose Gold",
@@ -274,7 +274,7 @@ const MapExample = ({maps=[],loading,type}) => {
     return (
 
         <div className='mapContainer'>
-            <MapContainer center={mapCenter} zoom={mapZoom} style={{height: "80vh", width: "100%", borderRadius: '30px'}}>
+            <MapContainer center={mapCenter} zoom={mapZoom} style={{ width: "100%", borderRadius: '30px'}}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

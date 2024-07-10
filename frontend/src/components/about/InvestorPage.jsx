@@ -14,11 +14,6 @@ const InvestorPage = () => {
   const dispatch = useDispatch();
   const [selectedTitle,setSelectedTitle] = useState(0)
     const { language } = useContext(LanguageContext);
-  useEffect(() => {
-    dispatch(getDiagramInvestor())
-    dispatch(getLineChartInvestor())
-    dispatch(getInvestorsInfo())
-  }, []);
   const handleSetId = (id)=>{
     setSelectedTitle(id)
   }
