@@ -4,10 +4,10 @@ from django.core.exceptions import ValidationError
 
 
 class Home(models.Model):
-    title = models.CharField(max_length=200)
-    mini_title = models.CharField(max_length=10)
-    image = models.ImageField(upload_to='media')
-    icon = models.ImageField(upload_to='icons')
+    title = models.CharField(max_length=100, verbose_name='Заголовок')
+    mini_title = models.CharField(max_length=10, verbose_name='Мини заголовок')
+    image = models.ImageField(upload_to='media', verbose_name='Фотография')
+    icon = models.ImageField(upload_to='icons', verbose_name='Иконка')
 
 
     def save(self, *args, **kwargs):

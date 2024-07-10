@@ -1,7 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+const apiUrl = process.env.REACT_APP_API_URL;
 export const instance = axios.create({
-    baseURL: 'http://34.38.234.161/api/',
+    baseURL: apiUrl,
 })
 
 export const getHome = createAsyncThunk(

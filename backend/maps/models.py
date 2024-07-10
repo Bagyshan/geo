@@ -7,20 +7,27 @@ from django_admin_geomap import GeoItem
         
 class Maps(models.Model):
     COLOR_CHOICES = [
-        ('#FFFF00', 'Gold'),
-        ('#000000', 'Coal'),
-        ('#808080', 'General'),
+        ('#FFD700', 'Золото'),
+        ('#FFFF00', 'Рассыпное золото'),
+        ('#808080', 'Каменный уголь'),
+        ('#000000', 'Уголь'),
+        ('#E6E6FA', 'Мраморизованный известняк'),
+        ('#BA55D3', 'Сурьма, флюорит'),
+        ('#C0C0C0', 'Гипс'),
+        ('#2F4F4F', 'Глинистые сланцы'),
+        ('#00FA9A', 'Гранит'),
+        ('#DAA520', 'Ракушечник'),
     ]
 
 
-    title = models.CharField(max_length=50)
-    body = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='images')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    location = gis_models.PointField()
-    object_type = models.CharField(max_length=10, choices=COLOR_CHOICES)
-    file = models.FileField(upload_to='pdfs', null=True, blank=True)
+    title = models.CharField(max_length=50, verbose_name='Название')
+    body = models.TextField(null=True, blank=True, verbose_name='Описание')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
+    location = gis_models.PointField(verbose_name='Местоположение')
+    object_type = models.CharField(max_length=10, choices=COLOR_CHOICES, verbose_name='Категория месторождения')
+    image = models.ImageField(upload_to='images', verbose_name='Фотогорафия')
+    file = models.FileField(upload_to='pdfs', null=True, blank=True, verbose_name='Файл')
 
 
     def __str__(self) -> str:
@@ -41,20 +48,27 @@ from django_admin_geomap import GeoItem
         
 class NewMaps(models.Model):
     COLOR_CHOICES = [
-        ('#FFFF00', 'Gold'),
-        ('#000000', 'Coal'),
-        ('#808080', 'General'),
+        ('#FFD700', 'Золото'),
+        ('#FFFF00', 'Рассыпное золото'),
+        ('#808080', 'Каменный уголь'),
+        ('#000000', 'Уголь'),
+        ('#E6E6FA', 'Мраморизованный известняк'),
+        ('#BA55D3', 'Сурьма, флюорит'),
+        ('#C0C0C0', 'Гипс'),
+        ('#2F4F4F', 'Глинистые сланцы'),
+        ('#00FA9A', 'Гранит'),
+        ('#DAA520', 'Ракушечник'),
     ]
 
 
-    title = models.CharField(max_length=50)
-    body = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='images')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    location = gis_models.PointField()
-    object_type = models.CharField(max_length=10, choices=COLOR_CHOICES)
-    file = models.FileField(upload_to='pdfs', null=True, blank=True)
+    title = models.CharField(max_length=50, verbose_name='Название')
+    body = models.TextField(null=True, blank=True, verbose_name='Описание')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
+    location = gis_models.PointField(verbose_name='Местоположение')
+    object_type = models.CharField(max_length=10, choices=COLOR_CHOICES, verbose_name='Категория месторождения')
+    image = models.ImageField(upload_to='images', verbose_name='Фотография')
+    file = models.FileField(upload_to='pdfs', null=True, blank=True, verbose_name='Файл')
 
 
     def __str__(self) -> str:
