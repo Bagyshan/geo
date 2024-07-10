@@ -176,7 +176,7 @@ export const getAboutCompany = createAsyncThunk(
     "api/getAboutCompany",
     async (_, { rejectWithValue, dispatch }) => {
         try {
-            const response = await instance.get(`/aboutcompany/1/`);
+            const response = await axios.get(`http://34.38.234.161/api/aboutcompany/`);
             return response.data;
         } catch (error) {
             console.log(error);

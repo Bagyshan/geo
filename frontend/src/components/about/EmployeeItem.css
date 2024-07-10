@@ -1,0 +1,30 @@
+.employeeContainer{
+    margin: 5px auto;
+    padding: 35px 45px;/* Уменьшаем отступы по бокам */
+    max-width: 1150px;
+    background-color: #f8f9fa;
+    margin-top: 80px;
+    border-radius: 15px;
+    display: flex;
+}
+.employeeImage{
+    width: 400px;
+    height: 400px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.employeeInfo{
+    margin-left: 20px;
+}
+@media (max-width: 900px) {
+    .employeeContainer{
+        flex-direction: column;
+    }
+    .employeeImage{
+        width: 100px;
+        height: 100px;
+    }
+    .employeeInfo{
+        margin-left: 0;
+        margin-top: 15px;
+    }
+}
