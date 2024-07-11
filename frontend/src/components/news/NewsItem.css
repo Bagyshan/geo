@@ -141,4 +141,11 @@
   .comments{
     padding: 0;
   }
+  .news-item{
+    padding: 10px;
+  }
+  .containerNews{
+    padding: 25px 25px;
+  }
+
 }

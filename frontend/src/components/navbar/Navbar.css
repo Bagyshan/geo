@@ -68,7 +68,7 @@
 }
 
 .navbar a.light-bg {
-  color: #333333;
+  color: #000000;
 }
 
 .navbar a:hover {
@@ -122,12 +122,15 @@
     width: 100%;
     background-color: #0D3E61;
     position: absolute;
-    top: 75px;
+    top: 80px;
     left: 0;
     border-top: 1px solid #122C5B;
     border-radius: 0 0 20px 20px;
+    animation: slideDown 0.5s ease-out forwards;
   }
-
+  .header{
+    background-color: #0D3E61;
+  }
   .navbar.active {
     display: flex;
   }
@@ -139,8 +142,6 @@
     width: 100%;
     background-color: #0D3E61;
     color: #ffffff !important;
-    border-bottom: 1px solid #122C5B;
-
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
@@ -219,6 +220,7 @@
     border-radius: 0;
     box-shadow: none;
     max-height: none;
+    animation: ani 1.5s forwards;
   }
 
   .about-container:hover .accordion {
@@ -237,7 +239,6 @@
   .icons {
     display: flex;
     align-items: center;
-    margin: 0 10px; /* Отступы по бокам */
     margin-left: auto; /* Сдвинуть вправо */
   }
 
@@ -249,7 +250,6 @@
     background: #f0f0f079; /* Серый фон с небольшой прозрачностью */
     border-radius: 8px; /* Закругленные углы */
     padding: 5px 5px 0 5px; /* Отступы внутри квадратика (сверху и снизу 10px, по бокам 5px) */
-    margin-right: 10px; /* Отступ между иконками */
   }
 
   .language-switcher {
@@ -267,5 +267,17 @@
 
   .language-switcher span.active {
     color: #FFD700; /* Темный цвет текста для активного языка */
+  }
+}
+@keyframes ani {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
