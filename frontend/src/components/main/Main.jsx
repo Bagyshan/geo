@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, useRef} from 'react';
 import './Main.css';
 import photo1 from '../../assets/photo_2024-05-20_05-03-23.jpg';
 import photo2 from '../../assets/photo_2024-05-20_05-05-24.jpg';
@@ -15,22 +15,32 @@ import {getHome} from "../../store/apiSlice";
 
 const Main = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
-
+    const [timeOut,setTimeOut] = useState(2000)
     const dispatch = useDispatch()
     const {homes} = useSelector((state)=> state.api)
+    const intervalRef = useRef(null);
     useEffect(()=>{
         dispatch(getHome())
     },[])
-  useEffect(() => {
-      const interval = setInterval(() => {
-       setCurrentSlide(prevSlide => (prevSlide + 1) % homes.length);
-    }, 2000);
+    const clearAndSetInterval = () => {
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+        }
+        intervalRef.current = setInterval(() => {
+            setCurrentSlide((prevSlide) => (prevSlide + 1) % homes.length);
+        }, timeOut);
+    };
 
-     return () => clearInterval(interval);
-   }, [homes.length]);
+    useEffect(() => {
+        if (homes.length > 0) {
+            clearAndSetInterval();
+        }
+        return () => clearInterval(intervalRef.current);
+    }, [homes.length, timeOut]);
 
    const goToSlide = (index) => {
      setCurrentSlide(index);
+     clearAndSetInterval();
    };
     const { language } = useContext(LanguageContext);
   return (

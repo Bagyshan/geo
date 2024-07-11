@@ -17,6 +17,11 @@ const InvestorPage = () => {
   const handleSetId = (id)=>{
     setSelectedTitle(id)
   }
+    useEffect(() => {
+        dispatch(getDiagramInvestor())
+        dispatch(getLineChartInvestor())
+        dispatch(getInvestorsInfo())
+    }, [dispatch]);
   return (
       <div className="investor-page">
         <nav className="navigation">

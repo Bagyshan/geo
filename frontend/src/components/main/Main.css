@@ -62,7 +62,7 @@
 
 .dot.active {
   border-color: #007BFF;
-  background-color: rgba(255, 255, 255, 0.48);
+  background-color: rgba(72, 143, 194, 0.48);
 }
 
 .dot:last-child {
@@ -93,6 +93,5 @@
     margin-right: 10px; /* Возвращение расстояния между точками */
     flex-shrink: 0; /* Запрет уменьшения точки */
   }
-
 
 }
