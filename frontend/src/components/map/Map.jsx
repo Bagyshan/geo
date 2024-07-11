@@ -95,7 +95,6 @@ const MapExample = ({maps=[],loading,type}) => {
         fillOpacity: 0.7
     };
     ChartJS.register(ArcElement, Tooltip, Legend);
-
     const processChartData = (maps) => {
         const typeCounts = maps?.reduce((acc, map) => {
             acc[map.object_type] = (acc[map.object_type] || 0) + 1;
