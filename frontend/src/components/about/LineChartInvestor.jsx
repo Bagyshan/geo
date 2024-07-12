@@ -38,13 +38,13 @@ const LineChart = ({ monthlyIncome , loading}) => {
         <div>
             <h2>{translate.graphOfMonth[language]}</h2>
             {loading === false ?
-                monthlyIncome.length >=1 ? (
+                monthlyIncome?.length >=1 ? (
                     <div className="diagrams" style={{display: "flex"}}>
                         <div style={{width: "100%"}}>
                             <Line data={data} ref={chartRef}/>
                         </div>
                         <div className="diagramList" style={{width: "100%"}}>
-                            {monthlyIncome.map((item, index) => (
+                            {monthlyIncome?.map((item, index) => (
                                 <div
                                     className="filteredList_Object diagramListObject"
                                     key={index}

@@ -29,7 +29,7 @@ const InvestorPage = () => {
             <li key={0} className={selectedTitle === 0 ? 'selected':''}>
               <a onClick={() => handleSetId(0)}>{translate.main[language]}</a>
             </li>
-            {investorsInfo.map((investorsInfoItem) => (
+            {investorsInfo?.map((investorsInfoItem) => (
                 <li key={investorsInfoItem.id} className={selectedTitle === investorsInfoItem.id ? 'selected':''}>
                   <a onClick={() => handleSetId(investorsInfoItem.id)}>{investorsInfoItem.title}</a>
                 </li>
@@ -37,7 +37,7 @@ const InvestorPage = () => {
           </ul>
         </nav>
         <div>
-          {selectedTitle == 0 ? (
+          {selectedTitle === 0 ? (
               <section className="financial-press-section">
                 <div className="press-releases">
                   <DoughnutChart allocations={diagramInvestor} loading={loading}/>

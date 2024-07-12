@@ -254,7 +254,7 @@ const MapExample = ({maps=[],loading,type}) => {
         });
         return geoJsonData ?<>
             <GeoJSON data={geoJsonData} style={style} onEachFeature={onEachFeature} />
-            <button className={`resetBtn ${isSpinning ? 'spinning' : ''}`} onClick={handleReset} style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000,}}><img src={ResetIcon}/></button>
+            <button className={`resetBtn ${isSpinning ? 'spinning' : ''}`} onClick={handleReset} style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000,}}><img src={ResetIcon} alt='reset'/></button>
         </> : null;
     };
     useEffect(() => {
@@ -267,7 +267,7 @@ const MapExample = ({maps=[],loading,type}) => {
     }, [language]);
 
     const handleNavigate = (item) => {
-        if(type == 0){navigate(`/mapItem/${item.id}`);}
+        if(type === 0){navigate(`/mapItem/${item.id}`);}
         else {navigate(`/newMapItem/${item.id}`)}
     };
     return (
@@ -304,7 +304,7 @@ const MapExample = ({maps=[],loading,type}) => {
                 <MapComponent/>
             </MapContainer>
             {loading === false ? (
-                maps.length >= 1 ? (
+                maps?.length >= 1 ? (
                     <div className="diagramMaps">
                         <Doughnut data={data} options={options} />
                         {(selectedElement !== null || filteredMaps.length !== maps.length) ? (

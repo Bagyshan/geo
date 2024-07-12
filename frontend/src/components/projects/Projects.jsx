@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import './Projects.css';
 import Map from "../map/Map";
 import {translate} from "../../assets/translate";

@@ -162,11 +162,10 @@
 
 .about-container {
   position: relative;
-  padding: 20px 0;
+  padding: 0;
   width: 100%;
   text-align: center;
 }
-
 .accordion {
   display: none;
   flex-direction: column;
@@ -211,7 +210,7 @@
 }
 
 /* Стили для аккордеона на мобильных устройствах */
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .accordion {
     position: relative;
     top: 0;
@@ -222,12 +221,16 @@
     max-height: none;
     animation: ani 1.5s forwards;
   }
+  .about-container a{
+    width: 100%;
+    display: block;
+  }
 
   .about-container:hover .accordion {
     max-height: none;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .header.hidden {
     top: 0; /* Для мобильных устройств: хедер не скрывается */
   }
@@ -235,7 +238,7 @@
 
 
 /* Стили для иконок меню и переключателя языка на мобильных устройствах */
-@media (max-width: 768px) {
+@media (max-width:1000px) {
   .icons {
     display: flex;
     align-items: center;

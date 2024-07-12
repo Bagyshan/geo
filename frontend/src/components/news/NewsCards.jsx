@@ -59,7 +59,7 @@ const NewsCards = () => {
       threshold: 0.2, // Порог видимости элемента
     };
 
-    const handleIntersection = (entries, observer) => {
+    const handleIntersection = (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');

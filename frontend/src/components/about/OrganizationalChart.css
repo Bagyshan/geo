@@ -3,9 +3,14 @@
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
-    margin-top: 80px;
 }
-
+.employees{
+    margin-top: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 .worker-card {
     display: flex;
     background-color: #ffffff;

@@ -29,8 +29,8 @@ const AchievementsProjects = () => {
         <div className="container">
           <h2 className="section-title">{translate.achievements[language]}</h2>
           <div className="services">
-            {loading == false ?
-                achievements.length >= 1 ? (
+            {loading === false ?
+                achievements?.length >= 1 ? (
                     <div className="services-list">
                       {achievements.map((achievement, index) => (
                           <div
