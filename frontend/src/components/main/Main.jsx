@@ -15,7 +15,7 @@ import {getHome} from "../../store/apiSlice";
 
 const Main = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [timeOut,setTimeOut] = useState(2000)
+    const timeOut = 5000
     const dispatch = useDispatch()
     const {homes} = useSelector((state)=> state.api)
     const intervalRef = useRef(null);
