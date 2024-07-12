@@ -21,7 +21,7 @@ const InvestorItem = ({id}) => {
         <div className="investor-item">
             <div className="containerInvestorItem">
                 <h2 className="investor-title">{investorItem[translate.translatedApi.title[language]]}</h2>
-                <img src={investorItem.image} style={{borderRadius: "20px"}}/>
+                <img src={investorItem?.image} style={{borderRadius: "20px"}}/>
                 <div className="bodyCont" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(investorItem[translate.translatedApi.body[language]])}}/>
                 {investorItem.file == null ? (
                     <div></div>

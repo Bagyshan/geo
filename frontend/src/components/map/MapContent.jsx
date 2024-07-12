@@ -8,7 +8,7 @@ const MapContent = ({mapInfo,type}) => {
     const {language} = useContext(LanguageContext)
     const navigate = useNavigate()
     const handleNavigate = () => {
-       if(type == 0){
+       if(type === 0){
            navigate(`/mapItem/${mapInfo.id}`);
        }
        else {
@@ -17,7 +17,7 @@ const MapContent = ({mapInfo,type}) => {
     };
   return (
       <div className="content-container">
-          <img src={mapInfo.image}/>
+          <img src={mapInfo.image}  alt={mapInfo[translate.translatedApi.title[language]]}/>
           <h1 className="toProject" onClick={handleNavigate}>{mapInfo[translate.translatedApi.title[language]] }</h1>
       </div>
   );

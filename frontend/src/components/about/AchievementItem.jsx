@@ -25,7 +25,7 @@ const AchievementItem = () => {
         <div className="news-item">
             <div className="containerNews">
                 <h2 className="news-title">{achievementItem[translate.translatedApi.title[language]]}</h2>
-                <img src={achievementItem.image} style={{borderRadius: "20px"}} alt="AchievementImage"/>
+                <img src={achievementItem?.image} style={{borderRadius: "20px"}} alt="AchievementImage"/>
                 <div className="bodyCont" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(achievementItem[translate.translatedApi.body[language]])}}/>
                 {achievementItem.file == null ? (
                     <div></div>

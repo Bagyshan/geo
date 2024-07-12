@@ -76,13 +76,13 @@ const DoughnutChart = ({ allocations,loading }) => {
         <div>
             <h2>{translate.diagramOfAll[language]}</h2>
             {loading === false ?
-                allocations.length >= 1 ? (
+                allocations?.length >= 1 ? (
                     <div className="diagrams" style={{display:"flex"}}>
                         <div style={{width:"100%",height:"80%"}}>
                             <Doughnut data={data}  options={options} ref={chartRef}/>
                         </div>
                         <div className="diagramList" style={{width:"100%"}}>
-                            {allocations.map((item,index)=>(
+                            {allocations?.map((item,index)=>(
                                 <div
                                     className="filteredList_Object diagramListObject"
                                     key={index}

@@ -51,7 +51,7 @@ const Main = () => {
 
 
       <div className="slider">
-          {homes.length > 0 && (
+          {homes?.length > 0 && (
               <div className="slide">
                   <div className="titleSlide">
                       <h2>{homes[currentSlide][translate.translatedApi.title[language]]}</h2>
@@ -64,7 +64,7 @@ const Main = () => {
               </div>
           )}
         <div className="dots">
-          {homes.map((home, index) => (
+          {homes?.map((home, index) => (
             <div
               key={index}
               className={`dot ${index === currentSlide ? 'active' : ''}`}
