@@ -246,7 +246,7 @@ TINYMCE_DEFAULT_CONFIG = {
         {'title': '24pt', 'inline': 'span', 'styles': {'font-size': '24pt'}},
         {'title': '36pt', 'inline': 'span', 'styles': {'font-size': '36pt'}},
     ],
-    'images_upload_url': '/upload_image/upload_image/',
+    'images_upload_url': '/api/upload_image/upload_image/',
     'relative_urls': False,
     'remove_script_host': False,
 }
