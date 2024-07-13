@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from news.models import News
 from rest_framework import status
 from .tasks import send_comment_notification
+from django.views.decorators.csrf import csrf_exempt
 
 
 class StandartResultPagination(PageNumberPagination):
@@ -27,6 +28,7 @@ class CommentViewSet(ModelViewSet):
         serializer = CommentSerializer(news_comments, many=True)
         return Response(serializer.data)
     
+    @csrf_exempt
     def create(self, request, *args, **kwargs):
         news_id = kwargs.get('news_id')
         news = News.objects.get(id=news_id)
@@ -38,7 +40,7 @@ class CommentViewSet(ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
-
+    @csrf_exempt
     def perform_create(self, serializer):
 
         comment = serializer.save()
