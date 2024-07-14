@@ -19,7 +19,7 @@ const Projects = () => {
     <section className="projects">
       <div className="containerProjects">
         <h2 className="section-title">{translate.projects[language]}</h2>
-        <div className='mapContainer'>
+        <div className='mapProjectsContainer'>
             <div className="mapContent">
                 <Map maps={maps} loading={loading} type={0}/>
                 <h2 className="section-title" style={{marginTop: "40px"}}>{translate.geologicalExploration[language]}</h2>
