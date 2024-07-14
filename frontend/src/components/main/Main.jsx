@@ -1,11 +1,6 @@
 import React, {useState, useEffect, useContext, useRef} from 'react';
 import './Main.css';
-import photo1 from '../../assets/photo_2024-05-20_05-03-23.jpg';
-import photo2 from '../../assets/photo_2024-05-20_05-05-24.jpg';
-import photo3 from '../../assets/photo_2024-05-20_05-05-30.jpg';
-import photo4 from '../../assets/photo_2024-05-20_05-05-35.jpg';
-import photo5 from '../../assets/photo_2024-05-20_05-06-06.jpg';
-import video from '../../assets/20600550-uhd_3840_2160_30fps.mp4';
+import mainPhoto from "../../assets/mainPhoto.jpg"
 import NewsCards from '../news/NewsCards';
 import {translate} from "../../assets/translate";
 import {LanguageContext} from "../../LanguageContext";
@@ -51,7 +46,7 @@ const Main = () => {
 
 
       <div className="slider">
-          {homes?.length > 0 && (
+          {homes?.length > 0 ? (
               <div className="slide">
                   <div className="titleSlide">
                       <h2>{homes[currentSlide][translate.translatedApi.title[language]]}</h2>
@@ -62,6 +57,8 @@ const Main = () => {
                       style={{ width: '100%', height: '100vmin' }}
                   />
               </div>
+          ):(
+              <img src={mainPhoto} alt="main" style={{ width: '100%', height: '100vmin' }}/>
           )}
         <div className="dots">
           {homes?.map((home, index) => (

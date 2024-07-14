@@ -273,7 +273,7 @@ const MapExample = ({maps=[],loading,type}) => {
     return (
 
         <div className='mapContainer'>
-            <MapContainer center={mapCenter} zoom={mapZoom} style={{ width: "100%", borderRadius: '30px'}}>
+            <MapContainer center={mapCenter} zoom={mapZoom} style={{ width: "100%", borderRadius: '30px', maxHeight: '680px'}}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
