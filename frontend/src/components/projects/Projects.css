@@ -35,13 +35,14 @@
 .diagramMaps{
   width: 300px;
   margin-left: 10px;
-  padding: 20px;
+  padding: 10px;
   border-radius: 35px;
   background-color: rgba(223, 234, 234, 0.8);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
   .filteredList{
     margin: 10px 0;
+    color: #083250;
     max-height: 380px; /* Adjust the height as needed */
     overflow-y: auto;
   }
@@ -68,8 +69,9 @@
 
 /* Firefox */
 .filteredList {
-  scrollbar-width: thin; /* Make scrollbar thinner */
-  scrollbar-color: #888 #f1f1f1; /* Color of the scrollbar thumb and track */
+  padding: 1px;
+  scrollbar-width: thin;/* Make scrollbar thinner */
+  scrollbar-color: rgba(120, 157, 185, 0.48) rgba(175, 203, 241, 0); /* Color of the scrollbar thumb and track */
 }
 
 

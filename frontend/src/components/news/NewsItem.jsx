@@ -37,6 +37,7 @@ const NewsItem = () => {
     <div className="news-item">
         <div className="containerNews">
             <h2 className="news-title">{newsPost[translate.translatedApi.title[language]]}</h2>
+            <p className='dateNews'>{newsPost.created_at}</p>
             <img src={newsPost.image} style={{borderRadius: "20px", marginBottom:"20px"}} alt="NewsImage"/>
             <div className="bodyCont"
                  dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(newsPost[translate.translatedApi.body[language]])}}/>
