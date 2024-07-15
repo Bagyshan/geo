@@ -6,7 +6,6 @@
   align-items: center;
   flex-direction: column;
   }
-  
   .containerProjects {
     max-width: 1700px;
     margin: 0 50px;
@@ -40,11 +39,10 @@
   border-radius: 35px;
   background-color: rgba(223, 234, 234, 0.8);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
 }
   .filteredList{
     margin: 10px 0;
-    max-height: 320px; /* Adjust the height as needed */
+    max-height: 380px; /* Adjust the height as needed */
     overflow-y: auto;
   }
 

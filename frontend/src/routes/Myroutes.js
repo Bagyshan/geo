@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Route, Routes, useLocation} from "react-router-dom";
 import HistoryAndMission from "../components/about/HistoryAndMission";
 import Main from "../components/main/Main";
 import OrganizationalChart from "../components/about/OrganizationalChart";
@@ -34,13 +34,28 @@ const PUBLIC_ROUTES = [
   { id: 15, link: '/employee/:employeeId', element:<EmployeeItem/>},
   { id: 16, link: '/achievement/:achievementId', element:<AchievementItem/>}
 ];
+const Reload = ({ children }) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return <React.Fragment key={location.pathname}>{children}</React.Fragment>;
+};
 
 const Myroutes = () => {
+  const location = useLocation();
+  const [key, setKey] = useState(location.pathname);
+
+  useEffect(() => {
+    setKey(location.pathname);
+  }, [location]);
   return (
-    <Routes>
+    <Routes key={key}>
       {" "}
       {PUBLIC_ROUTES.map((elem) => (
-        <Route path={elem.link} element={elem.element} key={elem.id} />
+        <Route path={elem.link} element={<Reload>{elem.element}</Reload>} key={elem.id} />
       ))}
     </Routes>
   );

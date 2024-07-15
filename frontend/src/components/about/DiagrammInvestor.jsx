@@ -31,17 +31,17 @@ const DoughnutChart = ({ allocations,loading }) => {
             },
             legend: {
                 display: true,
-                position: 'top',
+                position: window.innerWidth < 768 ? 'bottom' : 'top',
                 onClick: () => false,
                 labels: {
                     font: {
-                        size: 20,
+                        size: window.innerWidth < 768 ? 12 : 20,
                     },
                 },
             },
         },
         layout: {
-            padding: 50
+            padding: window.innerWidth < 768 ? 20 : 50,
         },
         onHover: (event, chartElement) => {
             if (chartElement.length) {
@@ -78,21 +78,20 @@ const DoughnutChart = ({ allocations,loading }) => {
             {loading === false ?
                 allocations?.length >= 1 ? (
                     <div className="diagrams" style={{display:"flex"}}>
-                        <div style={{width:"100%",height:"80%"}}>
-                            <Doughnut data={data}  options={options} ref={chartRef}/>
+                        <div className='diagramInvestor'>
+                            <Doughnut data={data}  options={options} ref={chartRef} />
                         </div>
                         <div className="diagramList" style={{width:"100%"}}>
                             {allocations?.map((item,index)=>(
                                 <div
                                     className="filteredList_Object diagramListObject"
                                     key={index}
-                                    style={{display:"flex", alignItems:"center",justifyContent:"space-between"}}
+                                    style={{display:"flex", alignItems:"center",justifyContent:"space-between", width:"100%"}}
                                     onMouseEnter={() => handleMouseEnter(index)}
                                     onMouseLeave={() => handleMouseLeave(index)}
                                 >
                                     <h2>{item[translate.translatedApi.category[language]]}</h2>
                                     <p>Количество: {item.amount}</p>
-                                    <span>{item.percentage}%</span>
                                 </div>
                             ))}
                         </div>
