@@ -7,6 +7,9 @@
 .bodyCont{
   padding: 10px 40px;
 }
+.dateNews{
+  margin: 20px 0;
+}
 /* Стили для контейнера новостей */
 .containerNews {
   margin: 5px auto;
