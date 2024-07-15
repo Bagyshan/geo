@@ -4,7 +4,7 @@ from django.utils import timezone
 
 # Create your models here.
 class News(models.Model):
-    title = models.CharField(max_length=100, verbose_name='Название')
+    title = models.CharField(max_length=150, verbose_name='Название')
     body = models.TextField(null=True, blank=True, verbose_name='Описание')
     created_at = models.DateField(verbose_name='Дата создания')
     updated_at = models.DateField(auto_now=True, verbose_name='Дата обновления')
