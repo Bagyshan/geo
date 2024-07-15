@@ -92,7 +92,6 @@ const DoughnutChart = ({ allocations,loading }) => {
                                 >
                                     <h2>{item[translate.translatedApi.category[language]]}</h2>
                                     <p>Количество: {item.amount}</p>
-                                    <span>{item.percentage}%</span>
                                 </div>
                             ))}
                         </div>

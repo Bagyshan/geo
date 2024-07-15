@@ -56,4 +56,5 @@ export const translate =
         income:{"RU":"Доход","KG":"Киреше","EN":"Income"},
         diagramOfAll:{"RU":"Диаграма всех объектов","KG":"Бардык объекттердин диаграммасы","EN":"Diagram of all objects"},
         graphOfMonth:{"RU":"График месячного дохода","KG":"Айлык киреше диаграммасы","EN":"Monthly income graph"},
+        numberOfDeposits:{"RU":"Количество месторождений","KG":"Кендүү жерлер","EN":"Number of deposits"}
     }

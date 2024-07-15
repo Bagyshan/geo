@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState,} from 'react';
+import React, {useContext, useEffect, useRef, useState,} from 'react';
 import {MapContainer, TileLayer, GeoJSON, useMap, Marker, Popup, useMapEvent} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import wellknown from 'wellknown'
@@ -20,7 +20,7 @@ const MapExample = ({maps=[],loading,type}) => {
     const [isSpinning, setIsSpinning] = useState(false);
     const [mapCenter, setMapCenter] = useState(initialPosition);
     const [mapZoom, setMapZoom] = useState(initialZoom);
-
+    const chartRef = useRef(null);
     const { language } = useContext(LanguageContext);
     const navigate = useNavigate()
 
@@ -100,7 +100,7 @@ const MapExample = ({maps=[],loading,type}) => {
             acc[map.object_type] = (acc[map.object_type] || 0) + 1;
             return acc;
           }, {});
-        const ddd = {   
+        const ddd = {
             "#FFD700": translate.resources?.gold?.[language] || "Gold",
             "#000000": translate.resources?.coal?.[language] || "Coal",
             "#FFFF00": translate.resources?.looseGold?.[language] || "Loose Gold",
@@ -162,10 +162,10 @@ const MapExample = ({maps=[],loading,type}) => {
         },
         plugins: {
             legend: {
-                onClick: (e, legendItem) => {
+                onClick: (e, legendItem,legend) => {
+                    const chart = legend.chart;
                     const index = legendItem.index;
                     const newData = { ...data };
-
                     if (newData.datasets[0].data[index] !== 0) {
                         newData.datasets[0].data[index] = 0;
                     } else {
@@ -177,6 +177,7 @@ const MapExample = ({maps=[],loading,type}) => {
                     }
 
                     setData(newData);
+
                     const ddd = {
                         "#FFD700": "gold",
                         "#000000": "coal",
@@ -189,15 +190,35 @@ const MapExample = ({maps=[],loading,type}) => {
                         '#00FA9A': "granite",
                         '#DAA520': "shellRock",
                     };
+
                     const newFilteredMaps = maps?.filter((map) => {
                         const x = ddd[map?.object_type];
                         return newData.datasets[0].data[newData.labels.indexOf(translate.resources[x][language])] > 0;
                     });
+
                     setFilteredMaps(newFilteredMaps);
+                    const meta = chart.getDatasetMeta(0);
+                    const dataPoint = meta.data[index];
+                    dataPoint.hidden = !dataPoint.hidden;
+                },
+                labels: {
+                    generateLabels: (chart) => {
+                        const data = chart.data;
+                        return data.labels.map((label, i) => {
+                            const meta = chart.getDatasetMeta(0);
+                            const hidden = meta.data[i].hidden;
+
+                            return {
+                                text: label,
+                                fillStyle: hidden ? 'rgba(252,52,52,0.42)' : data.datasets[0].backgroundColor[i],
+                                fontColor: hidden ? 'rgba(2,2,2,0.42)' : 'black',
+                                index: i
+                            };
+                        });
+                    }
                 }
-            },
 
-
+            }
         }
     };
     const getObjectTypeFromLabel = (label) => {
@@ -217,6 +238,17 @@ const MapExample = ({maps=[],loading,type}) => {
     };
 
     const resetChart = () => {
+        if (chartRef.current) {
+            const chartInstance = chartRef.current;
+            const meta = chartInstance.getDatasetMeta(0);
+
+            if (meta) {
+                meta.data.forEach((dataPoint) => {
+                    dataPoint.hidden = false;
+                });
+
+            }
+        }
         setData(initialData);
         setSelectedElement(null);
         setFilteredMaps(maps);
@@ -273,7 +305,7 @@ const MapExample = ({maps=[],loading,type}) => {
     return (
 
         <div className='mapContainer'>
-            <MapContainer center={mapCenter} zoom={mapZoom} style={{ width: "100%", borderRadius: '30px', maxHeight: '680px'}}>
+            <MapContainer center={mapCenter} zoom={mapZoom} style={{ width: "100%", borderRadius: '30px', maxHeight: '675px'}}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -306,7 +338,7 @@ const MapExample = ({maps=[],loading,type}) => {
             {loading === false ? (
                 maps?.length >= 1 ? (
                     <div className="diagramMaps">
-                        <Doughnut data={data} options={options} />
+                        <Doughnut ref={chartRef} data={data} options={options} />
                         {(selectedElement !== null || filteredMaps.length !== maps.length) ? (
                             <button onClick={resetChart} className={`resetBtn ${isSpinning ? 'spinning' : ''}`}>
                                 <img src={ResetIcon} alt="Reset Icon" />

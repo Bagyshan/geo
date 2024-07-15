@@ -15,7 +15,12 @@
 body {
   background-color: #e0e8f5;
 }
-
+.news-date{
+  position: absolute;
+  right: 10px;
+  bottom: 2px;
+  color: rgba(0, 0, 0, 0.32);
+}
 .news-section h2 {
   font-size: 36px;
   font-weight: bold;
@@ -93,7 +98,7 @@ body {
 
 .news-card h3 {
   margin-top: 0;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
   font-size: 24px;
   color: #0D3E61;
 }
@@ -197,7 +202,7 @@ body {
 
   .news-card h3 {
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   .news-card p {
