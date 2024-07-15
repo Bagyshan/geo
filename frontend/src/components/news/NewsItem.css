@@ -4,7 +4,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+.bodyCont{
+  padding: 10px 40px;
+}
 /* Стили для контейнера новостей */
 .containerNews {
   margin: 5px auto;
@@ -146,6 +148,9 @@
   }
   .containerNews{
     padding: 25px 25px;
+  }
+  .bodyCont{
+    padding:10px 0;
   }
 
 }
