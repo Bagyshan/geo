@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getServices} from "../../store/apiSlice";
 import {LanguageContext} from "../../LanguageContext";
 import {translate} from "../../assets/translate";
+import DOMPurify from "dompurify";
 
 const Services = () => {
   const dispatch = useDispatch();
@@ -43,10 +44,11 @@ const Services = () => {
                 onMouseLeave={handleMouseLeave}
             >
               <h3 className="service-title">{service[translate.translatedApi.title[language]]}</h3>
-              <p className="service-description">{service[translate.translatedApi.body[language]]}</p>
+              <div className="bodyCont"
+                   dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(service[translate.translatedApi.body[language]])}}/>
             </div>))}
         </div>
-    </div>
+      </div>
 
   );
 };
