@@ -13,13 +13,23 @@ const NewsItem = () => {
     const {newsPost} = useSelector((state)=> state.api)
     const {newsId} = useParams();
     const { language } = useContext(LanguageContext);
+    const colors = [
+        'rgba(255, 99, 132, 0.72)',
+        'rgba(54, 162, 235, 0.72)',
+        'rgba(255,213,109,0.72)',
+        'rgba(75, 192, 192, 0.72)',
+        'rgba(153, 102, 255, 0.72)',
+        'rgba(255, 159, 64, 0.72)'
+    ];
+
+    const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];
+
     useEffect(()=>{
         dispatch(getNewsPost(newsId))
         return () => {
             dispatch(clearNewsPost());
         };
     },[dispatch,newsId])
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -85,8 +95,11 @@ const NewsItem = () => {
                 {comments.length >= 1 ? (
                     comments.map((comment, index) => (
                         <div className="comment" key={index}>
-                            <h2>{comment.username}</h2>
-                            <p>{comment.content}</p>
+                            <div className='userLetterIcon' style={{ backgroundColor: getRandomColor() }}><h1>{comment.username[0].toUpperCase()}</h1></div>
+                            <div>
+                                <h2>{comment.username}</h2>
+                                <p>{comment.content}</p>
+                            </div>
                         </div>
                     ))
                 ) : (
