@@ -21,7 +21,6 @@ from django.contrib.gis.db import models as gis_models
 
 
 class MapsAdmin(TranslationAdmin, LeafletGeoAdmin):
-    # form = MapsAdminForm
     formfield_overrides = {
         models.TextField: {'widget': TinyMCE()},
     }

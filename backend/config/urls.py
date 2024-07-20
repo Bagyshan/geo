@@ -22,6 +22,8 @@ from django.urls import path, include
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from django.conf.urls.i18n import i18n_patterns
+from maps.models import Maps, NewMaps
+from maps.views import MapsCustomGeoJSONLayerView, NewMapsCustomGeoJSONLayerView
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -44,6 +46,10 @@ urlpatterns = [
     path('api/upload_image/', include('upload_image.urls')),
     path('admin/media/text_images/', include('upload_image.urls')),
     path('api/maps/', include('maps.urls')),
+    # path('api/maps/', MapsCustomGeoJSONLayerView.as_view(model=Maps,
+    #     properties=('title', 'title_ru', 'title_en', 'title_ky', 'created_at', 'updated_at', 'body', 'body_ru', 'body_en', 'body_ky', 'object_type'))),
+    # path('api/newmaps/', NewMapsCustomGeoJSONLayerView.as_view(model=NewMaps,
+    #     properties=('title', 'title_ru', 'title_en', 'title_ky', 'created_at', 'updated_at', 'body', 'body_ru', 'body_en', 'body_ky', 'object_type'))),
     path('api/services/', include('services.urls')),
     path('api/comments/', include('comments.urls')),
     path('api/gp/', include('gp.urls')),
