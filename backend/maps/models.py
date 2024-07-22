@@ -24,10 +24,10 @@ class Maps(models.Model):
     body = models.TextField(null=True, blank=True, verbose_name='Описание')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
-    geom = PolygonField(verbose_name='Местоположение')
+    geom = PolygonField(help_text='coordinates', verbose_name='Местоположение')
     object_type = models.CharField(max_length=10, choices=COLOR_CHOICES, verbose_name='Категория месторождения')
-    image = models.ImageField(upload_to='images', verbose_name='Фотогорафия')
-    file = models.FileField(upload_to='pdfs', null=True, blank=True, verbose_name='Файл')
+    image = models.ImageField(max_length=500, upload_to='images', verbose_name='Фотогорафия')
+    file = models.FileField(max_length=500, upload_to='pdfs', null=True, blank=True, verbose_name='Файл')
 
 
     def __str__(self) -> str:
@@ -66,8 +66,8 @@ class NewMaps(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     geom = PolygonField(verbose_name='Местоположение')
     object_type = models.CharField(max_length=10, choices=COLOR_CHOICES, verbose_name='Категория месторождения')
-    image = models.ImageField(upload_to='images', verbose_name='Фотография')
-    file = models.FileField(upload_to='pdfs', null=True, blank=True, verbose_name='Файл')
+    image = models.ImageField(max_length=500, upload_to='images', verbose_name='Фотография')
+    file = models.FileField(max_length=500, upload_to='pdfs', null=True, blank=True, verbose_name='Файл')
 
 
     def __str__(self) -> str:

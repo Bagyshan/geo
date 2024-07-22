@@ -3,12 +3,39 @@ from .models import Maps, NewMaps
 from tinymce.widgets import TinyMCE
 from django import forms
 from django.db import models
-from leaflet.forms.widgets import LeafletWidget
 from modeltranslation.admin import TranslationAdmin
 from leaflet.admin import LeafletGeoAdmin
 from django.contrib import admin
 from leaflet.admin import LeafletGeoAdminMixin
 from django.contrib.gis.db import models as gis_models
+from django import forms
+from leaflet.forms.widgets import LeafletWidget
+from .models import Maps
+
+
+class MapsForm(forms.ModelForm):
+    class Meta:
+        model = Maps
+        fields = '__all__'
+        widgets = {
+            'geom': LeafletWidget(attrs={
+                'map_height': '0px',  # Высота карты
+                'map_width': '0px',   # Ширина карты
+                'display_raw': 'true',  # Отображение ввода координат
+            }),
+        }
+
+class NewMapsForm(forms.ModelForm):
+    class Meta:
+        model = NewMaps
+        fields = '__all__'
+        widgets = {
+            'geom': LeafletWidget(attrs={
+                'map_height': '0px',  # Высота карты
+                'map_width': '0px',   # Ширина карты
+                'display_raw': 'true',  # Отображение ввода координат
+            }),
+        }
 
 # class MapsAdminForm(forms.ModelForm):
 #     class Meta:
@@ -20,7 +47,8 @@ from django.contrib.gis.db import models as gis_models
 #         }
 
 
-class MapsAdmin(TranslationAdmin, LeafletGeoAdmin):
+class MapsAdmin(TranslationAdmin):
+    form = MapsForm
     formfield_overrides = {
         models.TextField: {'widget': TinyMCE()},
     }
@@ -29,8 +57,8 @@ class MapsAdmin(TranslationAdmin, LeafletGeoAdmin):
 
 admin.site.register(Maps, MapsAdmin)
 
-class NewMapsAdmin(TranslationAdmin, LeafletGeoAdmin):
-    # form = NewMapsAdminForm
+class NewMapsAdmin(TranslationAdmin):
+    form = NewMapsForm
     formfield_overrides = {
         models.TextField: {'widget': TinyMCE()},
     }

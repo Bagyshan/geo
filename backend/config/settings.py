@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'tinymce',
     'corsheaders',
+    'django.contrib.gis',
     'leaflet',
     'djgeojson',
     'storages',
@@ -213,7 +214,9 @@ STATIC_URL = '/api/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'api/static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'api/static'),
+# ]
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
@@ -395,8 +398,25 @@ LEAFLET_CONFIG = {
     'MIN_ZOOM': 3,
     'MAX_ZOOM': 18,
     'TILES': 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    'SCALE': 'both',
+    'ATTRIBUTION_PREFIX': 'Powered by <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>'
+    # 'PLUGINS': {
+    #     'draw': {
+    #         'auto-include': True
+    #     },
+    #     'fullscreen': {
+    #         'auto-include': True
+    #     },
+    # }
 }
 
+# LEAFLET_CONFIG = {
+#     'PLUGINS': {
+#         'forms': {
+#             'auto-include': True
+#         }
+#     }
+# }
 
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')

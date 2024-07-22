@@ -8,9 +8,9 @@ class News(models.Model):
     body = models.TextField(null=True, blank=True, verbose_name='Описание')
     created_at = models.DateField(verbose_name='Дата создания')
     updated_at = models.DateField(auto_now=True, verbose_name='Дата обновления')
-    preview = models.ImageField(upload_to='previews', verbose_name='Превью')
-    image = models.ImageField(upload_to='images', verbose_name='Фотография')
-    file = models.FileField(upload_to='pdfs', null=True, blank=True, verbose_name='Файл')
+    preview = models.ImageField(max_length=500, upload_to='previews', verbose_name='Превью')
+    image = models.ImageField(max_length=500, upload_to='images', verbose_name='Фотография')
+    file = models.FileField(max_length=500, upload_to='pdfs', null=True, blank=True, verbose_name='Файл')
 
     def save(self, *args, **kwargs):
         self.updated_at = timezone.now().date()

@@ -26,8 +26,8 @@ class Products(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     price = models.CharField(max_length=20, verbose_name='Цена')
-    image = models.ImageField(upload_to='images', verbose_name='Фотография')
-    file = models.FileField(upload_to='pdfs', verbose_name='Файл')
+    image = models.ImageField(max_length=500, upload_to='images', verbose_name='Фотография')
+    file = models.FileField(max_length=500, upload_to='pdfs', null=True, blank=True, verbose_name='Файл')
 
     def __str__(self) -> str:
         return self.title
