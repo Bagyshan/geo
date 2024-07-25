@@ -1,5 +1,6 @@
 import datetime
 from django.utils.http import http_date
+from django.utils.deprecation import MiddlewareMixin
 
 class CacheControlMiddleware:
     def __init__(self, get_response):
@@ -17,3 +18,7 @@ class CacheControlMiddleware:
                 
             response['Expires'] = http_date(expires.timestamp())
         return response
+    
+class DisableCSRFMiddleware(MiddlewareMixin):
+    def process_request(self, request):
+        setattr(request, '_dont_enforce_csrf_checks', True)

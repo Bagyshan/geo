@@ -1,11 +1,19 @@
 from django.db import models
 from django.utils import timezone
+from category.models import Category
 
 
 # Create your models here.
 class News(models.Model):
     title = models.CharField(max_length=150, verbose_name='Название')
     body = models.TextField(null=True, blank=True, verbose_name='Описание')
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='news',
+        verbose_name='Категория'
+    )
     created_at = models.DateField(verbose_name='Дата создания')
     updated_at = models.DateField(auto_now=True, verbose_name='Дата обновления')
     preview = models.ImageField(max_length=500, upload_to='previews', verbose_name='Превью')

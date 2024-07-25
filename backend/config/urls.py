@@ -59,6 +59,7 @@ urlpatterns = [
     path('api/charts/', include('charts.urls')),
     path('api/investors/', include('investors.urls')),
     path('api/boezgrt/', include('boezgrt.urls')),
+    path('api/category/', include('category.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
@@ -73,6 +74,7 @@ urlpatterns += i18n_patterns(
     path('api/charts/', include('charts.urls')),
     path('api/investors/', include('investors.urls')),
     path('api/boezgrt/', include('boezgrt.urls')),
+    path('api/category/', include('category.urls')),
 )
 
 
