@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BoezgrtHome, Products
+from .models import BoezgrtHome, Products, Currency
 from modeltranslation.admin import TranslationAdmin
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -39,3 +39,22 @@ class ProductsAdmin(TranslationAdmin):
     list_display = ('id', 'title', 'price', 'created_at')
 
 admin.site.register(Products, ProductsAdmin)
+
+
+class CurrencyAdmin(admin.ModelAdmin):
+    def save_model(self, request, obj, form, change):
+        if not obj.pk and Currency.objects.count() >= 1:
+            raise ValidationError(_("Вы не можете создать более 1 таблицы валют."))
+        super(CurrencyAdmin, self).save_model(request, obj, form, change)
+
+    def has_add_permission(self, request):
+        if Currency.objects.count() >= 1:
+            return False
+        return super(CurrencyAdmin, self).has_add_permission(request)
+    
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    list_display = ('id', 'dollar', 'euro', 'rubles', 'tenge', 'created_at')
+
+admin.site.register(Currency, CurrencyAdmin)

@@ -25,7 +25,7 @@ class Products(models.Model):
     body = models.TextField(null=True, blank=True, verbose_name='Описание')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
-    price = models.CharField(max_length=20, verbose_name='Цена')
+    price = models.FloatField(max_length=20, verbose_name='Цена')
     image = models.ImageField(max_length=500, upload_to='images', verbose_name='Фотография')
     file = models.FileField(max_length=500, upload_to='pdfs', null=True, blank=True, verbose_name='Файл')
 
@@ -38,3 +38,19 @@ class Products(models.Model):
 
 
 
+class Currency(models.Model):
+    dollar = models.FloatField(verbose_name='Доллар')
+    euro = models.FloatField(verbose_name='Евро')
+    rubles = models.FloatField(verbose_name='Рубли')
+    tenge = models.FloatField(verbose_name='Тенге')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+
+    def save(self, *args, **kwargs):
+        if not self.pk and Currency .objects.count() >= 1:
+            raise ValidationError("Вы не можете создать более 1 таблицы валют.")
+        super(Currency  , self).save(*args, **kwargs)
+
+    
+    class Meta:
+        verbose_name = 'Валюта'
+        verbose_name_plural = 'Валюты'
