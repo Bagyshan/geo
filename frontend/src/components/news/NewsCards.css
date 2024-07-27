@@ -12,6 +12,13 @@
   text-align: center;
 }
 
+.select-category{
+  width: 100%;
+}
+/* Styling the select box */
+/* CustomSelect.css */
+
+
 body {
   background-color: #e0e8f5;
 }

@@ -9,6 +9,7 @@
 }
 .dateNews{
   margin: 20px 0;
+  color: rgba(0, 0, 0, 0.32);
 }
 /* Стили для контейнера новостей */
 .containerNews {

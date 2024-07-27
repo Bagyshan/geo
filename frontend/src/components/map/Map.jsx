@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useRef, useState,} from 'react';
-import {MapContainer, TileLayer, GeoJSON, useMap, Marker, Popup, useMapEvent} from 'react-leaflet';
+import {MapContainer, TileLayer, GeoJSON, useMap, Marker, Popup, useMapEvent, Polygon} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import wellknown from 'wellknown'
 import L from 'leaflet';
@@ -23,6 +23,7 @@ const MapExample = ({maps=[],loading,type}) => {
     const chartRef = useRef(null);
     const { language } = useContext(LanguageContext);
     const navigate = useNavigate()
+    const polygonRefs = useRef([]);
 
     const handleClick = () => {
         setIsSpinning(true)
@@ -35,7 +36,7 @@ const MapExample = ({maps=[],loading,type}) => {
         return L.divIcon({
             className: 'custom-icon',
             html: `<div style="background-color: ${color}; width: 20px; height: 20px; border-radius: 50%; border: solid white 1px"></div>`,
-            iconSize: [20, 20],
+            iconSize: [10, 10],
             iconAnchor: [10, 10]
         });
     };
@@ -82,9 +83,9 @@ const MapExample = ({maps=[],loading,type}) => {
         fillColor: 'rgba(8,92,194,0.62)',
         weight: 2,
         opacity: 1,
-        color: 'white',
+        color: 'rgba(8,92,194,0.62)',
         dashArray: '3',
-        fillOpacity: 0.7
+        fillOpacity: 0.4,
     };
     const clickedStyle = {
         fillColor: 'rgba(159,6,29,0.62)', // Цвет при клике
@@ -259,26 +260,8 @@ const MapExample = ({maps=[],loading,type}) => {
     const MapComponent = () => {
         const map = useMap();
 
-        const onEachFeature = (feature, layer) => {
-            if (feature.properties && feature.properties.NAME_1) {
-                layer.bindPopup(feature.properties.NAME_1);
-            }
-
-            layer.on({
-                click: () => {
-                    map.fitBounds(layer.getBounds());
-                    layer.setStyle(clickedStyle)
-                }
-            });
-
-            layer.on('popupclose', () => {
-                map.setView(mapCenter, mapZoom);
-                layer.setStyle(style)
-
-            });
-        };
         const handleReset = () => {
-            map.setView(mapCenter, mapZoom);
+            map.setView(mapCenter, initialZoom-1);
             handleClick();
         };
 
@@ -286,7 +269,7 @@ const MapExample = ({maps=[],loading,type}) => {
             map.setView(mapCenter, mapZoom);
         });
         return geoJsonData ?<>
-            <GeoJSON data={geoJsonData} style={style} onEachFeature={onEachFeature} />
+            <GeoJSON data={geoJsonData} style={style} />
             <button className={`resetBtn ${isSpinning ? 'spinning' : ''}`} onClick={handleReset} style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000,}}><img src={ResetIcon} alt='reset'/></button>
         </> : null;
     };
@@ -298,41 +281,82 @@ const MapExample = ({maps=[],loading,type}) => {
     useEffect(() => {
         setData(processChartData(maps));
     }, [language]);
-
     const handleNavigate = (item) => {
         if(type === 0){navigate(`/mapItem/${item.id}`);}
         else {navigate(`/newMapItem/${item.id}`)}
+    };
+    const ZoomHandler = ({ setMapZoom }) => {
+        useMapEvent('zoomend', (e) => {
+            setMapZoom(e.target.getZoom());
+        });
+        return null;
+    };
+    const getPolygonCenter = (coordinates) => {
+        let latSum = 0;
+        let lngSum = 0;
+        const numPoints = coordinates.length;
+
+        coordinates.forEach(([lng, lat]) => {
+            latSum += lat;
+            lngSum += lng;
+        });
+
+        return [lngSum / numPoints, latSum / numPoints];
     };
     return (
 
         <div className='mapContainer'>
             <MapContainer center={mapCenter} zoom={mapZoom} style={{ width: "100%", borderRadius: '30px', maxHeight: '675px'}}>
+                <ZoomHandler setMapZoom={setMapZoom} />
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 />
-                {filteredMaps.map((mapPos, index) => {
+                {/*{filteredMaps.map((mapPos, index) => {*/}
 
-                    // const wktWithSrid = 'SRID=4326;POINT (76.204605 42.447781)';
+                    {/*// const wktWithSrid = 'SRID=4326;POINT (76.204605 42.447781)';*/}
 
+
+
+                {/*    return (*/}
+
+                {/*        <Marker key={index} position={   coordinates} icon={createCustomIcon(mapPos.object_type)}>*/}
+                {/*            <Popup className="popUp">*/}
+                {/*                <MapContent mapInfo={mapPos} type={type}/>*/}
+                {/*            </Popup>*/}
+                {/*        </Marker>*/}
+                {/*    )*/}
+
+                {/*})}*/}
+                {filteredMaps.map((map, index) => {
+                    const polygon = type === 0 ? map.geom.coordinates[0].map(([lng, lat]) => [lat, lng]) : []
                     // Удаляем SRID из WKT строки
-                    const wkt = mapPos?.location.split(';')[1];
+                    const wkt = type === 1 ? map?.location.split(';')[1]:[]
 
                     // Конвертация WKT в GeoJSON
-                    const geometry = wellknown.parse(wkt);
+                    const geometry = type === 1 ? wellknown.parse(wkt) : []
 
                     // Координаты из GeoJSON
-                    const coordinates = [geometry.coordinates[1], geometry.coordinates[0]];
-
-                    return (
-
-                        <Marker key={index} position={coordinates} icon={createCustomIcon(mapPos.object_type)}>
-                            <Popup className="popUp">
-                                <MapContent mapInfo={mapPos} type={type}/>
-                            </Popup>
-                        </Marker>
+                    const coordinates = type === 1 ? [geometry.coordinates[1], geometry.coordinates[0]] : []
+                    return(
+                        mapZoom >= 9 && type === 0  ? (
+                            < Polygon
+                                key = {index}
+                                positions = {polygon}
+                                pathOptions={{color: map.object_type}}
+                            >
+                                <Popup className="popUp">
+                                    <MapContent mapInfo={map} type={type}/>
+                                </Popup>
+                            </Polygon>
+                        ):(
+                            <Marker key={index} position={type === 1 ? coordinates : getPolygonCenter(polygon)} icon={createCustomIcon(map.object_type)}>
+                                <Popup className="popUp">
+                                    <MapContent mapInfo={map} type={type}/>
+                                </Popup>
+                            </Marker>
+                        )
                     )
-
                 })}
                 <MapComponent/>
             </MapContainer>

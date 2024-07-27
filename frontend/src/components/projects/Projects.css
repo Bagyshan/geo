@@ -31,7 +31,6 @@
     width: 200px;
     padding: 0;
   }
-
 .diagramMaps{
   width: 300px;
   margin-left: 10px;
@@ -67,6 +66,9 @@
   background: #555; /* Color of the scrollbar thumb on hover */
 }
 
+.leaflet-control-attribution{
+  display: none;
+}
 /* Firefox */
 .filteredList {
   padding: 1px;
