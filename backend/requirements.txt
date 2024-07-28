@@ -25,3 +25,4 @@ boto3
 django-storages
 django-echarts
 pyecharts
+django-celery-results

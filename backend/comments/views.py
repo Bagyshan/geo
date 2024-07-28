@@ -1,8 +1,9 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
-from .serializers import CommentSerializer
-from .models import Comment
+from .serializers import CommentSerializer, KyrgyzGeologyApplicationSerializer, BoezgrtApplicationSerializer
+from .models import Comment, KyrgyzGeologyApplication, BoezgrtApplication
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.pagination import PageNumberPagination
@@ -10,7 +11,9 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from news.models import News
 from rest_framework import status
-from .tasks import send_comment_notification
+from .tasks import send_comment_notification, send_kyrgyzgeology_application, send_boezgrt_application
+from django.views.decorators.csrf import csrf_exempt
+from config import settings
 
 
 class StandartResultPagination(PageNumberPagination):
@@ -27,6 +30,7 @@ class CommentViewSet(ModelViewSet):
         serializer = CommentSerializer(news_comments, many=True)
         return Response(serializer.data)
     
+    @csrf_exempt
     def create(self, request, *args, **kwargs):
         news_id = kwargs.get('news_id')
         news = News.objects.get(id=news_id)
@@ -38,10 +42,52 @@ class CommentViewSet(ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
-
+    @csrf_exempt
     def perform_create(self, serializer):
 
         comment = serializer.save()
         serializer.save()
 
         send_comment_notification.delay(comment.id)
+
+
+class KyrgyzGeologyApplicationViewSet(ModelViewSet):
+    queryset = KyrgyzGeologyApplication.objects.all()
+    serializer_class = KyrgyzGeologyApplicationSerializer
+
+    @csrf_exempt
+    def create(self, request, *args, **kwargs):
+        data = request.data.copy()
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    @csrf_exempt
+    def perform_create(self, serializer):
+        application = serializer.save()
+        serializer.save()
+
+        send_kyrgyzgeology_application.delay(application.id)
+
+
+class BoezgrtApplicationViewSet(ModelViewSet):
+    queryset = BoezgrtApplication.objects.all()
+    serializer_class = BoezgrtApplicationSerializer
+
+    @csrf_exempt
+    def create(self, request, *args, **kwargs):
+        data = request.data.copy()
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    @csrf_exempt
+    def perform_create(self, serializer):
+        application = serializer.save()
+        serializer.save()
+
+        send_boezgrt_application.delay(application.id)
