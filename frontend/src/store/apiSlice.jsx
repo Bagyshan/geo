@@ -35,7 +35,6 @@ export const getNewMaps = createAsyncThunk(
     async (_, { rejectWithValue, dispatch }) => {
         try {
             const response = await instance.get(`/maps/newmaps/`);
-            console.log(response)
             return response.data;
         } catch (error) {
             console.log(error);
@@ -287,7 +286,6 @@ export const getCategories = createAsyncThunk(
     async (_, { rejectWithValue, dispatch }) => {
         try {
             const response = await instance.get(`/category`);
-            console.log(response)
             return response.data;
 
         } catch (error) {

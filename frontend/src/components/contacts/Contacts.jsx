@@ -36,7 +36,6 @@ const Contacts = () => {
     // const mailtoLink = `mailto:boezgrt@yandex.ru?subject=Contact%20Form%20Submission&body=Name:%20${formData.name}%0AEmail:%20${formData.email}%0AMessage:%20${formData.message}`;
     // window.location.href = mailtoLink;
     await dispatch(postKyrgyzGeologyApplication(formDataToSend));
-    console.log(formData)
     alert("Заявка отправлена.")
     setFormData({
       username: '',
