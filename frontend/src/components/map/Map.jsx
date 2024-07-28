@@ -7,7 +7,6 @@ import ResetIcon from "../../assets/reset.svg"
 import MapContent from "./MapContent";
 import {Doughnut} from "react-chartjs-2";
 import {ArcElement, Chart as ChartJS, Legend, Tooltip} from "chart.js";
-import {useSelector} from "react-redux";
 import {translate} from "../../assets/translate";
 import {LanguageContext} from "../../LanguageContext";
 import {useNavigate} from "react-router-dom";
@@ -23,7 +22,6 @@ const MapExample = ({maps=[],loading,type}) => {
     const chartRef = useRef(null);
     const { language } = useContext(LanguageContext);
     const navigate = useNavigate()
-    const polygonRefs = useRef([]);
 
     const handleClick = () => {
         setIsSpinning(true)
@@ -86,14 +84,6 @@ const MapExample = ({maps=[],loading,type}) => {
         color: 'rgba(8,92,194,0.62)',
         dashArray: '3',
         fillOpacity: 0.4,
-    };
-    const clickedStyle = {
-        fillColor: 'rgba(159,6,29,0.62)', // Цвет при клике
-        weight: 5,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7
     };
     ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -328,6 +318,8 @@ const MapExample = ({maps=[],loading,type}) => {
                 {/*    )*/}
 
                 {/*})}*/}
+
+                <MapComponent/>
                 {filteredMaps.map((map, index) => {
                     const polygon = type === 0 ? map.geom.coordinates[0].map(([lng, lat]) => [lat, lng]) : []
                     // Удаляем SRID из WKT строки
@@ -358,7 +350,6 @@ const MapExample = ({maps=[],loading,type}) => {
                         )
                     )
                 })}
-                <MapComponent/>
             </MapContainer>
             {loading === false ? (
                 maps?.length >= 1 ? (

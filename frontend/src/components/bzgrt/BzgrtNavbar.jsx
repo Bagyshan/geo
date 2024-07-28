@@ -30,10 +30,8 @@ const BzgrtNavbar = () => {
         </div>
         <div className="bzgrt-bottom-navigation">
           <ul className="bzgrt-bottom-nav-links">
-            <li><a href="#home">Главная</a></li>
-            <li><a href="/boezgrabout">О нас</a></li>
+            <li><a onClick={() => handleNavigation('/boezgrtmain')} href="#home">Главная</a></li>
             <li><a onClick={() => handleNavigation('/boezgrproductcard')} href="#boezgrproductcard">Продукция</a></li>
-            <li><a href="#price-list">Прайс лист</a></li>
             <li><a onClick={() => handleNavigation('/boezgrtcontact')} href="#contacts">Контакты</a></li>
           </ul>
         </div>
