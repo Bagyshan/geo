@@ -6,9 +6,6 @@ class BoezgrtHome(models.Model):
     body = models.TextField(null=True, blank=True, verbose_name='Описание')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
-
-    def __str__(self) -> str:
-        return self.id
     
     def save(self, *args, **kwargs):
         if not self.pk and BoezgrtHome.objects.count() >= 1:
