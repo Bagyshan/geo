@@ -22,9 +22,6 @@ const BoezgrtProductCard = () => {
     useEffect(() => {
         dispatch(getBoezgrtProducts())
     }, [dispatch]);
-    useEffect(() => {
-        console.log(boezgrtProducts)
-    }, [boezgrtProducts]);
     const handleNavigate = (id) => {
         navigate(`/boezgrproduct/${id}`);
     };

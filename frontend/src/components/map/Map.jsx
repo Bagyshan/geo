@@ -258,10 +258,45 @@ const MapExample = ({maps=[],loading,type}) => {
         useMapEvent('resize', () => {
             map.setView(mapCenter, mapZoom);
         });
-        return geoJsonData ?<>
-            <GeoJSON data={geoJsonData} style={style} />
-            <button className={`resetBtn ${isSpinning ? 'spinning' : ''}`} onClick={handleReset} style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000,}}><img src={ResetIcon} alt='reset'/></button>
-        </> : null;
+        return (
+            <>
+                {geoJsonData && <GeoJSON data={geoJsonData} style={style} />}
+                {filteredMaps.map((map, index) => {
+                    const polygon = type === 0 ? map.geom.coordinates[0].map(([lng, lat]) => [lat, lng]) : [];
+                    const wkt = type === 1 ? map?.location.split(';')[1] : [];
+                    const geometry = type === 1 ? wellknown.parse(wkt) : [];
+                    const coordinates = type === 1 ? [geometry.coordinates[1], geometry.coordinates[0]] : [];
+
+                    return (
+                        mapZoom >= 9 && type === 0 ? (
+                            <Polygon
+                                key={index}
+                                positions={polygon}
+                                pathOptions={{ color: map.object_type }}
+                            >
+                                <Popup className="popUp">
+                                    <MapContent mapInfo={map} type={type} />
+                                </Popup>
+                            </Polygon>
+                        ) : (
+                            <Marker
+                                key={index}
+                                position={type === 1 ? coordinates : getPolygonCenter(polygon)}
+                                icon={createCustomIcon(map.object_type)}
+                            >
+                                <Popup className="popUp">
+                                    <MapContent mapInfo={map} type={type} />
+                                </Popup>
+                            </Marker>
+                        )
+                    );
+                })}
+                <button className={`resetBtn ${isSpinning ? 'spinning' : ''}`} onClick={handleReset} style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000 }}>
+                    <img src={ResetIcon} alt='reset' />
+                </button>
+            </>
+        );
+
     };
     useEffect(() => {
         if (maps.length > 0) {
@@ -302,54 +337,7 @@ const MapExample = ({maps=[],loading,type}) => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 />
-                {/*{filteredMaps.map((mapPos, index) => {*/}
-
-                    {/*// const wktWithSrid = 'SRID=4326;POINT (76.204605 42.447781)';*/}
-
-
-
-                {/*    return (*/}
-
-                {/*        <Marker key={index} position={   coordinates} icon={createCustomIcon(mapPos.object_type)}>*/}
-                {/*            <Popup className="popUp">*/}
-                {/*                <MapContent mapInfo={mapPos} type={type}/>*/}
-                {/*            </Popup>*/}
-                {/*        </Marker>*/}
-                {/*    )*/}
-
-                {/*})}*/}
-
                 <MapComponent/>
-                {filteredMaps.map((map, index) => {
-                    const polygon = type === 0 ? map.geom.coordinates[0].map(([lng, lat]) => [lat, lng]) : []
-                    // Удаляем SRID из WKT строки
-                    const wkt = type === 1 ? map?.location.split(';')[1]:[]
-
-                    // Конвертация WKT в GeoJSON
-                    const geometry = type === 1 ? wellknown.parse(wkt) : []
-
-                    // Координаты из GeoJSON
-                    const coordinates = type === 1 ? [geometry.coordinates[1], geometry.coordinates[0]] : []
-                    return(
-                        mapZoom >= 9 && type === 0  ? (
-                            < Polygon
-                                key = {index}
-                                positions = {polygon}
-                                pathOptions={{color: map.object_type}}
-                            >
-                                <Popup className="popUp">
-                                    <MapContent mapInfo={map} type={type}/>
-                                </Popup>
-                            </Polygon>
-                        ):(
-                            <Marker key={index} position={type === 1 ? coordinates : getPolygonCenter(polygon)} icon={createCustomIcon(map.object_type)}>
-                                <Popup className="popUp">
-                                    <MapContent mapInfo={map} type={type}/>
-                                </Popup>
-                            </Marker>
-                        )
-                    )
-                })}
             </MapContainer>
             {loading === false ? (
                 maps?.length >= 1 ? (

@@ -1,7 +1,18 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import './BoezgrtAbout.css';
+import {useDispatch, useSelector} from "react-redux";
+import {getBoezgrtHome} from "../../store/apiSlice";
+import DOMPurify from "dompurify";
+import {translate} from "../../assets/translate";
+import {LanguageContext} from "../../LanguageContext";
 
 const BoezgrtAbout = () => {
+  const dispatch = useDispatch();
+  const {language} = useContext(LanguageContext)
+  const {boezgrtHome} = useSelector((state) => state.api)
+  useEffect(() => {
+    dispatch(getBoezgrtHome())
+  }, []);
   return (
       <div className="boezgrt-about-container">
         <h1 className="boezgrt-title">О КОМПАНИИ</h1>
@@ -28,6 +39,10 @@ const BoezgrtAbout = () => {
             Более чем 80 постоянных клиентов от небольших лабораторий до крупных промышленных горнодобывающих компаний оказали доверие продукции нашего предприятия.
           </p>
         </div>
+        {boezgrtHome.map((home, index) =>
+            <div className="bodyCont"
+                 dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(home[translate.translatedApi.body[language]])}}/>
+        )}
       </div>
   );
 };
