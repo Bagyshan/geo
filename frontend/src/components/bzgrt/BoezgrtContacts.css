@@ -1,0 +1,333 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0f0f0;
+}
+
+.lds-roller,
+.lds-roller div,
+.lds-roller div:after {
+  box-sizing: border-box;
+}
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 40px 40px;
+}
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 7.2px;
+  height: 7.2px;
+  border-radius: 50%;
+  background: currentColor;
+  margin: -3.6px 0 0 -3.6px;
+}
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+  top: 62.62742px;
+  left: 62.62742px;
+}
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+  top: 67.71281px;
+  left: 56px;
+}
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+  top: 70.90963px;
+  left: 48.28221px;
+}
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+  top: 72px;
+  left: 40px;
+}
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+  top: 70.90963px;
+  left: 31.71779px;
+}
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+  top: 67.71281px;
+  left: 24px;
+}
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+  top: 62.62742px;
+  left: 17.37258px;
+}
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+  top: 56px;
+  left: 12.28719px;
+}
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.input-file {
+  position: relative;
+  display: inline-block;
+}
+.input-file span {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  font-size: 14px;
+  vertical-align: middle;
+  color: rgb(255 255 255);
+  text-align: center;
+  border-radius: 4px;
+  background-color: #416691;
+  line-height: 22px;
+  height: 40px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border: none;
+  margin: 0;
+  transition: background-color 0.2s;
+}
+.input-file input[type=file] {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  display: block;
+  width: 0;
+  height: 0;
+}
+
+/* Focus */
+.input-file input[type=file]:focus + span {
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Hover/active */
+.input-file:hover span {
+  background-color: #152c44;
+}
+.input-file:active span {
+  background-color: #416691;
+}
+
+/* Disabled */
+.input-file input[type=file]:disabled + span {
+  background-color: #eee;
+}
+.boezgrtContacts-container {
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 50px auto;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.containerBoezgrt{
+  display: flex;
+  flex-direction: column;
+}
+.boezgrtInfo{
+  display: flex;
+  flex-direction: row;
+}
+/* Заголовок */
+.boezgrtContacts-header {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #1e3a8a;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Текст контактов */
+.boezgrtContacts-text {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  color: #2c3e50;
+}
+
+/* Ссылка на email */
+.boezgrtContacts-link {
+  color: #e74c3c;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.boezgrtContacts-link:hover {
+  color: #c0392b;
+  border-color: #c0392b;
+}
+
+.boezgrtContacts-text a {
+  color: #1e3a8a;
+  text-decoration: none;
+  border-bottom: 1px dashed #1e3a8a;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.boezgrtContacts-text a:hover {
+  color: #2980b9;
+  border-color: #2980b9;
+}
+
+/* Форма обратной связи */
+.boezgrtContacts-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.boezgrtContacts-input, .boezgrtContacts-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.boezgrtContacts-button {
+  background-color: #0e026c;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 30px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.boezgrtContacts-button:hover {
+  background-color: #040825;
+}
+
+/* Анимация при наведении */
+.boezgrtContacts-container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1024px) {
+  .boezgrtContacts-container {
+    padding: 30px;
+    margin: 30px auto;
+  }
+
+  .boezgrtContacts-header {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  .boezgrtContacts-text {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .boezgrtContacts-container {
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  .boezgrtContacts-header {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .boezgrtContacts-text {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .boezgrtContacts-input, .boezgrtContacts-textarea {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .boezgrtContacts-container {
+    padding: 15px;
+    margin: 15px auto;
+  }
+
+  .boezgrtContacts-header {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .boezgrtContacts-text {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .boezgrtContacts-input, .boezgrtContacts-textarea {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 320px) {
+  .boezgrtContacts-container {
+    padding: 10px;
+    margin: 10px auto;
+  }
+
+  .boezgrtContacts-header {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .boezgrtContacts-text {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .boezgrtContacts-link {
+    font-size: 12px;
+  }
+
+  .boezgrtContacts-input, .boezgrtContacts-textarea {
+    font-size: 12px;
+  }
+}

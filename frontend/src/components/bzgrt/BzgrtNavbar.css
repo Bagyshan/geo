@@ -1,0 +1,130 @@
+.bzgrt-container {
+  width: 100%;
+  font-family: 'Arial', sans-serif;
+  background-color: #ffffff;
+  margin-top: 80px;
+}
+
+.bzgrt-top-navigation {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.bzgrt-logo {
+  height: 80px;
+}
+
+.bzgrt-contact-info {
+  display: flex;
+  align-items: center;
+  color: #1e3a8a;
+}
+
+.bzgrt-contact-info div {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.bzgrt-icon {
+  color: #ff9800;
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.bzgrt-bottom-navigation {
+  width: 100%;
+  background-color: #1e3a8a;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.bzgrt-bottom-nav-links {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.bzgrt-bottom-nav-links li {
+  margin: 0 15px;
+}
+
+.bzgrt-bottom-nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 8px 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 5px;
+}
+
+.bzgrt-bottom-nav-links a:hover {
+  background-color: #ff9800;
+  color: #1e3a8a;
+}
+
+
+@media (max-width: 768px) {
+  .bzgrt-top-navigation {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .bzgrt-logo {
+    height: 70px;
+    margin-bottom: 10px;
+  }
+
+  .bzgrt-contact-info {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .bzgrt-contact-info div {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+
+  .bzgrt-bottom-nav-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bzgrt-bottom-nav-links li {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .bzgrt-top-navigation {
+    padding: 10px;
+  }
+
+  .bzgrt-logo {
+    height: 60px;
+  }
+
+  .bzgrt-bottom-navigation {
+    padding: 10px;
+  }
+
+  .bzgrt-bottom-nav-links a {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .bzgrt-bottom-nav-links li {
+    margin: 5px 0;
+  }
+}

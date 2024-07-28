@@ -5,11 +5,16 @@ import {getAboutCompany, getGP} from "../../store/apiSlice";
 import {translate} from "../../assets/translate";
 import {LanguageContext} from "../../LanguageContext";
 import DOMPurify from "dompurify";
+import {useNavigate} from "react-router-dom";
 
 const HistoryAndMission = () => {
   const dispatch = useDispatch()
   const {gp,aboutCompany} = useSelector((state) => state.api);
   const { language } = useContext(LanguageContext);
+  const navigate = useNavigate();
+  const handleNavigate = (id) =>{
+      navigate(`/gp/${id}`)
+  }
   useEffect(() => {
     dispatch(getGP())
     dispatch(getAboutCompany())
@@ -26,7 +31,7 @@ const HistoryAndMission = () => {
             </p>
             <div className="stateEnterprise-grid">
               {gp.map((g,index)=> (
-                  <div className="stateEnterprise-item" key={index}>
+                  <div className="stateEnterprise-item" key={index} onClick={() => handleNavigate(g.id)}>
                     <span>{g.id}</span>
                     <p>{g[translate.translatedApi.title[language]]}</p>
                   </div>

@@ -85,6 +85,13 @@ const Navbar = () => {
           </a>
           <a
               href="#"
+              onClick={() => handleNavigate('/boezgrtmain')}
+              className={isDarkBackground ? 'dark-bg' : 'light-bg'}
+          >
+            БОЭЗГРТ
+          </a>
+          <a
+              href="#"
               onClick={() => handleNavigate('/projects')}
               className={isDarkBackground ? 'dark-bg' : 'light-bg'}
           >

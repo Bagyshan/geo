@@ -56,5 +56,27 @@ export const translate =
         income:{"RU":"Доход","KG":"Киреше","EN":"Income"},
         diagramOfAll:{"RU":"Диаграма всех объектов","KG":"Бардык объекттердин диаграммасы","EN":"Diagram of all objects"},
         graphOfMonth:{"RU":"График месячного дохода","KG":"Айлык киреше диаграммасы","EN":"Monthly income graph"},
-        numberOfDeposits:{"RU":"Количество месторождений","KG":"Кендүү жерлер","EN":"Number of deposits"}
+        numberOfDeposits:{"RU":"Количество месторождений","KG":"Кендүү жерлер","EN":"Number of deposits"},
+            apiCurrency :{
+                    usd: {
+                            api: "price_dollar",
+                            currency: '$'
+                    },
+                    eur: {
+                            api: "price_euro",
+                            currency: '€'
+                    },
+                    rub: {
+                            api: "price_rubles",
+                            currency: '₽'
+                    },
+                    kzt: {
+                            api: "price_tenge",
+                            currency: '₸'
+                    },
+                    kgs: {
+                            api: "price",
+                            currency: '⃀'
+                    },
+            }
     }

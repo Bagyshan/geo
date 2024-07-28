@@ -1,0 +1,117 @@
+/* Основной контейнер селекта */
+
+.select{
+    display: flex;
+    align-items: center;
+    width: 500px;
+    padding: 0 20px;
+}
+.__select {
+    position: relative;
+    width: 100%;
+    height: 53px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Заголовок селекта */
+.__select__title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: solid 1px #c7ccd1;
+    cursor: pointer;
+    position: relative;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    overflow: hidden;
+    transition:0.3s ease-out;
+
+}
+
+/* Стиль стрелки в заголовке */
+.__select__title::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-left: 2px solid #333333;
+    border-bottom: 2px solid #333333;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    transform: translateY(-85%) rotate(-45deg);
+    transition: transform 0.3s ease-out;
+}
+
+/* Стиль стрелки при открытии селекта */
+.__select.active .__select__title::before {
+    transform: translateY(-35%) rotate(135deg); /* Поворачиваем стрелку вверх */
+}
+.__select.active .__select__title{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    transition:0.3s ease-out;
+}
+/* Контент селекта (выпадающее меню) */
+.__select__content {
+    position: absolute;
+    top: 100%; /* расположение меню сразу под заголовком */
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #c7ccd1;
+    border-top: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    z-index: 8;
+    transform: translateY(-25%);
+    transition: opacity 0.3s ease-out;
+    animation: none;
+}
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-25%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Стилизация для отображения контента при активном состоянии */
+.__select.active .__select__content {
+    animation: slideDown 0.3s ease-out forwards;
+}
+/* Стилизация опций */
+.__select__label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    padding: 0 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out;
+}
+
+.__select__label:hover {
+    background-color: #718ec9;
+    color: #ffffff;
+}
+
+/* Сброс селекта */
+
+@media (max-width: 760px) {
+    .select{
+        width: 100%;
+        padding: 5px;
+    }
+}

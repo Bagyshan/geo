@@ -1,0 +1,148 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+}
+
+.product-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px;
+}
+
+.exchange-rate-table {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px 0;
+    border-collapse: collapse;
+    text-align: left;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.exchange-rate-table th, .exchange-rate-table td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+}
+
+.exchange-rate-table th {
+    background-color: #1e3a8a;
+    color: #ffffff;
+}
+
+.exchange-rate-table td {
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, font-size 0.3s;
+}
+
+.exchange-rate-table tr:hover td {
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 1.1em;
+}
+
+.exchange-rate-table tr.active td {
+    background-color: #1e3a8a;
+    color: #ffffff;
+}
+
+.product-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    gap: 20px;
+    border-radius: 30px;
+}
+
+.product-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: fadeIn 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.product-title {
+    font-size: 1.4em;
+    margin: 0;
+    color: #333;
+    font-weight: bold;
+}
+
+.product-prices {
+    margin: 10px 0;
+}
+
+.product-price {
+    font-size: 1.25em;
+    margin: 5px 0;
+    font-weight: bold;
+    color: #4b4b4b;
+}
+
+.buy-button {
+    background-color: #0e026c;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-weight: bold;
+    width: 100%;
+}
+
+.buy-button:hover {
+    background-color: #040825;
+    transform: scale(1.05);
+}
+
+.buy-button:active {
+    transform: scale(0.95);
+}
+.selectedCurrency{
+    color: #cc4d4d;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .product-card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}

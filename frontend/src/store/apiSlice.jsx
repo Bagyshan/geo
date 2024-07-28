@@ -3,7 +3,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const apiUrl = process.env.REACT_APP_API_URL;
 export const instance = axios.create({
     baseURL: apiUrl,
-
 })
 
 export const getHome = createAsyncThunk(
@@ -23,7 +22,7 @@ export const getMaps = createAsyncThunk(
     "api/getMaps",
     async (_, { rejectWithValue, dispatch }) => {
         try {
-            const response = await instance.get(`/maps/maps`);
+            const response = await axios.get(`http://34.71.94.143/api/maps/maps`);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -36,6 +35,7 @@ export const getNewMaps = createAsyncThunk(
     async (_, { rejectWithValue, dispatch }) => {
         try {
             const response = await instance.get(`/maps/newmaps/`);
+            console.log(response)
             return response.data;
         } catch (error) {
             console.log(error);
@@ -83,7 +83,7 @@ export const getMap = createAsyncThunk(
     "api/getMap",
     async (id , { rejectWithValue, dispatch }) => {
         try {
-            const response = await instance.get(`/maps/maps/${id}/`);
+            const response = await axios.get(`http://34.71.94.143/api/maps/maps/${id}/`);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -174,6 +174,18 @@ export const getGP = createAsyncThunk(
         }
     }
 );
+export const getGPItem = createAsyncThunk(
+    "api/getGPItem",
+    async (id, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/gp/${id}`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
 export const getAboutCompany = createAsyncThunk(
     "api/getAboutCompany",
     async (_, { rejectWithValue, dispatch }) => {
@@ -234,6 +246,81 @@ export const getEmployee = createAsyncThunk(
         }
     }
 );
+export const getBoezgrtHome = createAsyncThunk(
+    "api/getBoezgrtHome",
+    async (_, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/boezgrt/home/`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getBoezgrtProducts = createAsyncThunk(
+    "api/getBoezgrtProducts",
+    async (_, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/boezgrt/products/`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getBoezgrtProduct = createAsyncThunk(
+    "api/getBoezgrtProduct",
+    async (id, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/boezgrt/products/${id}`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getCategories = createAsyncThunk(
+    "api/getCategories",
+    async (_, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/category`);
+            console.log(response)
+            return response.data;
+
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const postBoezgrtApplication = createAsyncThunk(
+    "api/postBoezgrtApplication",
+    async (comment , { rejectWithValue }) => {
+        try {
+            const response = await instance.post(`/comments/boezgrtapplication/`, comment);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const postKyrgyzGeologyApplication = createAsyncThunk(
+    "api/postKyrgyzGeologyApplication",
+    async (comment , { rejectWithValue }) => {
+        try {
+            const response = await instance.post(`/comments/kyrgyzgeologyapplication/`, comment);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
 
 
 const apiSlice = createSlice({
@@ -254,11 +341,16 @@ const apiSlice = createSlice({
         investorsInfo:[],
         investorItem:[],
         gp:[],
+        gpItem:[],
         aboutCompany:[],
         achievements:[],
         achievementItem:[],
         employes:[],
         employee:[],
+        boezgrtHome: [],
+        boezgrtProducts: [],
+        boezgrtProduct:[],
+        categories: [],
 
     },
     reducers: {
@@ -279,7 +371,14 @@ const apiSlice = createSlice({
         },
         clearEmployee: (state) =>{
             state.employee = []
-        }
+        },
+        clearBoezgrtProduct: (state) =>{
+            state.boezgrtProduct = []
+        },
+        clearGPItem: (state) => {
+            state.gpItem = []
+        },
+
 
     },
     extraReducers: (builder) => {
@@ -416,6 +515,16 @@ const apiSlice = createSlice({
             .addCase(getGP.rejected, (state) => {
                 state.loading = false;
             })
+            .addCase(getGPItem.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getGPItem.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.gpItem = payload;
+            })
+            .addCase(getGPItem.rejected, (state) => {
+                state.loading = false;
+            })
             .addCase(getAboutCompany.pending, (state) => {
                 state.loading = true;
             })
@@ -465,6 +574,64 @@ const apiSlice = createSlice({
             })
             .addCase(getEmployee.rejected, (state) => {
                 state.loading = false;
+            })
+            .addCase(getBoezgrtHome.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getBoezgrtHome.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.boezgrtHome = payload;
+            })
+            .addCase(getBoezgrtHome.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(getBoezgrtProducts.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getBoezgrtProducts.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.boezgrtProducts = payload;
+            })
+            .addCase(getBoezgrtProducts.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(getBoezgrtProduct.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getBoezgrtProduct.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.boezgrtProduct = payload;
+            })
+            .addCase(getBoezgrtProduct.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(getCategories.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getCategories.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.categories = payload;
+            })
+            .addCase(getCategories.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(postBoezgrtApplication.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(postBoezgrtApplication.fulfilled, (state,{payload}) => {
+                state.loading = false;
+            })
+            .addCase(postBoezgrtApplication.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(postKyrgyzGeologyApplication.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(postKyrgyzGeologyApplication.fulfilled, (state,{payload}) => {
+                state.loading = false;
+            })
+            .addCase(postKyrgyzGeologyApplication.rejected, (state) => {
+                state.loading = false;
             });
 
 
@@ -477,5 +644,7 @@ export const {  clearMap,
                 clearInvestorItem,
                 clearNewsPost,
                 clearAchievementItem,
-                clearEmployee
+                clearEmployee,
+                clearBoezgrtProduct,
+                clearGPItem,
             } = apiSlice.actions;

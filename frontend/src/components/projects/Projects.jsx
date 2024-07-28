@@ -23,7 +23,7 @@ const Projects = () => {
             <div className="mapContent">
                 <Map maps={maps} loading={loading} type={0}/>
                 <h2 className="section-title" style={{marginTop: "40px"}}>{translate.geologicalExploration[language]}</h2>
-                <Map maps={newMaps} loading={loading}/>
+                <Map maps={newMaps} loading={loading} type={1}/>
             </div>
         </div>
       </div>
