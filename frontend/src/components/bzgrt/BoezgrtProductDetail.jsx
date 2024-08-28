@@ -22,9 +22,6 @@ const BoezgrtProductDetail = () => {
             dispatch(clearBoezgrtProduct())
         }
     }, [dispatch,productId]);
-    useEffect(() => {
-        console.log(boezgrtProduct)
-    }, [boezgrtProduct]);
     return (
         <div className="news-item">
             <div className="containerNews">
