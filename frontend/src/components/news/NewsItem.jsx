@@ -58,7 +58,7 @@ const NewsItem = () => {
                 <div className="pdf-upload">
                     {isMobile ? (
                         <a href={newsPost.file} target="_blank" rel="noopener noreferrer">
-                            {translate.viewPdf[language]}
+                            pdf
                         </a>
                     ): (
                         <embed
