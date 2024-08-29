@@ -29,7 +29,7 @@ const NewMapItem = () => {
             img.onload = () => setLoading(false);
         }
     }, [newMap.image]);
-
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     return (
         <div className="news-item">
             <div className="containerNews">
@@ -46,13 +46,19 @@ const NewMapItem = () => {
                     <div></div>
                 ): (
                     <div className="pdf-upload">
-                        <embed
-                            id="pdf-plugin"
-                            type="application/pdf"
-                            src={newMap?.file}
-                            width="100%"
-                            height="500px"
-                        />
+                        {isMobile ? (
+                            <a href={newMap?.file} target="_blank" rel="noopener noreferrer">
+                                {translate.viewPdf[language]}
+                            </a>
+                        ): (
+                            <embed
+                                id="pdf-plugin"
+                                type="application/pdf"
+                                src={newMap?.file}
+                                width="100%"
+                                height="500px"
+                            />
+                        )}
                     </div>
                 )}
             </div>

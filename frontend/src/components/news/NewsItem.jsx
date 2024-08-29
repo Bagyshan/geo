@@ -42,6 +42,7 @@ const NewsItem = () => {
         setFormData({username: '', email: '' ,content: ''})
     };
     const comments = newsPost?.comments || []
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   return (
     <div className="news-item">
@@ -55,13 +56,19 @@ const NewsItem = () => {
                 <div></div>
             ) : (
                 <div className="pdf-upload">
-                    <embed
-                        id="pdf-plugin"
-                        type="application/pdf"
-                        src={newsPost?.file}
-                        width="100%"
-                        height="500px"
-                    />
+                    {isMobile ? (
+                        <a href={newsPost.file} target="_blank" rel="noopener noreferrer">
+                            {translate.viewPdf[language]}
+                        </a>
+                    ): (
+                        <embed
+                            id="pdf-plugin"
+                            type="application/pdf"
+                            src={newsPost?.file}
+                            width="100%"
+                            height="500px"
+                        />
+                    )}
                 </div>
             )}
             <form className="comment-form" onSubmit={handleSubmit}>

@@ -10,6 +10,7 @@ const Contacts = () => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
+    application_type:'',
     content: '',
     file: null
   });
@@ -31,8 +32,9 @@ const Contacts = () => {
     const formDataToSend = new FormData();
     formDataToSend.append('username', formData.username);
     formDataToSend.append('email', formData.email);
+    formDataToSend.append('application_type', formData.application_type);
     formDataToSend.append('content', formData.content);
-    formDataToSend.append('file', formData.file);
+    if (formData.file != null) {formDataToSend.append('file', formData.file);}
     // const mailtoLink = `mailto:boezgrt@yandex.ru?subject=Contact%20Form%20Submission&body=Name:%20${formData.name}%0AEmail:%20${formData.email}%0AMessage:%20${formData.message}`;
     // window.location.href = mailtoLink;
     await dispatch(postKyrgyzGeologyApplication(formDataToSend));
@@ -40,6 +42,7 @@ const Contacts = () => {
     setFormData({
       username: '',
       email: '',
+      application_type: "",
       content: '',
       file: null,
     })
@@ -65,6 +68,7 @@ const Contacts = () => {
             </div>
           </div>
           <form className="boezgrtContacts-form" onSubmit={handleSubmit}>
+            <h1>Подать заявку</h1>
             <input
                 type="text"
                 name="username"
@@ -83,6 +87,30 @@ const Contacts = () => {
                 className="boezgrtContacts-input"
                 required
             />
+            <div className='typeOfApplication'>
+              <div className="radio-group">
+                <label>
+                  <input
+                      type="radio"
+                      name="application_type"
+                      value="kyrgyzgeology_applicaiton"
+                      checked={formData.application_type === 'kyrgyzgeology_applicaiton'}
+                      onChange={handleChange}
+                  />
+                  Option 1
+                </label>
+                <label>
+                  <input
+                      type="radio"
+                      name="application_type"
+                      value="boezgrt_application"
+                      checked={formData.application_type === 'boezgrt_application'}
+                      onChange={handleChange}
+                  />
+                  Option 2
+                </label>
+              </div>
+            </div>
             <textarea
                 name="content"
                 placeholder="Ваше сообщение"
@@ -97,9 +125,9 @@ const Contacts = () => {
             </label>
             {!loading ? (
                 <button type="submit" className="boezgrtContacts-button">
-                  Отправить
+                  {translate.send[language]}
                 </button>
-            ): (
+            ) : (
                 <div>
                   <div className="lds-roller">
                     <div></div>

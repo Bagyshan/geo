@@ -16,7 +16,7 @@ const InvestorItem = ({id}) => {
             dispatch(clearInvestorItem());
         };
     },[])
-
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     return (
         <div className="investor-item">
             <div className="containerInvestorItem">
@@ -27,13 +27,19 @@ const InvestorItem = ({id}) => {
                     <div></div>
                 ): (
                     <div className="pdf-upload">
-                        <embed
-                            id="pdf-plugin"
-                            type="application/pdf"
-                            src={investorItem?.file}
-                            width="100%"
-                            height="500px"
-                        />
+                        {isMobile ? (
+                            <a href={investorItem?.file} target="_blank" rel="noopener noreferrer">
+                                {translate.viewPdf[language]}
+                            </a>
+                        ): (
+                            <embed
+                                id="pdf-plugin"
+                                type="application/pdf"
+                                src={investorItem?.file}
+                                width="100%"
+                                height="500px"
+                            />
+                        )}
                     </div>
                 )}
             </div>
