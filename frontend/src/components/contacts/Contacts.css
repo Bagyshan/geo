@@ -13,7 +13,18 @@
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   }
-  
+  .typeOfApplication{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: none;
+  }
+  .radio-group label{
+    margin-right: 15px;
+  }
+  .radio-group input{
+    margin-right: 5px;
+  }
   .section-title {
     text-align: center;
     margin-bottom: 40px;

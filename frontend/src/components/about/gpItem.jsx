@@ -19,6 +19,7 @@ const GPItem = () => {
             dispatch(clearGPItem());
         };
     },[dispatch,gpId])
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     // const handleChange = (e) => {
     //     const { name, value } = e.target;
     //     setFormData({ ...formData, [name]: value });
@@ -44,13 +45,19 @@ const GPItem = () => {
                     <div></div>
                 ) : (
                     <div className="pdf-upload">
-                        <embed
-                            id="pdf-plugin"
-                            type="application/pdf"
-                            src={gpItem?.file}
-                            width="100%"
-                            height="500px"
-                        />
+                        {isMobile ? (
+                            <a href={gpItem?.file} target="_blank" rel="noopener noreferrer">
+                                {translate.viewPdf[language]}
+                            </a>
+                        ): (
+                            <embed
+                                id="pdf-plugin"
+                                type="application/pdf"
+                                src={gpItem?.file}
+                                width="100%"
+                                height="500px"
+                            />
+                        )}
                     </div>
                 )}
                 {/*<form className="comment-form" onSubmit={handleSubmit}>*/}

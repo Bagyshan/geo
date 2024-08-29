@@ -19,6 +19,7 @@ const HistoryAndMission = () => {
     dispatch(getGP())
     dispatch(getAboutCompany())
   }, []);
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   return (
       <section className="history-mission">
         <h2>{translate.history[language]}</h2>
@@ -49,13 +50,19 @@ const HistoryAndMission = () => {
               <div></div>
           ): (
               <div className="pdf-upload">
-                <embed
-                    id="pdf-plugin"
-                    type="application/pdf"
-                    src={aboutCompany?.file}
-                    width="100%"
-                    height="500px"
-                />
+                  {isMobile ? (
+                      <a href={aboutCompany?.file} target="_blank" rel="noopener noreferrer">
+                          {translate.viewPdf[language]}
+                      </a>
+                  ): (
+                      <embed
+                          id="pdf-plugin"
+                          type="application/pdf"
+                          src={aboutCompany?.file}
+                          width="100%"
+                          height="500px"
+                      />
+                  )}
               </div>
           )}
         </div>
