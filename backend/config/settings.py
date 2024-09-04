@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'investors',
     'boezgrt',
     'category',
+    'vacancies',
 ]
 
 MIDDLEWARE = [
