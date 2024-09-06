@@ -19,7 +19,7 @@ def send_comment_notification(comment_id):
 
     subject = 'Уведомление о новом комментарии'
     message = f'{name} добавил комментарий к вашей новости "{news_title}", под id номером: "{news_id}"\n\nТекст комментария: "{comment.content}"\n\nЕго email: "{email}"'
-    from_email = 'bagishan040401@yandex.ru'
+    from_email = 'kyrgyzgeology@yandex.com'
     recipient_list = ['bagishan01@gmail.com']
 
     send_mail(subject, message, from_email, recipient_list)
@@ -39,7 +39,7 @@ def send_kyrgyzgeology_application(application_id):
 
     subject = 'Уведомление о новой заявке в Кыргызгеологии'
     message = f'{name} оставил заявку на услуги Кыргызгеологии\n\nТекст заявки: "{application.content}"\n\nЕго email: "{email}"'
-    from_email = sanitize_email('bagishan040401@yandex.ru')
+    from_email = sanitize_email('kyrgyzgeology@yandex.com')
     recipient_list = [sanitize_email('bagishan01@gmail.com')]
 
     email_message = EmailMessage(subject, message, from_email, recipient_list)
