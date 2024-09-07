@@ -72,7 +72,7 @@ services:
     container_name: "nginx"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
-      - ./certbot/conf:/etc/letsencrypt
+      - /etc/letsencrypt:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
       - nginx_frontend_static_volume:/usr/share/nginx/html
       - static_volume:/usr/src/app/api/static
