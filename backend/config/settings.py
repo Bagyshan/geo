@@ -378,7 +378,7 @@ LOGGING = {
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000", "http://*", "https://*", "http://localhost:*", "https://localhost:*"
+    "http://localhost:3000", "http://*", "https://*", "http://localhost:*", "https://localhost:*", "https://*", "https://kyrgyzgeology.kg", "https://www.kyrgyzgeology.kg", "https://localhost:3000"
 ]
 
 CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
