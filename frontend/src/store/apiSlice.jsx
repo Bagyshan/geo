@@ -22,7 +22,7 @@ export const getMaps = createAsyncThunk(
     "api/getMaps",
     async (_, { rejectWithValue, dispatch }) => {
         try {
-            const response = await axios.get(`http://kyrgyzgeology.kg/api/maps/maps`);
+            const response = await axios.get(`https://kyrgyzgeology.kg/api/maps/maps`);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -82,7 +82,7 @@ export const getMap = createAsyncThunk(
     "api/getMap",
     async (id , { rejectWithValue, dispatch }) => {
         try {
-            const response = await axios.get(`http://kyrgyzgeology.kg/api/maps/maps/${id}/`);
+            const response = await axios.get(`https://kyrgyzgeology.kg/api/maps/maps/${id}/`);
             return response.data;
         } catch (error) {
             console.log(error);
