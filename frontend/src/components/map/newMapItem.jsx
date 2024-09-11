@@ -6,6 +6,7 @@ import DOMPurify from 'dompurify';
 import {LanguageContext} from "../../LanguageContext";
 import {translate} from "../../assets/translate";
 import map from "./Map";
+import RedirectIcon from "../../assets/maximize.svg";
 
 const NewMapItem = () => {
     const dispatch = useDispatch();
@@ -47,10 +48,15 @@ const NewMapItem = () => {
                 ): (
                     <div className="pdf-upload">
                         {isMobile ? (
-                            <a href={newMap?.file} target="_blank" rel="noopener noreferrer">
-                                {translate.viewPdf[language]}
-                            </a>
-                        ): (
+                            <button className='pdfMobile'>
+                                <a href={newMap.file} target="_blank" rel="noopener noreferrer">
+                                    <img className='redirectIcon'
+                                         style={{width: '20px', height: "20px", marginRight: '5px'}}
+                                         src={RedirectIcon}/>
+                                    {translate.viewPdf[language]}
+                                </a>
+                            </button>
+                        ) : (
                             <embed
                                 id="pdf-plugin"
                                 type="application/pdf"
