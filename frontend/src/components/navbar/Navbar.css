@@ -201,7 +201,7 @@
 }
 
 .accordion.active {
-  max-height: 300px; /* Настройте в зависимости от содержимого */
+  max-height: 320px; /* Настройте в зависимости от содержимого */
   opacity: 1;
 }
 
@@ -220,6 +220,7 @@
     box-shadow: none;
     max-height: none;
     animation: ani 1.5s forwards;
+    overflow-y:auto;
   }
   .about-container a{
     width: 100%;

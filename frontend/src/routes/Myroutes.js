@@ -21,6 +21,8 @@ import BoezgrtProductCard from "../components/bzgrt/BoezgrtProductCard";
 import BoezgrtContacts from "../components/bzgrt/BoezgrtContacts";
 import BoezgrtProductDetail from "../components/bzgrt/BoezgrtProductDetail";
 import GPItem from "../components/about/gpItem";
+import Vacancies from "../components/vacancies/Vacancies";
+import VacancyDetail from "../components/vacancies/VacancyDetail";
 
 const PUBLIC_ROUTES = [
   
@@ -40,11 +42,13 @@ const PUBLIC_ROUTES = [
   { id: 15, link: '/employee/:employeeId', element:<EmployeeItem/>},
   { id: 16, link: '/achievement/:achievementId', element:<AchievementItem/>},
   { id: 17, link: '/boezgrtmain', element: <BoezgrtMain/> },
-  { id: 18, link: '/boezgrabout', element: <BoezgrtAbout/> },
+  { id: 18, link: '/boezgrtabout', element: <BoezgrtAbout/> },
   { id: 19, link: '/boezgrproductcard', element: <BoezgrtProductCard/> },
   { id: 20, link: '/boezgrtcontact', element: <BoezgrtContacts/> },
   { id: 21, link: '/boezgrproduct/:productId', element: <BoezgrtProductDetail/>},
-  { id: 22, link: '/gp/:gpId', element: <GPItem/>}
+  { id: 22, link: '/gp/:gpId', element: <GPItem/>},
+  { id: 23, link: '/vacancies', element: <Vacancies/>},
+  { id: 24, link: '/vacancies/:vacancyId', element: <VacancyDetail/>}
 ];
 const Reload = ({ children }) => {
   const location = useLocation();

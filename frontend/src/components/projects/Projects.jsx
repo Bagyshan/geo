@@ -5,7 +5,7 @@ import {translate} from "../../assets/translate";
 import {LanguageContext} from "../../LanguageContext";
 import {useDispatch, useSelector} from "react-redux";
 import {getMaps, getNewMaps} from "../../store/apiSlice";
-
+import RedirectIcon from "../../assets/maximize.svg"
 
 const Projects = () => {
     const { language } = useContext(LanguageContext);
@@ -22,13 +22,20 @@ const Projects = () => {
         <div className='mapProjectsContainer'>
             <div className="mapContent">
                 <Map maps={maps} loading={loading} type={0}/>
-                <h2 className="section-title" style={{marginTop: "40px"}}>{translate.geologicalExploration[language]}</h2>
+                <h2 className="section-title"
+                    style={{marginTop: "40px"}}>{translate.geologicalExploration[language]}</h2>
                 <Map maps={newMaps} loading={loading} type={1}/>
+                <a href='http://open.geology.kg/minresources/f1_ru.aspx' target="_blank">
+                    <button className='mapRedirect'>
+                        <p>Сылка на карту</p>
+                        <img src={RedirectIcon} alt="" style={{width: '20px', height: "20px", marginRight: '5px'}}/>
+                    </button>
+                </a>
             </div>
         </div>
       </div>
     </section>
-        );
+);
 };
 
 export default Projects;
