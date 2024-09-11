@@ -1,8 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
+const apiUrl = process.env.REACT_APP_API_URL;
 export const instance = axios.create({
-    baseURL: 'https://kyrgyzgeology.kg/api'
+    baseURL: apiUrl,
 })
 
 export const getHome = createAsyncThunk(

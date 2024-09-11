@@ -11,7 +11,7 @@ from tinymce.widgets import TinyMCE
 class AboutCompanyAdmin(TranslationAdmin):
     def save_model(self, request, obj, form, change):
         if not obj.pk and AboutCompany.objects.count() >= 1:
-            raise ValidationError(_("Вы не можете создать более 1 домашних страниц."))
+            raise ValidationError(_("Вы не можете создать более 1 статей о компании."))
         super(AboutCompanyAdmin, self).save_model(request, obj, form, change)
 
     def has_add_permission(self, request):

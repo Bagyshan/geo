@@ -1,7 +1,7 @@
 from requests import Response
 from rest_framework import viewsets
 from .models import Maps, NewMaps
-from .serializers import MapsSerializer, NewMapsSerializer
+from .serializers import MapsSerializer, NewMapsSerializer, MapsCustomGeoJSONLayerSerializer, NewMapsCustomGeoJSONLayerSerializer
 from django.http import FileResponse, Http404, HttpResponse, JsonResponse
 from rest_framework.decorators import action
 from django.views.decorators.csrf import csrf_exempt
@@ -19,6 +19,29 @@ from rest_framework import viewsets, status
 
 from django.shortcuts import render
 from django_admin_geomap import geomap_context
+from djgeojson.views import GeoJSONLayerView
+
+
+class MapsCustomGeoJSONLayerView(GeoJSONLayerView):
+    queryset = Maps.objects.all()
+    serializer_class = MapsCustomGeoJSONLayerSerializer
+
+    def get_properties(self, feature):
+        properties = super().get_properties(feature)
+        if 'image' in properties and properties['image']:
+            properties['image'] = properties['image'].url
+        return properties
+
+
+class NewMapsCustomGeoJSONLayerView(GeoJSONLayerView):
+    queryset = NewMaps.objects.all()
+    serializer_class = NewMapsCustomGeoJSONLayerSerializer
+
+    def get_properties(self, feature):
+        properties = super().get_properties(feature)
+        if 'image' in properties and properties['image']:
+            properties['image'] = properties['image'].url
+        return properties
 
 
 class MapsViewSet(viewsets.ReadOnlyModelViewSet):

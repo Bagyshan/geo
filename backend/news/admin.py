@@ -3,7 +3,6 @@ from .models import News
 from tinymce.widgets import TinyMCE
 from django.db import models
 from modeltranslation.admin import TranslationAdmin
-from django import forms
 
 
 class NewsAdmin(TranslationAdmin):
