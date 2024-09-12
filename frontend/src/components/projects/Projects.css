@@ -18,13 +18,20 @@
     width: 100%;
 
   }
+  .linkToMaps{
+    text-decoration: none;
+  }
   .mapRedirect{
     margin-top: 10px;
     padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 15px;
     border: none;
     background-color: #94bdec;
     cursor: pointer;
+    width: 100%;
   }
   .toProject{
     cursor: pointer;
@@ -186,7 +193,9 @@
     align-items: center; /* Центрирование по горизонтали */
     height: auto;
   }
-
+  .mapRedirect{
+    width: 100%;
+  }
   .leaflet-container {
     height: 40vh; /* Высота карты для мобильных устройств */
     width: 90vw; /* Ширина карты для мобильных устройств */

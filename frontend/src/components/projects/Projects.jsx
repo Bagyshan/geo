@@ -25,10 +25,10 @@ const Projects = () => {
                 <h2 className="section-title"
                     style={{marginTop: "40px"}}>{translate.geologicalExploration[language]}</h2>
                 <Map maps={newMaps} loading={loading} type={1}/>
-                <a href='http://open.geology.kg/minresources/f1_ru.aspx' target="_blank">
+                <a href='http://open.geology.kg/minresources/f1_ru.aspx' target="_blank"  className='linkToMaps'>
                     <button className='mapRedirect'>
-                        <p>Сылка на карту</p>
-                        <img src={RedirectIcon} alt="" style={{width: '20px', height: "20px", marginRight: '5px'}}/>
+                        <p>Ссылка на карту</p>
+                        <img src={RedirectIcon} alt="" style={{width: '20px', height: "20px",marginLeft:"10px", marginRight: '5px'}}/>
                     </button>
                 </a>
             </div>
