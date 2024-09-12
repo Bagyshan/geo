@@ -22,7 +22,7 @@ export const getMaps = createAsyncThunk(
     "api/getMaps",
     async (_, { rejectWithValue, dispatch }) => {
         try {
-            const response = await axios.get(`https://kyrgyzgeology.kg/api/maps/maps`);
+            const response = await instance.get(`/maps/maps`);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -82,7 +82,7 @@ export const getMap = createAsyncThunk(
     "api/getMap",
     async (id , { rejectWithValue, dispatch }) => {
         try {
-            const response = await axios.get(`https://kyrgyzgeology.kg/api/maps/maps/${id}/`);
+            const response = await instance.get(`/maps/maps/${id}/`);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -281,11 +281,49 @@ export const getBoezgrtProduct = createAsyncThunk(
         }
     }
 );
+export const getBoezgrtCurrencies = createAsyncThunk(
+    "api/getBoezgrtCurrencies",
+    async (_, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/boezgrt/currency/`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
 export const getCategories = createAsyncThunk(
     "api/getCategories",
     async (_, { rejectWithValue, dispatch }) => {
         try {
             const response = await instance.get(`/category`);
+            return response.data;
+
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getVacancies = createAsyncThunk(
+    "api/getVacancies",
+    async (_, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/vacancies`);
+            return response.data;
+
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const getVacancyDetail = createAsyncThunk(
+    "api/getVacancyDetail",
+    async (id, { rejectWithValue, dispatch }) => {
+        try {
+            const response = await instance.get(`/vacancies${id}/`);
             return response.data;
 
         } catch (error) {
@@ -348,8 +386,10 @@ const apiSlice = createSlice({
         boezgrtHome: [],
         boezgrtProducts: [],
         boezgrtProduct:[],
+        boezgrtCurrencies:[],
         categories: [],
-
+        vacancies:[],
+        vacancyDetail:[],
     },
     reducers: {
         clearMap: (state) => {
@@ -376,6 +416,9 @@ const apiSlice = createSlice({
         clearGPItem: (state) => {
             state.gpItem = []
         },
+        clearVacancyDetail: (state) =>{
+            state.vacancyDetail = []
+        }
 
 
     },
@@ -603,6 +646,16 @@ const apiSlice = createSlice({
             .addCase(getBoezgrtProduct.rejected, (state) => {
                 state.loading = false;
             })
+            .addCase(getBoezgrtCurrencies.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getBoezgrtCurrencies.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.boezgrtCurrencies = payload;
+            })
+            .addCase(getBoezgrtCurrencies.rejected, (state) => {
+                state.loading = false;
+            })
             .addCase(getCategories.pending, (state) => {
                 state.loading = true;
             })
@@ -611,6 +664,26 @@ const apiSlice = createSlice({
                 state.categories = payload;
             })
             .addCase(getCategories.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(getVacancies.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getVacancies.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.vacancies = payload;
+            })
+            .addCase(getVacancies.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(getVacancyDetail.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getVacancyDetail.fulfilled, (state,{payload}) => {
+                state.loading = false;
+                state.vacancyDetail = payload;
+            })
+            .addCase(getVacancyDetail.rejected, (state) => {
                 state.loading = false;
             })
             .addCase(postBoezgrtApplication.pending, (state) => {
@@ -645,4 +718,5 @@ export const {  clearMap,
                 clearEmployee,
                 clearBoezgrtProduct,
                 clearGPItem,
+                clearVacancyDetail,
             } = apiSlice.actions;

@@ -6,7 +6,7 @@ import {clearNewsPost, getNewsPost, postComment} from "../../store/apiSlice";
 import DOMPurify from 'dompurify';
 import {LanguageContext} from "../../LanguageContext";
 import {translate} from "../../assets/translate";
-
+import RedirectIcon from "../../assets/maximize.svg"
 const NewsItem = () => {
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({username: '', email: '' ,content: ''});
@@ -57,10 +57,13 @@ const NewsItem = () => {
             ) : (
                 <div className="pdf-upload">
                     {isMobile ? (
-                        <a href={newsPost.file} target="_blank" rel="noopener noreferrer">
-                            pdf
-                        </a>
-                    ): (
+                        <button className='pdfMobile'>
+                            <a href={newsPost.file} target="_blank" rel="noopener noreferrer">
+                                <img className='redirectIcon' style={{width:'20px', height:"20px", marginRight:'5px'}} src={RedirectIcon}/>
+                                {translate.viewPdf[language]}
+                            </a>
+                        </button>
+                    ) : (
                         <embed
                             id="pdf-plugin"
                             type="application/pdf"

@@ -88,7 +88,7 @@ const Navbar = () => {
               onClick={() => handleNavigate('/boezgrtmain')}
               className={isDarkBackground ? 'dark-bg' : 'light-bg'}
           >
-            БОЭЗГРТ
+            {translate.boezgrt[language]}
           </a>
           <a
               href="#"
@@ -114,6 +114,8 @@ const Navbar = () => {
               <a onClick={() => handleNavigate('/historyandmission')}>{translate.history[language]}</a>
               <a onClick={() => handleNavigate('/organization')}>Информация о руководстве и ключевых сотрудниках</a>
               <a onClick={() => handleNavigate('/achievementsProjects')}>{translate.achievements[language]}</a>
+              <a onClick={() => handleNavigate('/boezgrtabout')}>{translate.boezgrt[language]}</a>
+              <a onClick={() => handleNavigate('/vacancies')}>{translate.vacancies[language]}</a>
             </div>
           </div>
           <a

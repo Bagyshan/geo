@@ -6,6 +6,7 @@ import {translate} from "../../assets/translate";
 import {LanguageContext} from "../../LanguageContext";
 import DOMPurify from "dompurify";
 import {useNavigate} from "react-router-dom";
+import RedirectIcon from "../../assets/maximize.svg";
 
 const HistoryAndMission = () => {
   const dispatch = useDispatch()
@@ -51,10 +52,15 @@ const HistoryAndMission = () => {
           ): (
               <div className="pdf-upload">
                   {isMobile ? (
-                      <a href={aboutCompany?.file} target="_blank" rel="noopener noreferrer">
-                          {translate.viewPdf[language]}
-                      </a>
-                  ): (
+                      <button className='pdfMobile'>
+                          <a href={aboutCompany.file} target="_blank" rel="noopener noreferrer">
+                              <img className='redirectIcon'
+                                   style={{width: '20px', height: "20px", marginRight: '5px'}}
+                                   src={RedirectIcon}/>
+                              {translate.viewPdf[language]}
+                          </a>
+                      </button>
+                  ) : (
                       <embed
                           id="pdf-plugin"
                           type="application/pdf"

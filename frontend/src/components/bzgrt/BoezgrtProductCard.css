@@ -104,7 +104,27 @@ body, html {
     font-weight: bold;
     color: #4b4b4b;
 }
-
+.currencySelect{
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+}
+.selectedCur{
+    background-color: #989595;
+}
+.currencySelect div{
+    padding: 10px;
+    cursor: pointer;
+}
+.currencySelect div:hover{
+    background-color: #c9c6c6;
+}
+.currencySelect div:first-child{
+    border-radius: 10px 0 0 10px;
+}
+.currencySelect div:last-child{
+    border-radius: 0 10px 10px 0;
+}
 .buy-button {
     background-color: #0e026c;
     color: #ffffff;

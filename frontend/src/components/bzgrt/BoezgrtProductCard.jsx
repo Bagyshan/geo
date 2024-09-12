@@ -1,59 +1,53 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './BoezgrtProductCard.css';
 import {useDispatch, useSelector} from "react-redux";
-import {getBoezgrtProducts} from "../../store/apiSlice";
+import {getBoezgrtCurrencies, getBoezgrtProducts} from "../../store/apiSlice";
 import {useNavigate} from "react-router-dom";
 import BzgrtNavbar from "./BzgrtNavbar";
 import {translate} from "../../assets/translate";
 import {CurrencyContext} from "../../CurrencyContext";
 
-const exchangeRates = {
-    usd: 0.0118,
-    eur: 0.0102,
-    rub: 0.88,
-    kzt: 5.07,
-    kgs: 1,
-};
+
 const BoezgrtProductCard = () => {
     const dispatch = useDispatch();
     const {selectedCurrency, switchCurrency} = useContext(CurrencyContext);
-    const {boezgrtProducts} = useSelector((state) => state.api)
+    const {boezgrtProducts,boezgrtCurrencies} = useSelector((state) => state.api)
     const navigate = useNavigate()
+    const [exchangeRates,setExchangeRates] = useState({
+        usd: boezgrtCurrencies.dollar,
+        eur: boezgrtCurrencies.euro,
+        rub: boezgrtCurrencies.rubles,
+        kzt: boezgrtCurrencies.tenge,
+        kgs: 1,
+    });
     useEffect(() => {
         dispatch(getBoezgrtProducts())
+        dispatch(getBoezgrtCurrencies())
     }, [dispatch]);
     const handleNavigate = (id) => {
         navigate(`/boezgrproduct/${id}`);
     };
-
+    useEffect(() => {
+        console.log(boezgrtCurrencies)
+        setExchangeRates({
+            usd: boezgrtCurrencies[0]?.dollar,
+            eur: boezgrtCurrencies[0]?.euro,
+            rub: boezgrtCurrencies[0]?.rubles,
+            kzt: boezgrtCurrencies[0]?.tenge,
+            kgs: 1,
+        })
+    }, [boezgrtCurrencies]);
     const handleCurrencyClick = (currency) => {
         switchCurrency(currency);
     };
-
     return (
         <div>
-            <BzgrtNavbar/>
             <div className="product-page-container">
-                <table className="exchange-rate-table">
-                    <thead>
-                    <tr>
-                        <th>Currency</th>
-                        <th>Rate</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <div className='currencySelect'>
                     {Object.keys(exchangeRates).map((currency, index) => (
-                        <tr
-                            key={index}
-                            onClick={() => handleCurrencyClick(currency)}
-                            className={selectedCurrency === currency ? 'selectedCurrency' : ''}
-                        >
-                            <td>{currency.toUpperCase()}</td>
-                            <td>{exchangeRates[currency]}</td>
-                        </tr>
+                        <div key={index} onClick={() => handleCurrencyClick(currency)} className={selectedCurrency === currency ? 'selectedCur' : ''}>{currency.toUpperCase()}</div>
                     ))}
-                    </tbody>
-                </table>
+                </div>
                 <div className="product-card-container">
                     {boezgrtProducts.map((product, index) => (
                         <div className="product-card" key={index} onClick={() => handleNavigate(product.id)}>
@@ -69,6 +63,26 @@ const BoezgrtProductCard = () => {
                         </div>
                     ))}
                 </div>
+                <table className="exchange-rate-table">
+                    <thead>
+                    <tr>
+                        <th>Валюта</th>
+                        <th>Курс</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {Object.keys(exchangeRates).map((currency, index) => (
+                        <tr
+                            key={index}
+                            onClick={() => handleCurrencyClick(currency)}
+                            className={selectedCurrency === currency ? 'selectedCurrency' : ''}
+                        >
+                            <td>{currency.toUpperCase()}</td>
+                            <td>{exchangeRates[currency]}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );
