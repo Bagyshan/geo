@@ -97,7 +97,7 @@ const Contacts = () => {
                       checked={formData.application_type === 'kyrgyzgeology_applicaiton'}
                       onChange={handleChange}
                   />
-                  Option 1
+                  Заявка Кыргызгеология
                 </label>
                 <label>
                   <input
@@ -107,7 +107,7 @@ const Contacts = () => {
                       checked={formData.application_type === 'boezgrt_application'}
                       onChange={handleChange}
                   />
-                  Option 2
+                  Заявка БОЭЗГРТ
                 </label>
               </div>
             </div>

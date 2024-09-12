@@ -50,7 +50,9 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
+  const toggleAboutCompany = () =>{
+    setIsAboutHovered(!isAboutHovered)
+  }
   const handleNavigate = (path) => {
     setIsOpen(false);
     navigate(path);
@@ -102,13 +104,12 @@ const Navbar = () => {
               onMouseEnter={() => setIsAboutHovered(true)}
               onMouseLeave={() => setIsAboutHovered(false)}
           >
-            <a id='aboutacc'
-               href="#"
-               onClick={toggleMenu}
+            <div id='aboutacc'
+               onClick={toggleAboutCompany}
                className={isDarkBackground ? 'dark-bg' : 'light-bg'}
             >
               {translate.aboutCompany[language]}
-            </a>
+            </div>
             <div id='aboutAccordion'
                  className={`accordion ${isAboutHovered ? 'active' : ''}`}>
               <a onClick={() => handleNavigate('/historyandmission')}>{translate.history[language]}</a>
