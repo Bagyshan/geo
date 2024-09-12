@@ -17,6 +17,8 @@ class NewsViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = NewsSerializer
 
     def get_permissions(self):
+        if self.request.method in ['PATCH', 'PUT', 'DELETE', 'POST']:
+            return [permissions.IsAdminUser()]
         return [permissions.AllowAny()]
 
     @csrf_exempt

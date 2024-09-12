@@ -20,6 +20,7 @@ from rest_framework import viewsets, status
 from django.shortcuts import render
 from django_admin_geomap import geomap_context
 from djgeojson.views import GeoJSONLayerView
+from rest_framework import permissions
 
 
 class MapsCustomGeoJSONLayerView(GeoJSONLayerView):
@@ -31,6 +32,11 @@ class MapsCustomGeoJSONLayerView(GeoJSONLayerView):
         if 'image' in properties and properties['image']:
             properties['image'] = properties['image'].url
         return properties
+    
+    def get_permissions(self):
+        if self.request.method in ['PATCH', 'PUT', 'DELETE', 'POST']:
+            return [permissions.IsAdminUser()]
+        return [permissions.AllowAny()]
 
 
 class NewMapsCustomGeoJSONLayerView(GeoJSONLayerView):
@@ -42,16 +48,31 @@ class NewMapsCustomGeoJSONLayerView(GeoJSONLayerView):
         if 'image' in properties and properties['image']:
             properties['image'] = properties['image'].url
         return properties
+    
+    def get_permissions(self):
+        if self.request.method in ['PATCH', 'PUT', 'DELETE', 'POST']:
+            return [permissions.IsAdminUser()]
+        return [permissions.AllowAny()]
 
 
 class MapsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Maps.objects.all()
     serializer_class = MapsSerializer
 
+    def get_permissions(self):
+        if self.request.method in ['PATCH', 'PUT', 'DELETE', 'POST']:
+            return [permissions.IsAdminUser()]
+        return [permissions.AllowAny()]
+
 
 class NewMapsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = NewMaps.objects.all()
     serializer_class = NewMapsSerializer
+
+    def get_permissions(self):
+        if self.request.method in ['PATCH', 'PUT', 'DELETE', 'POST']:
+            return [permissions.IsAdminUser()]
+        return [permissions.AllowAny()]
 
 
     # def create(self, request, *args, **kwargs):
