@@ -3,10 +3,12 @@ from .models import Service
 from tinymce.widgets import TinyMCE
 from django.db import models
 from modeltranslation.admin import TranslationAdmin
-from django import forms
 
 
 class ServiceAdmin(TranslationAdmin):
+    formfield_overrides = {
+        models.TextField: {'widget': TinyMCE()},
+    }
 
     list_display = ('id', 'title', 'body')
 

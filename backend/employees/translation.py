@@ -4,4 +4,4 @@ from .models import Employees
 
 @register(Employees)
 class EmployeesTranslationOptions(TranslationOptions):
-    fields = ('body',)
+    fields = ('body', 'name', 'post')

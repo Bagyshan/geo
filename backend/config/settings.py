@@ -14,6 +14,7 @@ from pathlib import Path
 from decouple import config
 import os
 from datetime import timedelta
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -49,10 +50,12 @@ INSTALLED_APPS = [
     'ckeditor',
     'tinymce',
     'corsheaders',
+    'django.contrib.gis',
     'leaflet',
     'djgeojson',
     'storages',
     'django_echarts',
+    'django_celery_results',
 
     # apps
     'home',
@@ -67,9 +70,13 @@ INSTALLED_APPS = [
     'achievements',
     'charts',
     'investors',
+    'boezgrt',
+    'category',
+    'vacancies',
 ]
 
 MIDDLEWARE = [
+    'config.middleware.CacheControlMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -79,6 +86,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'config.middleware.DisableCSRFMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -154,7 +162,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -194,23 +202,29 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool)
-EMAIL_PORT_SSL = config("EMAIL_PORT_SSL", cast=bool)
+EMAIL_USE_SSL = config("EMAIL_USE_SSL", cast=bool)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 
-REDIS_HOST = 'redis'
-REDIS_PORT = '6379'
+REDIS_HOST = config('REDIS_HOST')
+REDIS_PORT = config('REDIS_PORT')
 
 CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT
 CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
 
 STATIC_URL = '/api/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'api/static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'api/static'),
+# ]
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
@@ -226,7 +240,8 @@ SWAGGER_SETTINGS = {
 
 }
 
-DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
+DATA_UPLOAD_MAX_MEMORY_SIZE = 209715200  # 200 MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 209715200  # 200 MB
 
 TINYMCE_DEFAULT_CONFIG = {
     'height': 800,
@@ -246,7 +261,7 @@ TINYMCE_DEFAULT_CONFIG = {
         {'title': '24pt', 'inline': 'span', 'styles': {'font-size': '24pt'}},
         {'title': '36pt', 'inline': 'span', 'styles': {'font-size': '36pt'}},
     ],
-    'images_upload_url': '/upload_image/upload_image/',
+    'images_upload_url': '/api/upload_image/upload_image/',
     'relative_urls': False,
     'remove_script_host': False,
 }
@@ -363,7 +378,7 @@ LOGGING = {
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000", "http://*", "https://*", "http://localhost:*", "https://localhost:*"
+    "http://localhost:3000", "http://*", "https://*", "http://localhost:*", "https://localhost:*", "https://*", "https://kyrgyzgeology.kg", "https://www.kyrgyzgeology.kg", "https://localhost:3000"
 ]
 
 CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
@@ -391,8 +406,25 @@ LEAFLET_CONFIG = {
     'MIN_ZOOM': 3,
     'MAX_ZOOM': 18,
     'TILES': 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    'SCALE': 'both',
+    'ATTRIBUTION_PREFIX': 'Powered by <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>'
+    # 'PLUGINS': {
+    #     'draw': {
+    #         'auto-include': True
+    #     },
+    #     'fullscreen': {
+    #         'auto-include': True
+    #     },
+    # }
 }
 
+# LEAFLET_CONFIG = {
+#     'PLUGINS': {
+#         'forms': {
+#             'auto-include': True
+#         }
+#     }
+# }
 
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
@@ -404,5 +436,6 @@ AWS_S3_FILE_OVERWRITE = config('AWS_S3_FILE_OVERWRITE', cast=bool)
 AWS_DEFAULT_ACL = config('AWS_DEFAULT_ACL')
 AWS_S3_VERIFY = config('AWS_S3_VERIFY', cast=bool)
 DEFAULT_FILE_STORAGE = config('DEFAULT_FILE_STORAGE')
+AWS_S3_SECURE_URLS = config('AWS_S3_SECURE_URLS')
 
 MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/'
