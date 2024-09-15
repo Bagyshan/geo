@@ -24,7 +24,7 @@ const Footer = () => {
             <div className="column">
               <h3 className="headerh3">{translate.wordDays[language]}</h3>
               <p className="workingHours">
-                {translate.days.monday[language]} – {translate.days.friday[language]}: 9:00 – 18:00<br />
+                {translate.days.monday[language]} – {translate.days.friday[language]}: 8:30 – 17:30<br />
                 {translate.days.saturday[language]} – {translate.days.sunday[language]}: Выходной
               </p>
             </div>
@@ -39,12 +39,12 @@ const Footer = () => {
             <div className="column">
               <h3 className="headerh3">ГП «Кыргызгеология»</h3>
               <ul className="list">
-                <li>01 Северо-Кыргызская геологическая экспедиция</li>
-                <li>02 Кыргызская методическая экспедиция геолого-экономических исследований</li>
-                <li>03 Южно-Кыргызская ордена Трудового Красного Знамени геологическая экспедиция</li>
-                <li>04 Кыргызская комплексная гидрогеологическая экспедиция</li>
-                <li>05 Кыргызская геофизическая экспедиция</li>
-                <li>06 Бишкекский опытно-экспериментальный завод горно-разведочной техники</li>
+                <li>Северо-Кыргызская геологическая экспедиция</li>
+                <li>Кыргызская методическая экспедиция геолого-экономических исследований</li>
+                <li>Южно-Кыргызская ордена Трудового Красного Знамени геологическая экспедиция</li>
+                <li>Кыргызская комплексная гидрогеологическая экспедиция</li>
+                <li>Кыргызская геофизическая экспедиция</li>
+                <li>Бишкекский опытно-экспериментальный завод горно-разведочной техники</li>
               </ul>
             </div>
             <div className="column">
