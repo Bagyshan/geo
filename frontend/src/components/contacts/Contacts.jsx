@@ -59,7 +59,7 @@ const Contacts = () => {
             </div>
             <div className="contact-item">
               <h3>{translate.wordDays[language]}</h3>
-              <p>{translate.days.monday[language]} – {translate.days.friday[language]}: 9:00 – 18:00</p>
+              <p>{translate.days.monday[language]} – {translate.days.friday[language]}: 8:30 – 17:30</p>
               <p>{translate.days.saturday[language]} – {translate.days.sunday[language]}: {translate.weekend[language]}</p>
             </div>
             <div className="contact-item">
