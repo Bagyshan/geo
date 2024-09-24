@@ -6,7 +6,7 @@ export const translate =
         contacts:{"RU":"Контакты","KG":"Байланыштар","EN":"Contacts"},
         loadMore:{"RU":"Загрузить еще","KG":"Көбүрөөк жүктөө","EN":"Load more"},
         wordDays:{"RU":"Рабочие дни","KG":"Жумуш күндөрү","EN":"Work days"},
-        location:{"RU":"Расположение","KG":"Жайгашкан жай","EN":"Location"},
+        location:{"RU":"Расположение","KG":"Жайгашкан жер","EN":"Location"},
         send:{"RU":"Отправить","KG":"Жөнөтүү","EN":"Send"},
         investors:{"RU":"Инвесторы","KG":"Инвесторлор","EN":"Investors"},
         aboutCompany:{"RU":"О компании","KG":"Компания жөнүндө","EN":"About the company"},
