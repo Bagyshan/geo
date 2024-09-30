@@ -20,7 +20,6 @@ services:
 
   db:
     image: postgis/postgis:16-3.4
-    restart: always
     environment:
       POSTGRES_DB: kyrgeo
       POSTGRES_USER: bagyshan
