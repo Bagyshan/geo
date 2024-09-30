@@ -27,7 +27,7 @@ const Projects = () => {
                 <Map maps={newMaps} loading={loading} type={1}/>
                 <a href='http://open.geology.kg/minresources/f1_ru.aspx' target="_blank"  className='linkToMaps'>
                     <button className='mapRedirect'>
-                        <p>Ссылка на карту</p>
+                        <p>Карта всех месторождений</p>
                         <img src={RedirectIcon} alt="" style={{width: '20px', height: "20px",marginLeft:"10px", marginRight: '5px'}}/>
                     </button>
                 </a>
