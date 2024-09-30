@@ -86,4 +86,8 @@
     color: #0056b3;
     text-decoration: underline;
   }
-  
+  @media (max-width: 800px) {
+    .radio-group{
+      display: flex;
+    }
+  }
