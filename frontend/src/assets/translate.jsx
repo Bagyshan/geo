@@ -81,7 +81,7 @@ export const translate =
                     },
                     kgs: {
                             api: "price",
-                            currency: '⃀'
+                            currency: 'C'
                     },
             }
     }
