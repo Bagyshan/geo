@@ -265,13 +265,11 @@ const MapExample = ({maps=[],loading,type}) => {
             <>
                 {geoJsonData && <GeoJSON data={geoJsonData} style={style} />}
                 {filteredMaps.map((map, index) => {
-                    const polygon = type === 0 ? map.geom.coordinates[0].map(([lng, lat]) => [lat, lng]) : [];
-                    const wkt = type === 1 ? map?.location.split(';')[1] : [];
-                    const geometry = type === 1 ? wellknown.parse(wkt) : [];
-                    const coordinates = type === 1 ? [geometry.coordinates[1], geometry.coordinates[0]] : [];
+                    const polygon =  map.geom.coordinates[0].map(([lng, lat]) => [lat, lng]);
+            
 
                     return (
-                        mapZoom >= 9 && type === 0 ? (
+                        mapZoom >= 9 ? (
                             <Polygon
                                 key={index}
                                 positions={polygon}
@@ -284,7 +282,7 @@ const MapExample = ({maps=[],loading,type}) => {
                         ) : (
                             <Marker
                                 key={index}
-                                position={type === 1 ? coordinates : getPolygonCenter(polygon)}
+                                position={getPolygonCenter(polygon)}
                                 icon={createCustomIcon(map.object_type)}
                             >
                                 <Popup className="popUp">
