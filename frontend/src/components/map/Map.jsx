@@ -103,6 +103,9 @@ const MapExample = ({maps=[],loading,type}) => {
             '#2F4F4F': translate.resources?.clayShales?.[language] || "Clay Shales",
             '#00FA9A': translate.resources?.granite?.[language] || "Granite",
             '#DAA520': translate.resources?.shellRock?.[language] || "Shell Rock",
+            '#F7DA8F': translate.resources?.limestoneShellRock?.[language] || "Limestone shell rock",
+            '#A19D94': translate.resources?.iron?.[language] || "Iron",
+            '#DFDBD0': translate.resources?.shellRock?.[language] || "Kaolin",
         }
         const labelsD = Object.keys(typeCounts);
         const data = Object.values(typeCounts);
@@ -181,6 +184,9 @@ const MapExample = ({maps=[],loading,type}) => {
                         '#2F4F4F': "clayShales",
                         '#00FA9A': "granite",
                         '#DAA520': "shellRock",
+                        '#F7DA8F': "limestoneShellRock",
+                        '#A19D94': "iron",
+                        '#DFDBD0': "kaolin",
                     };
 
                     const newFilteredMaps = maps?.filter((map) => {
@@ -225,6 +231,9 @@ const MapExample = ({maps=[],loading,type}) => {
             [translate.resources?.clayShales?.[language] || "Clay Shales"]: '#2F4F4F',
             [translate.resources?.granite?.[language] || "Granite"]: '#00FA9A',
             [translate.resources?.shellRock?.[language] || "Shell Rock"]: '#DAA520',
+            [translate.resources?.limestoneShellRock?.[language] || "Limestone shell rock"]:'#F7DA8F' ,
+            [translate.resources?.iron?.[language] || "Iron"]:'#A19D94',
+            [translate.resources?.shellRock?.[language] || "Kaolin"]:'#DFDBD0',
         };
         return colorMap[label];
     };
