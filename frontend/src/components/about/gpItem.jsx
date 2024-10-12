@@ -38,7 +38,6 @@ const GPItem = () => {
         <div className="news-item">
             <div className="containerNews">
                 <h2 className="news-title">{gpItem[translate.translatedApi.title[language]]}</h2>
-                <p className='dateNews'>{gpItem.created_at}</p>
                 <img src={gpItem.image} style={{borderRadius: "20px", marginBottom:"20px"}} alt="GPImage"/>
                 <div className="bodyCont"
                      dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(gpItem[translate.translatedApi.body[language]])}}/>

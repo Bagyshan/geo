@@ -189,7 +189,7 @@ export const getAboutCompany = createAsyncThunk(
     "api/getAboutCompany",
     async (_, { rejectWithValue, dispatch }) => {
         try {
-            const response = await instance.get(`/aboutcompany/`);
+            const response = await instance.get(`/aboutcompany/1`);
             return response.data;
         } catch (error) {
             console.log(error);
