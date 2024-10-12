@@ -36,7 +36,10 @@ export const translate =
                 clayShales:{"RU":"Глинистые сланцы","KG":"Глинистые сланцы","EN":"Clay shales"},
                 granite:{"RU":"Гранит","KG":"Гранит","EN":"Granite"},
                 shellRock:{"RU":"Ракушечник","KG":"Ракушечник","EN":"Shell Rock"},
-                rareEarthMetals:{"RU":"Редкоземельные металлы","KG":"","EN":"Rare earth metals"}
+                iron:{"RU":"Железо","KG":"Темир","EN":"Iron"},
+                limestoneShellRock:{"RU":"Известняк ракушечник","KG":"Акиташ ракушечник","EN":"Limestone shell rock"},
+                kaolin:{"RU":"Каолин","KG":"Каолин","EN":"Kaolin"},
+                rareEarthMetals:{"RU":"Редкоземельные металлы","KG":"","EN":"Rare earth metals"},
         },
         translatedApi:{
                 title:{"RU":"title_ru","KG":"title_ky","EN":"title_en"},

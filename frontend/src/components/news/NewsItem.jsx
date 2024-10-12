@@ -41,6 +41,10 @@ const NewsItem = () => {
         dispatch(getNewsPost(newsId))
         setFormData({username: '', email: '' ,content: ''})
     };
+    const reversingDate = (date) =>{
+        const reverseDate = date?.split('-').reverse().join('-')
+        return reverseDate
+    }
     const comments = newsPost?.comments || []
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -48,7 +52,7 @@ const NewsItem = () => {
     <div className="news-item">
         <div className="containerNews">
             <h2 className="news-title">{newsPost[translate.translatedApi.title[language]]}</h2>
-            <p className='dateNews'>{newsPost.created_at}</p>
+            <p className='dateNews'>{reversingDate(newsPost.created_at)}</p>
             <img src={newsPost.image} style={{borderRadius: "20px", marginBottom:"20px"}} alt="NewsImage"/>
             <div className="bodyCont"
                  dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(newsPost[translate.translatedApi.body[language]])}}/>

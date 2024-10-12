@@ -39,12 +39,18 @@ const DoughnutChart = ({ allocations, loading }) => {
     const chartRef = useRef(null);
     const [hoverIndex, setHoverIndex] = useState(null);
     const { language } = useContext(LanguageContext);
+    const [totalAmount,setTotalAmount] = useState(0);
+    useEffect(() => {
+        const sum = allocations.reduce((acc, allocation) => acc + allocation.amount, 0);
+        setTotalAmount(sum);
+        console.log(sum)
+    }, [allocations]);
     const data = {
         labels: allocations.map(allocation => allocation[translate.translatedApi.category[language]]),
         datasets: [
             {
                 label: 'Процент от общего количества',
-                data: allocations.map(allocation => allocation.percentage),
+                data: allocations.map(allocation => (allocation.amount * 100 / totalAmount).toFixed(1)),
                 backgroundColor: allocations.map(allocation => allocation.color),
                 borderColor: allocations.map((allocation, index) => hoverIndex === index ? 'black' : allocation.color),
                 borderWidth: 1,

@@ -61,6 +61,10 @@ const NewsCards = () => {
   const handleNavigate = (path) => {
     navigate(path);
   };
+  const reversingDate = (date) =>{
+    const reverseDate = date?.split('-').reverse().join('-')
+    return reverseDate
+  }
 
   const handleLoadMore = () => {
     setVisibleNews(prevVisibleNews => prevVisibleNews + 7); // Увеличиваем количество видимых новостей на 7 при нажатии на кнопку "Загрузить еще"
@@ -135,7 +139,7 @@ const NewsCards = () => {
                     <div className="news-content">
                       <h3>{news[translate.translatedApi.title[language]]}</h3>
                     </div>
-                    <span className="news-date">{news.created_at}</span>
+                    <span className="news-date">{reversingDate(news.created_at)}</span>
                   </div>
               ))}
               {filteredNews.length > visibleNews && (
