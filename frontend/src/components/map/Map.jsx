@@ -86,7 +86,6 @@ const MapExample = ({maps=[],loading,type}) => {
         fillOpacity: 0.4,
     };
     ChartJS.register(ArcElement, Tooltip, Legend);
-
     const processChartData = (maps) => {
         const typeCounts = maps?.reduce((acc, map) => {
             acc[map.object_type] = (acc[map.object_type] || 0) + 1;
@@ -106,6 +105,7 @@ const MapExample = ({maps=[],loading,type}) => {
             '#F7DA8F': translate.resources?.limestoneShellRock?.[language] || "Limestone shell rock",
             '#A19D94': translate.resources?.iron?.[language] || "Iron",
             '#DFDBD0': translate.resources?.shellRock?.[language] || "Kaolin",
+            '#E0DFDB': translate.resources?.rareEarthMetals?.[language] || "Rare earth metals",
         }
         const labelsD = Object.keys(typeCounts);
         const data = Object.values(typeCounts);
@@ -187,6 +187,7 @@ const MapExample = ({maps=[],loading,type}) => {
                         '#F7DA8F': "limestoneShellRock",
                         '#A19D94': "iron",
                         '#DFDBD0': "kaolin",
+                        '#E0DFDB': "rareEarthMetals"
                     };
 
                     const newFilteredMaps = maps?.filter((map) => {
@@ -234,6 +235,7 @@ const MapExample = ({maps=[],loading,type}) => {
             [translate.resources?.limestoneShellRock?.[language] || "Limestone shell rock"]:'#F7DA8F' ,
             [translate.resources?.iron?.[language] || "Iron"]:'#A19D94',
             [translate.resources?.shellRock?.[language] || "Kaolin"]:'#DFDBD0',
+            [translate.resources?.rareEarthMetals?.[language] || "Rare earth metals"]: '#E0DFDB',
         };
         return colorMap[label];
     };

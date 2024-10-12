@@ -38,7 +38,8 @@ export const translate =
                 shellRock:{"RU":"Ракушечник","KG":"Ракушечник","EN":"Shell Rock"},
                 iron:{"RU":"Железо","KG":"Темир","EN":"Iron"},
                 limestoneShellRock:{"RU":"Известняк ракушечник","KG":"Акиташ ракушечник","EN":"Limestone shell rock"},
-                kaolin:{"RU":"Каолин","KG":"Каолин","EN":"Kaolin"}
+                kaolin:{"RU":"Каолин","KG":"Каолин","EN":"Kaolin"},
+                rareEarthMetals:{"RU":"Редкоземельные металлы","KG":"","EN":"Rare earth metals"},
         },
         translatedApi:{
                 title:{"RU":"title_ru","KG":"title_ky","EN":"title_en"},
@@ -83,7 +84,7 @@ export const translate =
                     },
                     kgs: {
                             api: "price",
-                            currency: '⃀'
+                            currency: 'C'
                     },
             }
     }

@@ -2,12 +2,12 @@ from django.db import models
 
 # Create your models here.
 class Achievements(models.Model):
-    title = models.CharField(max_length=150)
-    body = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to='images')
-    file = models.FileField(upload_to='pdfs', blank=True, null=True)
+    title = models.CharField(max_length=200, verbose_name='Название')
+    body = models.TextField(verbose_name='Описание')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
+    image = models.ImageField(max_length=500, upload_to='images', verbose_name='Фотография')
+    file = models.FileField(max_length=500, upload_to='pdfs', blank=True, null=True, verbose_name='Файл')
 
 
     def __str__(self) -> str:

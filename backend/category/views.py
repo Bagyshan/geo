@@ -1,0 +1,14 @@
+from rest_framework import viewsets
+from .models import Category
+from .serializers import CategorySerializer
+from rest_framework import permissions
+
+
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+    def get_permissions(self):
+        if self.request.method in ['PATCH', 'PUT', 'DELETE', 'POST']:
+            return [permissions.IsAdminUser()]
+        return [permissions.AllowAny()]

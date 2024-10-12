@@ -4,12 +4,12 @@ from django.core.exceptions import ValidationError
 
 # Create your models here.
 class GP(models.Model):
-    title = models.CharField(max_length=200)
-    body = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to='images')
-    file = models.FileField(upload_to='pdfs', null=True, blank=True)
+    title = models.CharField(max_length=200, verbose_name='Название')
+    body = models.TextField(blank=True, null=True, verbose_name='Описание')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
+    image = models.ImageField(max_length=500, upload_to='images', verbose_name='Фотография')
+    file = models.FileField(max_length=500, upload_to='pdfs', null=True, blank=True, verbose_name='Файл')
 
     def save(self, *args, **kwargs):
         if not self.pk and GP.objects.count() >= 6:

@@ -22,7 +22,6 @@ const InvestorPage = () => {
         dispatch(getLineChartInvestor())
         dispatch(getInvestorsInfo())
     }, [dispatch]);
-
   return (
       <div className="investor-page">
         <nav className="navigation">
