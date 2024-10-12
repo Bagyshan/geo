@@ -24,9 +24,6 @@ const CustomSelect = ({ options, defaultTitle, onSelect }) => {
             setIsSpinning(false);
         }, 2000); // Иконка будет крутиться 2 секунды
     };
-    useEffect(() => {
-        console.log(options)
-    }, [options]);
     return (
         <div className='select'>
             <h3 htmlFor="categories" style={{marginRight: '5px'}}>Категория:</h3>
