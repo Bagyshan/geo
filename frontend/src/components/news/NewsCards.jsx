@@ -142,10 +142,11 @@ const NewsCards = () => {
                     <span className="news-date">{reversingDate(news.created_at)}</span>
                   </div>
               ))}
-              {filteredNews.length > visibleNews && (
-                  <button className='load-more-btn' onClick={handleLoadMore}>{translate.loadMore[language]}</button>
-              )}
+              
             </div>
+            {filteredNews.length > visibleNews && (
+                  <button className='load-more-btn' onClick={handleLoadMore}>{translate.loadMore[language]}</button>
+            )}
           </div>
       ) : (<div>
       </div>)}
