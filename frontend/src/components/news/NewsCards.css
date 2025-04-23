@@ -149,7 +149,7 @@ body {
 
 .news-card.size-6 {
   grid-column: span 4;
-  grid-row: span 1;
+  grid-row: span 2;
 }
 
 /* Адаптивная верстка */
