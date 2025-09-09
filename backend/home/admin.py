@@ -16,9 +16,6 @@ class HomeAdmin(TranslationAdmin):
         if Home.objects.count() >= 5:
             return False
         return super(HomeAdmin, self).has_add_permission(request)
-    
-    def has_delete_permission(self, request, obj=None):
-        return False
 
     list_display = ('id', 'title')
 
