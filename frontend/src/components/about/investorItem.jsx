@@ -54,3 +54,4 @@ const InvestorItem = ({id}) => {
 };
 
 export default InvestorItem;
+
